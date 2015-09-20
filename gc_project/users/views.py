@@ -18,3 +18,11 @@ class LoginWidgetView(View):
 class MyAccountView(View):
     def get(self, request):
         return HttpResponse("MyAccount!!!!!")
+
+class UserView(View):
+    def get(self, request, username):
+        return HttpResponse("Userview " + username)
+
+class ProductView(View):
+    def get(self, request, username, product_id):
+        return HttpResponse("Product!!!!! " + username + " " + product_id)

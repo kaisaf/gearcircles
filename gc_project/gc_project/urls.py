@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from customauth.views import LoginView, LogoutView, MyAccountView, LoginWidgetView
+from users.views import LoginView, LogoutView, MyAccountView, LoginWidgetView, UserView, ProductView
+from gears.views import CategoriesView, CategoryByNameView, AddGearView, LocationsView, LocationByNameView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -23,4 +24,12 @@ urlpatterns = [
     url(r'^logout/', LogoutView.as_view(), name='logout'),
     url(r'^myaccount/', MyAccountView.as_view(), name='myaccount'),
     url(r'^loginwidget/', LoginWidgetView.as_view(), name='loginwidget'),
+    url(r'^users/(?P<username>\w+)/$', UserView.as_view(), name='user'),
+    url(r'^users/(?P<username>\w+)/(?P<product_id>\w+)', ProductView.as_view(), name='product'),
+    url(r'^categories/$', CategoriesView.as_view(), name='categories'),
+    url(r'^categories/(?P<category_name>\w+)', CategoryByNameView.as_view(), name='category_by_name'),
+    url(r'^addgear/', AddGearView.as_view(), name='addgear'),
+    url(r'^locations/$', LocationsView.as_view(), name='locations'),
+    url(r'^locations/(?P<location_name>\w+)', LocationByNameView.as_view(), name='location_by_name'),
+
 ]
