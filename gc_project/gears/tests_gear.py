@@ -1,7 +1,8 @@
 from django.test import TestCase
 from gears.models import Category, CategoryProperty, Gear, GearProperty, GearAvailability, GearImage
+from rentals.models import Transaction
 from users.models import User
-from datetime import date
+import datetime
 
 
 class GearTestCase(TestCase):
@@ -33,7 +34,7 @@ class GearTestCase(TestCase):
             price="2000",
             preferred_contact=1, #email
             payment=1, #paypal
-            expiration_date=date.today(),
+            expiration_date=datetime.date.today() + datetime.timedelta(days=30),
             user=self.kaisa
         )
         self.gear1.save()
@@ -46,7 +47,7 @@ class GearTestCase(TestCase):
             price="2500",
             preferred_contact=1, #email
             payment=1, #paypal
-            expiration_date=date.today(),
+            expiration_date=datetime.date.today(),
             user=self.kaisa
         )
         self.gear2.save()
@@ -55,6 +56,17 @@ class GearTestCase(TestCase):
 
         self.gear2_size = GearProperty(value=24.5, gear=self.gear2, category_property=self.category2_size)
         self.gear2_size.save()
+
+        self.transaction1 = Transaction(
+            start_date=datetime.date.today() + datetime.timedelta(days=1),
+            end_date=datetime.date.today() + datetime.timedelta(days=4),
+            owner_user=self.kaisa,
+            borrower_user=self.victor,
+            price_paid=100,
+            payment_method=1, #paypal
+            gear=self.gear1
+        )
+        self.transaction1.save()
 
 
     def test_get_gear(self):
@@ -69,3 +81,9 @@ class GearTestCase(TestCase):
         self.assertEqual(len(gear1.categories.all()), 2)
         gear2 = Gear.objects.get(name="telemark skis")
         self.assertEqual(gear2.categories.first().name, "skiing")
+
+    def test_list_all_transactions(self):
+        self.assertEqual(len(Transaction.objects.all()), 1)
+
+    def test_gear_availability(self):
+        self.assertEqual(len(GearAvailability.objects.all()), 4)

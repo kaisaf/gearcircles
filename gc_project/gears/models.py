@@ -5,6 +5,7 @@ from users.models import User
 PAYMENT_CHOICES = (
     (0, 'Cash'),
     (1, 'Paypal'),
+    (2, 'Any')
 )
 
 CONTACT_CHOICES = (
@@ -24,6 +25,9 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 
 class CategoryProperty(models.Model):
     name = models.CharField(max_length=50)
@@ -33,6 +37,9 @@ class CategoryProperty(models.Model):
     categories = models.ManyToManyField(Category)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Gear(models.Model):
@@ -48,6 +55,9 @@ class Gear(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 
 class GearProperty(models.Model):
     value = models.CharField(max_length=50)
@@ -56,6 +66,9 @@ class GearProperty(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "gear:{} value:{}".format(self.gear, self.value)
+
 
 class GearAvailability(models.Model):
     not_available_date = models.DateField()
@@ -63,9 +76,15 @@ class GearAvailability(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "gear:{} not_available_date:{}".format(self.gear, self.not_available_date)
+
 
 class GearImage(models.Model):
     photo = models.ImageField()
     gear = models.ForeignKey(Gear)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "gear:{} photo:{}".format(self.gear, self.photo)
