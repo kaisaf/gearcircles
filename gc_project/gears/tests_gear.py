@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core.exceptions import ValidationError
 from gears.models import Category, CategoryProperty, Gear, GearProperty, GearAvailability, GearImage
 from rentals.models import Transaction
 from users.models import User
@@ -22,8 +23,7 @@ class GearTestCase(TestCase):
             name="size",
             description="boot size",
             mandatory=True,
-            input_type=2 #float
-        )
+            input_type=2) #float
         self.category2_size.save()
         self.category2_size.categories.add(self.category2)
 
@@ -35,8 +35,7 @@ class GearTestCase(TestCase):
             preferred_contact=1, #email
             payment=1, #paypal
             expiration_date=datetime.date.today() + datetime.timedelta(days=30),
-            user=self.kaisa
-        )
+            user=self.kaisa)
         self.gear1.save()
         self.gear1.categories.add(self.category1)
 
@@ -48,8 +47,7 @@ class GearTestCase(TestCase):
             preferred_contact=1, #email
             payment=1, #paypal
             expiration_date=datetime.date.today(),
-            user=self.kaisa
-        )
+            user=self.kaisa)
         self.gear2.save()
         self.gear2.categories.add(self.category1)
         self.gear2.categories.add(self.category2)
@@ -64,8 +62,7 @@ class GearTestCase(TestCase):
             borrower_user=self.victor,
             price_paid=100,
             payment_method=1, #paypal
-            gear=self.gear1
-        )
+            gear=self.gear1)
         self.transaction1.save()
 
 
@@ -87,3 +84,51 @@ class GearTestCase(TestCase):
 
     def test_gear_availability(self):
         self.assertEqual(len(GearAvailability.objects.all()), 4)
+
+    def test_gear_expiration_in_the_past(self):
+        with self.assertRaises(ValidationError):
+            past = datetime.date.today() - datetime.timedelta(days=2)
+            Gear.objects.create(
+                name="boots",
+                description="DFDFDS",
+                brand="Salomon",
+                price=12,
+                preferred_contact=0,
+                payment=0,
+                expiration_date=past,
+                user=self.kaisa)
+
+    def test_gear_expiration_over_90_days(self):
+        with self.assertRaises(ValidationError):
+            future = datetime.date.today() + datetime.timedelta(days=100)
+            Gear.objects.create(
+                name="boots",
+                description="DFDFDS",
+                brand="Salomon",
+                price=12,
+                preferred_contact=0,
+                payment=0,
+                expiration_date=future,
+                user=self.kaisa)
+
+    def test_transaction_start_date_greater_than_end(self):
+        with self.assertRaises(ValidationError):
+            Transaction.objects.create(
+                start_date=datetime.date.today() + datetime.timedelta(days=5),
+                end_date=datetime.date.today() + datetime.timedelta(days=2),
+                owner_user=self.kaisa,
+                borrower_user=self.victor,
+                price_paid=1200,
+                payment_method=1,
+                gear=self.gear1)
+
+    def test_transaction_gear_not_available(self):
+        with self.assertRaises(ValidationError):
+            Transaction.objects.create(
+                start_date=datetime.date.today() + datetime.timedelta(days=2),
+                end_date=datetime.date.today() + datetime.timedelta(days=3),
+                owner_user=self.kaisa,
+                borrower_user=self.victor,
+                price_paid=100,
+                payment_method=1,
+                gear=self.gear1)

@@ -23,15 +23,11 @@ class Transaction(models.Model):
     def clean(self):
         if self.start_date > self.end_date:
             raise ValidationError("End date can not be before start date")
-        intersection_dates = GearAvailability.objects.filter(
-            not_available_date__gte=self.start_date
-        ).filter(
-            not_available_date__lte=self.end_date
-        )
-        if len(intersection_dates) > 0:
+        if not self.gear.check_availability(self.start_date, self.end_date):
             raise ValidationError("Gear not available for given timeframe")
 
     def save(self, *args, **kwargs):
+        self.full_clean()
         super(Transaction, self).save(*args, **kwargs)
         for i in range((self.end_date-self.start_date).days + 1):
             not_available = self.start_date + datetime.timedelta(days=i)

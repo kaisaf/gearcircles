@@ -57,6 +57,16 @@ class Gear(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def check_availability(self, start_date, end_date):
+        intersection_dates = GearAvailability.objects.filter(
+            not_available_date__gte=start_date
+        ).filter(
+            not_available_date__lte=end_date
+        )
+        if len(intersection_dates) > 0:
+            return False
+        return True
+
     def __str__(self):
         return self.name
 
@@ -67,6 +77,10 @@ class Gear(models.Model):
             raise ValidationError("Expiration date must be within 90 days.")
         elif today > self.expiration_date:
             raise ValidationError("Expiration date can not be in the past.")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(Gear, self).save(*args, **kwargs)
 
 
 class GearProperty(models.Model):
