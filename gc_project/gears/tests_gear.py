@@ -11,22 +11,22 @@ class GearTestCase(TestCase):
         self.victor = User(name="Victor", email="victor@victor.com", phone="3443-343", score=9.75)
         self.victor.save()
 
-        self.skiing = Category(name="skiing", description="downhill skiing")
-        self.skiing.save()
+        self.category1 = Category(name="skiing", description="downhill skiing")
+        self.category1.save()
         Category.objects.create(name="ski boots", description="Downhill skiing boots")
-        self.ski_boots = Category.objects.get(name="ski boots")
-        self.ski_boots.save()
+        self.category2 = Category.objects.get(name="ski boots")
+        self.category2.save()
 
-        self.boot_size = CategoryProperty(
+        self.category2_size = CategoryProperty(
             name="size",
             description="boot size",
             mandatory=True,
             input_type=2 #float
         )
-        self.boot_size.save()
-        self.boot_size.categories.add(self.ski_boots)
+        self.category2_size.save()
+        self.category2_size.categories.add(self.category2)
 
-        self.skis = Gear(
+        self.gear1 = Gear(
             name="telemark skis",
             description="the best skis",
             brand="Black Diamond",
@@ -36,10 +36,10 @@ class GearTestCase(TestCase):
             expiration_date=date.today(),
             user=self.kaisa
         )
-        self.skis.save()
-        self.skis.categories.add(self.skiing)
+        self.gear1.save()
+        self.gear1.categories.add(self.category1)
 
-        self.boots = Gear(
+        self.gear2 = Gear(
             name="telemark boots",
             description="the best boots",
             brand="Scarpa",
@@ -49,12 +49,12 @@ class GearTestCase(TestCase):
             expiration_date=date.today(),
             user=self.kaisa
         )
-        self.boots.save()
-        self.boots.categories.add(self.skiing)
-        self.boots.categories.add(self.ski_boots)
+        self.gear2.save()
+        self.gear2.categories.add(self.category1)
+        self.gear2.categories.add(self.category2)
 
-        self.gear1_size = GearProperty(value=24.5, gear=self.boots, category_property=self.boot_size)
-        self.gear1_size.save()
+        self.gear2_size = GearProperty(value=24.5, gear=self.gear2, category_property=self.category2_size)
+        self.gear2_size.save()
 
 
     def test_get_gear(self):
@@ -69,4 +69,3 @@ class GearTestCase(TestCase):
         self.assertEqual(len(gear1.categories.all()), 2)
         gear2 = Gear.objects.get(name="telemark skis")
         self.assertEqual(gear2.categories.first().name, "skiing")
-        
