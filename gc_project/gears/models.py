@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+import datetime
 from users.models import User
 
 
@@ -57,6 +59,14 @@ class Gear(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        today = datetime.date.today()
+        three_months = today + datetime.timedelta(days=90)
+        if self.expiration_date > three_months:
+            raise ValidationError("Expiration date must be within 90 days.")
+        elif today > self.expiration_date:
+            raise ValidationError("Expiration date can not be in the past.")
 
 
 class GearProperty(models.Model):
