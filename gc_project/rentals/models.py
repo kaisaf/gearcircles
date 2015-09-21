@@ -3,6 +3,10 @@ from users.models import User
 from gears.models import Gear, GearAvailability
 import datetime
 
+PAYMENT_CHOICES = (
+    (0, 'Cash'),
+    (1, 'Paypal'),
+)
 
 class Transaction(models.Model):
     start_date = models.DateField()
@@ -10,7 +14,7 @@ class Transaction(models.Model):
     owner_user = models.ForeignKey(User, related_name="transactions_owned")
     borrower_user = models.ForeignKey(User, related_name="transactions_borrowed")
     price_paid = models.FloatField()
-    payment_method = models.IntegerField()
+    payment_method = models.IntegerField(choices=PAYMENT_CHOICES)
     gear = models.ForeignKey(Gear)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
