@@ -7,15 +7,15 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gears', '0003_gearavailability_gearimage'),
-        ('users', '0003_remove_user_payment'),
+        ('users', '0001_initial'),
+        ('gears', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Transaction',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField()),
                 ('price_paid', models.FloatField()),

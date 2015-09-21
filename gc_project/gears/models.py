@@ -21,7 +21,16 @@ INPUT_CHOICES = (
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    related_categories = models.ManyToManyField("self")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class CategoryProperty(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    mandatory = models.BooleanField()
+    input_type = models.IntegerField(choices=INPUT_CHOICES)
+    categories = models.ManyToManyField(Category)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -34,18 +43,16 @@ class Gear(models.Model):
     preferred_contact = models.IntegerField(choices=CONTACT_CHOICES)
     payment = models.IntegerField(choices=PAYMENT_CHOICES)
     expiration_date = models.DateField()
-    category = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category)
     user = models.ForeignKey(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class GearProperties(models.Model):
-    name = models.CharField(max_length=50)
-    description = models.TextField()
-    mandatory = models.BooleanField()
-    input_type = models.IntegerField(choices=INPUT_CHOICES)
+class GearProperty(models.Model):
+    value = models.CharField(max_length=50)
     gear = models.ForeignKey(Gear)
+    category_property = models.ForeignKey(CategoryProperty)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -13,13 +13,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
                 ('password', models.CharField(verbose_name='password', max_length=128)),
-                ('last_login', models.DateTimeField(null=True, verbose_name='last login', blank=True)),
+                ('last_login', models.DateTimeField(verbose_name='last login', null=True, blank=True)),
                 ('name', models.CharField(max_length=100)),
                 ('email', models.EmailField(max_length=254)),
                 ('phone', models.CharField(max_length=15)),
-                ('payment', models.IntegerField(max_length=1, choices=[(0, 'Cash'), (1, 'Paypal')])),
                 ('score', models.FloatField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
             ],
