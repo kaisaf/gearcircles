@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from users.models import User
 from gears.models import Gear, GearAvailability
 import datetime
@@ -18,6 +19,17 @@ class Transaction(models.Model):
     gear = models.ForeignKey(Gear)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        if self.start_date > self.end_date:
+            raise ValidationError("End date can not be before start date")
+        intersection_dates = GearAvailability.objects.filter(
+            not_available_date__gte=self.start_date
+        ).filter(
+            not_available_date__lte=self.end_date
+        )
+        if len(intersection_dates) > 0:
+            raise ValidationError("Gear not available for given timeframe")
 
     def save(self, *args, **kwargs):
         super(Transaction, self).save(*args, **kwargs)
