@@ -15,16 +15,25 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from users.views import LoginView, LogoutView, MyAccountView, LoginWidgetView, UserView
-from gears.views import CategoriesView, CategoryByNameView, AddGearView, LocationsView, LocationByNameView
+from django.contrib.auth.decorators import login_required
+
+from users.views import (IndexView, LoginView,
+                         LogoutView, MyAccountView,
+                         LoginWidgetView, UserView,
+                         HomeView)
+from gears.views import (CategoriesView, CategoryByNameView,
+                         AddGearView, LocationsView,
+                         LocationByNameView)
 from rentals.views import ProductView
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/', LoginView.as_view(), name='login'),
-    url(r'^logout/', LogoutView.as_view(), name='logout'),
-    url(r'^myaccount/', MyAccountView.as_view(), name='myaccount'),
     url(r'^loginwidget/', LoginWidgetView.as_view(), name='loginwidget'),
+    url(r'^logout/', LogoutView.as_view(), name='logout'),
+    url(r'^home/', HomeView.as_view(), name='home'),
+    url(r'^myaccount/', MyAccountView.as_view(), name='myaccount'),
     url(r'^users/(?P<user_id>\w+)/$', UserView.as_view(), name='user'),
     url(r'^users/(?P<user_id>\w+)/(?P<product_id>\w+)', ProductView.as_view(), name='product'),
     url(r'^categories/$', CategoriesView.as_view(), name='categories'),
@@ -32,5 +41,5 @@ urlpatterns = [
     url(r'^addgear/', AddGearView.as_view(), name='addgear'),
     url(r'^locations/$', LocationsView.as_view(), name='locations'),
     url(r'^locations/(?P<location_name>\w+)', LocationByNameView.as_view(), name='location_by_name'),
-
+    url(r'^$', IndexView.as_view(), name='index'),
 ]
