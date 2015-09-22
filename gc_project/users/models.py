@@ -9,9 +9,7 @@ class UserManager(BaseUserManager):
 
        user = self.model(
            email=self.normalize_email(email),
-           name=name,
-           phone=phone,
-           score=score
+           name=name
        )
 
        user.set_password(password)
@@ -21,9 +19,7 @@ class UserManager(BaseUserManager):
    def create_superuser(self, email, password, name, phone=None, score=None):
        user = self.create_user(email,
            password=password,
-           name=name,
-           phone=phone,
-           score=score
+           name=name
        )
        user.is_admin = True
        user.save(using=self._db)
@@ -34,7 +30,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15, blank=True)
     #location =
-    score = models.FloatField(blank=True)
+    score = models.FloatField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     is_active = models.BooleanField(default=True)

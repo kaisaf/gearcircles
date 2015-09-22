@@ -16,7 +16,7 @@ def signin_or_signup_based_on_gitkit(request):
     if gtoken_cookie:
         server_config_json = path.join(
             path.dirname(path.realpath(__file__)),
-            '/users/gitkit-server-config.json')
+            'gitkit-server-config.json')
         gitkit_instance = gitkitclient.GitkitClient.FromConfigFile(server_config_json)
         gitkit_user = gitkit_instance.VerifyGitkitToken(gtoken_cookie)
         if gitkit_user:
