@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from users.views import LoginView, LogoutView, MyAccountView, LoginWidgetView, UserView, ProductView
+from users.views import LoginView, LogoutView, MyAccountView, LoginWidgetView, UserView
 from gears.views import CategoriesView, CategoryByNameView, AddGearView, LocationsView, LocationByNameView
+from rentals.views import ProductView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),

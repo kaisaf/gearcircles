@@ -22,7 +22,3 @@ class MyAccountView(View):
 class UserView(View):
     def get(self, request, user_id):
         return HttpResponse("Userview " + user_id)
-
-class ProductView(View):
-    def get(self, request, user_id, product_id):
-        return HttpResponse("Product!!!!! " + user_id + " " + product_id)
