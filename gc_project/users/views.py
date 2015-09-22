@@ -3,9 +3,14 @@ from django.http import HttpResponse
 from django.views.generic import View
 
 
+class IndexView(View):
+    def get(self, request):
+        return HttpResponse("Hei! IndexView")
+    
+    
 class LoginView(View):
     def get(self, request):
-        return HttpResponse("MOI! LoginView")
+        return render(request, "users/login.html")
     
     
 class LogoutView(View):
@@ -15,12 +20,17 @@ class LogoutView(View):
     
 class LoginWidgetView(View):
     def get(self, request):
-        return render(request, 'users/loginwidget.html')
+        return render(request, "users/loginwidget.html")
     
     
 class MyAccountView(View):
     def get(self, request):
         return HttpResponse("MyAccount!!!!!")
+    
+    
+class HomeView(View):
+    def get(self, request):
+        return HttpResponse("Home!!!!!")
     
     
 class UserView(View):
