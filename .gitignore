@@ -1,7 +1,11 @@
 gc_project/gc_project/credentials_paypal.json
+
 gc_project/users/static/js/gitkit-client-config.js
 gc_project/users/gitkit-server-config.json
 gc_project/users/google_client_secret.p12
+
+gc_project/gears/static/gears/img/*.png
+gc_project/gears/static/gears/img/*.jpg
 
 
 # Byte-compiled / optimized / DLL files

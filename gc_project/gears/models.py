@@ -1,8 +1,12 @@
 from django.contrib.gis.db import models
+from django.core.files.storage import FileSystemStorage
 from django.core.exceptions import ValidationError
-import datetime
+import datetime, os
 from users.models import User
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+image_storage = FileSystemStorage(location = BASE_DIR + "/static/gears/img")
 
 PAYMENT_CHOICES = (
     (0, 'Cash'),
@@ -115,7 +119,7 @@ class GearAvailability(models.Model):
 
 
 class GearImage(models.Model):
-    photo = models.ImageField()
+    photo = models.ImageField(storage=image_storage)
     gear = models.ForeignKey(Gear)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
