@@ -63,6 +63,7 @@ class Gear(models.Model):
     expiration_date = models.DateField()
     categories = models.ManyToManyField(Category)
     user = models.ForeignKey(User)
+    location = models.ForeignKey(Location)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
