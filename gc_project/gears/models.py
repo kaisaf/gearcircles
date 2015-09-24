@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError
 import datetime
 from users.models import User
@@ -42,6 +42,15 @@ class CategoryProperty(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Location(models.Model):
+    address = models.TextField()
+    point = models.PointField()
+    objects = models.GeoManager()
+
+    def __str__(self):
+        return "{} / {}".format(self.address, self.point.coords)
 
 
 class Gear(models.Model):
