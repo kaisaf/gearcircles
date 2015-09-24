@@ -1,8 +1,12 @@
-from django.db import models
+from django.contrib.gis.db import models
+from django.core.files.storage import FileSystemStorage
 from django.core.exceptions import ValidationError
-import datetime
+import datetime, os
 from users.models import User
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+image_storage = FileSystemStorage(location = BASE_DIR + "/static/gears/img")
 
 PAYMENT_CHOICES = (
     (0, 'Cash'),
@@ -44,6 +48,15 @@ class CategoryProperty(models.Model):
         return self.name
 
 
+class Location(models.Model):
+    address = models.TextField()
+    point = models.PointField()
+    objects = models.GeoManager()
+
+    def __str__(self):
+        return "{} / {}".format(self.address, self.point.coords)
+
+
 class Gear(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -54,6 +67,7 @@ class Gear(models.Model):
     expiration_date = models.DateField()
     categories = models.ManyToManyField(Category)
     user = models.ForeignKey(User)
+    location = models.ForeignKey(Location)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -105,7 +119,7 @@ class GearAvailability(models.Model):
 
 
 class GearImage(models.Model):
-    photo = models.ImageField()
+    photo = models.ImageField(storage=image_storage)
     gear = models.ForeignKey(Gear)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

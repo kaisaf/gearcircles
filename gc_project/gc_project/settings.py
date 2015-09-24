@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'users',
     'gears',
     'rentals',
@@ -79,10 +80,10 @@ WSGI_APPLICATION = 'gc_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'gearcircles',
-        'USER': 'django_user',
-        'PASSWORD': 'python',
+        'USER': 'gear_db_user',
+        'PASSWORD': 'oursuperuser',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

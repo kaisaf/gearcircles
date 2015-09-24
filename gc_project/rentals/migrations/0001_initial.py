@@ -16,11 +16,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Transaction',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField()),
                 ('price_paid', models.FloatField()),
-                ('payment_method', models.IntegerField()),
+                ('payment_method', models.IntegerField(choices=[(0, 'Cash'), (1, 'Paypal')])),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('borrower_user', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='transactions_borrowed')),
