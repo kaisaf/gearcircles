@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
+from rest_framework import routers
 
 from users.views import (IndexView, LoginView,
                          LogoutView, MyAccountView,
@@ -24,8 +25,20 @@ from users.views import (IndexView, LoginView,
 from gears.views import (CategoriesView, CategoryByNameView,
                          AddGearView, LocationsView,
                          LocationByNameView)
+from gears.views import (CategoryViewSet, CategoryPropertyViewSet,
+                        GearViewSet, GearPropertyViewSet,
+                        GearAvailabilityViewSet, GearImageViewSet,
+                        LocationViewSet)
 from rentals.views import ProductView
 
+router = routers.DefaultRouter()
+router.register(r'categories', CategoryViewSet)
+router.register(r'categoryproperties', CategoryPropertyViewSet)
+router.register(r'gears', GearViewSet)
+router.register(r'gearproperties', GearPropertyViewSet)
+router.register(r'gearavailabilities', GearAvailabilityViewSet)
+router.register(r'gearimages', GearImageViewSet)
+router.register(r'locations', LocationViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -41,5 +54,6 @@ urlpatterns = [
     url(r'^addgear/', AddGearView.as_view(), name='addgear'),
     url(r'^locations/$', LocationsView.as_view(), name='locations'),
     url(r'^locations/(?P<location_name>\w+)', LocationByNameView.as_view(), name='location_by_name'),
+    url(r'^api/v1/', include(router.urls)),
     url(r'^$', IndexView.as_view(), name='index'),
 ]
