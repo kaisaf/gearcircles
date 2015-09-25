@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Category, CategoryProperty, Gear, GearProperty, Location, GearAvailability, GearImage
+from users.serializers import UserSerializer
 
 
 class CategoryPropertySerializer(serializers.ModelSerializer):
@@ -41,6 +42,7 @@ class GearImageSerializer(serializers.ModelSerializer):
 
 
 class GearSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
     categories = CategorySerializer(many=True, read_only=True)
     location = LocationSerializer(read_only=True)
     gearproperty_set = GearPropertySerializer(many=True, read_only=True)
@@ -49,5 +51,5 @@ class GearSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gear
         fields = ('name', 'description', 'brand', 'price', 'expiration_date',
-            'preferred_contact', 'payment', 'categories', 'location',
+            'preferred_contact', 'payment', 'user', 'categories', 'location',
             'gearproperty_set', 'gearimage_set', 'gearavailability_set')
