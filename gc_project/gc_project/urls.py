@@ -33,7 +33,7 @@ from rentals.views import ProductView
 
 router = routers.DefaultRouter()
 router.register(r'categories', CategoryViewSet)
-router.register(r'categoryproperties', CategoryPropertyViewSet)
+#router.register(r'categoryproperties', CategoryPropertyViewSet)
 router.register(r'gears', GearViewSet)
 router.register(r'gearproperties', GearPropertyViewSet)
 router.register(r'gearavailabilities', GearAvailabilityViewSet)
