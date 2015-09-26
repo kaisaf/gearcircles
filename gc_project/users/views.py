@@ -1,13 +1,25 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import View
+from gears.models import Location
 
 from .gitkit_auth import signin_or_signup_based_on_gitkit
+
+from django.contrib.gis.geos import Point, fromstr
+from django.contrib.gis.measure import Distance
 
 
 class IndexView(View):
     def get(self, request):
-        return render(request, "index.html")
+        co = [39.828175, -98.5795]
+        distance_from_point = {'mi':'10000'}
+        point = fromstr("POINT({} {})".format(co[0], co[1]))
+        center = Location(address="us", point=point)
+        locations = Location.objects.filter(point__distance_lte=(center.point, Distance(**distance_from_point) ))
+        context = {}
+        for location in locations:
+            context[location.address] = location.point
+        return render(request, "index.html", context)
 
 
 class LoginView(View):
