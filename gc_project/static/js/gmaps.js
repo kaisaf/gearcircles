@@ -9,10 +9,10 @@ $(document).ready(function() {
     }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showMap, function() {
-        showMap(defaultPos)
+        showMap(defaultPos);
       });
     } else {
-      showMap(defaultPos)
+      showMap(defaultPos);
     }
   }
 
@@ -28,28 +28,6 @@ $(document).ready(function() {
         scrollwheel: false,
         zoom: 6
     });
-  //   addMArker(position, map)
-  //   pos1 = {
-  //     "coords": {
-  //       "latitude": 40.7609862,
-  //       "longitude": -73.996871
-  //     }
-  //   }
-  //   pos2 = {
-  //     "coords": {
-  //       "latitude": 40.7519862,
-  //       "longitude": -73.987871
-  //     }
-  //   }
-  //   pos3 = {
-  //     "coords": {
-  //       "latitude": 40.7509062,
-  //       "longitude": -73.956871
-  //     }
-  //   }
-  //   addMArker(pos1, map, "text1")
-  //   addMArker(pos2, map, "text2")
-  //   addMArker(pos3, map, "text3")
   }
 
   window.gcAddMarker = function(position, map, content) {
@@ -60,7 +38,7 @@ $(document).ready(function() {
     });
 
     if (content) {
-      var contentString = "<h3>"+ content +"</h3>"
+      var contentString = content;
 
       var infowindow = new google.maps.InfoWindow({
        content: contentString
@@ -73,7 +51,5 @@ $(document).ready(function() {
 
   }
 
-
-  //getPosition();
 
 })

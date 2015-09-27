@@ -20,9 +20,8 @@ from rest_framework import routers
 
 from users.views import (IndexView, LoginView,
                          LogoutView, MyAccountView,
-                         LoginWidgetView, UserView,
-                         HomeView)
-from gears.views import (CategoriesView, CategoryByNameView,
+                         LoginWidgetView, UserView)
+from gears.views import (HomeView, CategoriesView, CategoryByNameView,
                          AddGearView, LocationsView,
                          LocationByNameView)
 from gears.views import (CategoryViewSet, CategoryPropertyViewSet,

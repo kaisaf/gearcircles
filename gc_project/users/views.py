@@ -44,17 +44,15 @@ class MyAccountView(View):
         return HttpResponse("MyAccount!!!!!")
 
 
-class HomeView(View):
-    def get(self, request):
-        print("GET on /home")
-        if not request.user.is_authenticated():
-            #Should check google cookie and signup/signin user on django
-            if not signin_or_signup_based_on_gitkit(request):
-                #not signed in on gitkit, redirect to login page
-                return redirect(login)
-        return HttpResponse("Welcoome to the Login View!")
-
-
+# class HomeView(View):
+#     def get(self, request):
+#         print("GET on /home")
+#         if not request.user.is_authenticated():
+#             #Should check google cookie and signup/signin user on django
+#             if not signin_or_signup_based_on_gitkit(request):
+#                 #not signed in on gitkit, redirect to login page
+#                 return redirect(login)
+#         return HttpResponse("Welcoome to the Login View!")
 
 
 class UserView(View):

@@ -16,6 +16,11 @@ from .serializers import (CategorySerializer, CategoryPropertySerializer,
     GearImageSerializer)
 
 
+class HomeView(View):
+    def get(self, request):
+        return render(request, 'gears/home.html')
+
+
 class CategoriesView(View):
     def get(self, request):
         return HttpResponse("Gear CategoryView")
