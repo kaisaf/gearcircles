@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import View
 
+from django.contrib.gis.geos import Point, fromstr
+from django.contrib.gis.measure import Distance
+
 from rest_framework import viewsets
 
 from .models import (Category, CategoryProperty, Gear, GearProperty, Location,
@@ -60,6 +63,18 @@ class GearPropertyViewSet(viewsets.ModelViewSet):
 class LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+
+    def get_queryset(self):
+       latitude = (self.request.query_params.get('lat'))
+       longitude = (self.request.query_params.get('lng'))
+       distance = (self.request.query_params.get('miles'))
+       if latitude and longitude and distance:
+           center = fromstr("POINT({} {})".format(latitude, longitude))
+           distance_from_point = {'mi': distance}
+           queryset = self.queryset.filter(point__distance_lte=(center, Distance(**distance_from_point))).distance(center).order_by('distance')
+       else:
+           queryset = self.queryset.filter()
+       return queryset
 
 
 class GearAvailabilityViewSet(viewsets.ModelViewSet):

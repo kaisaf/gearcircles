@@ -19,7 +19,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ('address', 'point')
+        #fields = ('address', 'point')
 
 
 class GearPropertySerializer(serializers.ModelSerializer):
