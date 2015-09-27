@@ -2,6 +2,12 @@ $(document).ready(function() {
 
   window.gcGetPosition();
 
+  $("#map").on("click", ".infoWindow", function() {
+    console.log("got a click");
+    console.log($(this).data());
+    window.location.href="/products/" + $(this).data().gearid
+  })
+
   $.ajax({
     method: "GET",
     url: "/api/v1/locations",
@@ -33,7 +39,7 @@ $(document).ready(function() {
 
   function createMapInfoContent(location) {
     console.log(location);
-    var content = "<div data-gearId=" + location.gear_set[0].id + "> \
+    var content = "<div class='infoWindow' data-gearId=" + location.gear_set[0].id + "> \
       <div> \
         <img width=128px height=128px src=" + location.gear_set[0].gearimage_set[0].photo + "> \
       </div> \
