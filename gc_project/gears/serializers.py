@@ -16,12 +16,6 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('name', 'description', 'categoryproperty_set')
 
 
-class LocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Location
-        #fields = ('address', 'point')
-
-
 class GearPropertySerializer(serializers.ModelSerializer):
     category_property = CategoryPropertySerializer(read_only=True)
     class Meta:
@@ -44,12 +38,19 @@ class GearImageSerializer(serializers.ModelSerializer):
 class GearSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     categories = CategorySerializer(many=True, read_only=True)
-    location = LocationSerializer(read_only=True)
+    #location = LocationSerializer(read_only=True)
     gearproperty_set = GearPropertySerializer(many=True, read_only=True)
     gearavailability_set = GearAvailabilitySerializer(many=True, read_only=True)
     gearimage_set = GearImageSerializer(many=True, read_only=True)
     class Meta:
         model = Gear
         fields = ('name', 'description', 'brand', 'price', 'expiration_date',
-            'preferred_contact', 'payment', 'user', 'categories', 'location',
+            'preferred_contact', 'payment', 'user', 'categories',
             'gearproperty_set', 'gearimage_set', 'gearavailability_set')
+
+
+class LocationSerializer(serializers.ModelSerializer):
+    gear_set = GearSerializer(many=True, read_only=True)
+    class Meta:
+        model = Location
+        fields = ('address', 'point', 'gear_set')
