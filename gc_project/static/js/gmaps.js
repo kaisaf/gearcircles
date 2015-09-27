@@ -1,6 +1,5 @@
 $(document).ready(function() {
-
-  function getPosition() {
+  window.gcGetPosition = function() {
     // Create a map object and specify the DOM element for display.
     defaultPos = {
       "coords": {
@@ -24,36 +23,36 @@ $(document).ready(function() {
   }
 
   function showMap(position) {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    window.gcMap = new google.maps.Map(document.getElementById('map'), {
         center: convertCoords(position),
         scrollwheel: false,
         zoom: 6
     });
-    addMArker(position, map)
-    pos1 = {
-      "coords": {
-        "latitude": 40.7609862,
-        "longitude": -73.996871
-      }
-    }
-    pos2 = {
-      "coords": {
-        "latitude": 40.7519862,
-        "longitude": -73.987871
-      }
-    }
-    pos3 = {
-      "coords": {
-        "latitude": 40.7509062,
-        "longitude": -73.956871
-      }
-    }
-    addMArker(pos1, map, "text1")
-    addMArker(pos2, map, "text2")
-    addMArker(pos3, map, "text3")
+  //   addMArker(position, map)
+  //   pos1 = {
+  //     "coords": {
+  //       "latitude": 40.7609862,
+  //       "longitude": -73.996871
+  //     }
+  //   }
+  //   pos2 = {
+  //     "coords": {
+  //       "latitude": 40.7519862,
+  //       "longitude": -73.987871
+  //     }
+  //   }
+  //   pos3 = {
+  //     "coords": {
+  //       "latitude": 40.7509062,
+  //       "longitude": -73.956871
+  //     }
+  //   }
+  //   addMArker(pos1, map, "text1")
+  //   addMArker(pos2, map, "text2")
+  //   addMArker(pos3, map, "text3")
   }
 
-  function addMArker(position, map, content) {
+  window.gcAddMarker = function(position, map, content) {
     var marker = new google.maps.Marker({
         position: convertCoords(position),
         map: map,
@@ -75,15 +74,6 @@ $(document).ready(function() {
   }
 
 
-
-    // var marker = new google.maps.Marker({
-    //   position: {lat: 38.828175, lng: -97.5795},
-    //   icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
-    //   map: map,
-    //   title: "I'm here!",
-    // });
-
-
-  getPosition();
+  //getPosition();
 
 })

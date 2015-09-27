@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from .models import Category, CategoryProperty, Gear, GearProperty, Location, GearAvailability, GearImage
 from users.serializers import UserSerializer
 
@@ -49,8 +50,9 @@ class GearSerializer(serializers.ModelSerializer):
             'gearproperty_set', 'gearimage_set', 'gearavailability_set')
 
 
-class LocationSerializer(serializers.ModelSerializer):
+class LocationSerializer(GeoFeatureModelSerializer):
     gear_set = GearSerializer(many=True, read_only=True)
     class Meta:
         model = Location
+        geo_field = 'point'
         fields = ('address', 'point', 'gear_set')
