@@ -8,25 +8,37 @@ $(document).ready(function() {
     window.location.href="/products/" + $(this).data().gearid
   })
 
-  $.ajax({
-    method: "GET",
-    url: "/api/v1/locations",
-  }).done(function(data) {
-    setMarkers(data);
+  $("#choiceMenu").on("click", "#btnCategory", function() {
+    console.log("clicked category");
+    $("#categoryMenu").toggle();
   })
 
-  $.ajax({
-    method: "GET",
-    url: "/api/v1/categories",
-  }).done(function(data) {
-    //console.log(data);
-  })
+  getApiData("/api/v1/locations", setMarkers);
+  getApiData("/api/v1/categories", createMenu);
+
+  function getApiData(endpoint, callback) {
+    $.ajax({
+      method: "GET",
+      url: endpoint,
+    }).done(function(data) {
+      callback(data);
+    })
+
+  }
+
+  function createMenu(categories) {
+    console.log("kukkuu")
+    console.log(categories)
+    $("#categoryMenu").empty();
+    $.each(categories, function(index, category) {
+      $("#categoryMenu").append("<li> \
+        <a href=#>" + category.name + "</a></li>")
+    })
+  }
+
 
   function setMarkers(locations) {
     $.each(locations, function(index, location) {
-      // console.log(location.gear_set[0].description);
-      // console.log(location.gear_set[0].name);
-      // console.log(location.gear_set[0].price);
       position = {
         "coords": {
           "latitude": location.point.coordinates[1],
@@ -38,7 +50,6 @@ $(document).ready(function() {
   }
 
   function createMapInfoContent(location) {
-    console.log(location);
     var content = "<div class='infoWindow' data-gearId=" + location.gear_set[0].id + "> \
       <div> \
         <img width=128px height=128px src=" + location.gear_set[0].gearimage_set[0].photo + "> \

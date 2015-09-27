@@ -13,7 +13,7 @@ class CategorySerializer(serializers.ModelSerializer):
     categoryproperty_set = CategoryPropertySerializer(many=True, read_only=True)
     class Meta:
         model = Category
-        fields = ('name', 'description', 'categoryproperty_set')
+        fields = ('id', 'name', 'description', 'categoryproperty_set')
 
 
 class GearPropertySerializer(serializers.ModelSerializer):
