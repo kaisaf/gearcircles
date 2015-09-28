@@ -28,6 +28,10 @@ $(document).ready(function() {
     }
   })
 
+  $("#categoryMenu").on("click", ".catMenuItem", function() {
+    catMenuItemHandler(this);
+  })
+
   getApiData("/api/v1/locations", setMarkers);
   getApiData("/api/v1/categories", createMenu);
 
@@ -41,11 +45,10 @@ $(document).ready(function() {
   }
 
   function createMenu(categories) {
-    console.log("kukkuu")
     console.log(categories)
     $("#categoryMenu").empty();
     $.each(categories, function(index, category) {
-      $("#categoryMenu").append("<li> \
+      $("#categoryMenu").append("<li class='catMenuItem' data-catId=" + category.id + "> \
         <a href=#>" + category.name + "</a></li>")
     })
   }
@@ -74,6 +77,15 @@ $(document).ready(function() {
       </div> \
     </div>"
     return content;
+  }
+
+  function catMenuItemHandler(obj) {
+    if ($(obj).hasClass("selectedCat")) {
+      console.log("should remove class");
+      $(obj).removeClass("selectedCat");
+    } else {
+      $(obj).addClass("selectedCat");
+    }
   }
 
 })

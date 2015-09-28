@@ -13,3 +13,11 @@ body{
 .hiddenMenu{
     display: none;
 }
+
+.catMenuItem:hover{
+  background-color: rgb(231, 231, 231);
+}
+
+.selectedCat{
+  background-color: red;
+}
