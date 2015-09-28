@@ -14,7 +14,7 @@
     <li id="btnDate" class="btnChoiceMenuItem" data-panelId="dateMenu"><a href="#">Date</a></li>
 
     <div class="input-group col-xs-12 col-md-6">
-      <input type="text" class="form-control" placeholder="Search for...">
+      <input id="txtSearch" type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
         <button id="btnSearch" class="btn btn-default" type="button">Go!</button>
       </span>
@@ -28,11 +28,19 @@
   </ul>
 
   <ul id="priceMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
-    <li>$0-10</li>
+    <li>
+      <input id="minPriceSlider" type="range" onchange="minPrice.value=value" >
+      <input id="minPrice" type="number" onchange="minPriceSlider.value=value">
+    </li>
+    <li>
+      <input id="maxPriceSlider" type="range" onchange="maxPrice.value=value">
+      <input id="maxPrice" type="number" onchange="maxPriceSlider.value=value">
+    </li>
   </ul>
 
   <ul id="dateMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
-    <li>Calendar</li>
+    <li><input id="startDate" type="date"></li>
+    <li><input id="endDate" type="date"></li>
   </ul>
 
 {% endblock %}

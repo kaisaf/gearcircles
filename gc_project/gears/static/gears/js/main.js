@@ -2,14 +2,12 @@ $(document).ready(function() {
 
   window.gcGetPosition();
 
-  var categoriesQuery = {"categories":[]}
+  var queryFilter = {"categories":[]}
 
   /*
   EVENT HANDLERS
   */
   $("#map").on("click", ".infoWindow", function() {
-    console.log("got a click");
-    console.log($(this).data());
     window.location.href="/products/" + $(this).data().gearid
   })
 
@@ -20,9 +18,9 @@ $(document).ready(function() {
       if ($(panel).is(":visible")) {
         isEmpty = false
         if ($activePanel.data() == $(panel).data()) {
-          $(panel).slideToggle("slow")
+          $(panel).slideToggle("easy")
         } else {
-          $(panel).slideToggle("slow", function() {
+          $(panel).slideToggle("easy", function() {
             $activePanel.slideToggle("easy");
           });
         }
@@ -40,19 +38,29 @@ $(document).ready(function() {
 
   $("#btnSearch").on("click", function() {
     window.gcClearAllMarkers();
-    if ($("#priceMenu").is(":visible")) {
-      $("#priceMenu").slideToggle();
-    } else if ($("#categoryMenu").is(":visible")) {
-      $("#categoryMenu").slideToggle();
-    }
-    getApiData("/api/v1/locations", categoriesQuery, setMarkers);
+    $.each($(".pnlChoiceMenu"), function(index, panel) {
+      if ($(panel).is(":visible")) {
+        $(panel).slideToggle("easy");
+      }
+    })
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
+    var minPrice = $("#minPrice").val();
+    var maxPrice = $("#maxPrice").val();
+    var txtSearch = $("#txtSearch").val();
+    queryFilter["startDate"] = startDate;
+    queryFilter["endDate"] = endDate;
+    queryFilter["minPrice"] = minPrice;
+    queryFilter["maxPrice"] = maxPrice;
+    queryFilter["txtSearch"] = txtSearch;
+    getApiData("/api/v1/locations", queryFilter, setMarkers);
   })
 
 
   /*
   GET DATA ON PAGE LOAD
   */
-  getApiData("/api/v1/locations", categoriesQuery, setMarkers);
+  getApiData("/api/v1/locations", queryFilter, setMarkers);
   getApiData("/api/v1/categories", null, createMenu);
 
   /*
@@ -106,16 +114,15 @@ $(document).ready(function() {
     //window.gcClearAllMarkers()
     if ($(obj).hasClass("selectedCat")) {
       $(obj).removeClass("selectedCat");
-      var index = categoriesQuery["categories"].indexOf($(obj).data().catid);
+      var index = queryFilter["categories"].indexOf($(obj).data().catid);
       if (index == 0) {
-        categoriesQuery["categories"].splice(index, index+1)
+        queryFilter["categories"].splice(index, index+1)
       }
-      categoriesQuery["categories"].splice(index, index)
+      queryFilter["categories"].splice(index, index)
     } else {
       $(obj).addClass("selectedCat");
-      categoriesQuery["categories"].push($(obj).data().catid);
+      queryFilter["categories"].push($(obj).data().catid);
     }
-    console.log(categoriesQuery["categories"])
   }
 
 })
