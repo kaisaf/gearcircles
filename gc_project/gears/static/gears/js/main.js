@@ -9,8 +9,12 @@ $(document).ready(function() {
   })
 
   $("#choiceMenu").on("click", "#btnCategory", function() {
-    console.log("clicked category");
-    $("#categoryMenu").toggle();
+    console.log("asd")
+    $("#categoryMenu").slideToggle("easy");
+  })
+
+  $("#choiceMenu").on("click", "#btnPrice", function() {
+    $("#priceMenu").slideToggle("easy");
   })
 
   getApiData("/api/v1/locations", setMarkers);
@@ -23,7 +27,6 @@ $(document).ready(function() {
     }).done(function(data) {
       callback(data);
     })
-
   }
 
   function createMenu(categories) {
@@ -35,7 +38,6 @@ $(document).ready(function() {
         <a href=#>" + category.name + "</a></li>")
     })
   }
-
 
   function setMarkers(locations) {
     $.each(locations, function(index, location) {
