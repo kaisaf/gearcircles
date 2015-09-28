@@ -9,12 +9,23 @@ $(document).ready(function() {
   })
 
   $("#choiceMenu").on("click", "#btnCategory", function() {
-    console.log("asd")
-    $("#categoryMenu").slideToggle("easy");
+    if ($("#priceMenu").is(":visible")) {
+      $("#priceMenu").slideToggle("easy", function() {
+        $("#categoryMenu").slideToggle("easy");
+      });
+    } else {
+      $("#categoryMenu").slideToggle("easy");
+    }
   })
 
   $("#choiceMenu").on("click", "#btnPrice", function() {
-    $("#priceMenu").slideToggle("easy");
+    if ($("#categoryMenu").is(":visible")) {
+      $("#categoryMenu").slideToggle("easy", function() {
+        $("#priceMenu").slideToggle("easy");
+      });
+    } else {
+      $("#priceMenu").slideToggle("easy");
+    }
   })
 
   getApiData("/api/v1/locations", setMarkers);
