@@ -2,6 +2,8 @@ $(document).ready(function() {
 
   window.gcGetPosition();
 
+  var categoriesQuery = {"categories":[]}
+
   $("#map").on("click", ".infoWindow", function() {
     console.log("got a click");
     console.log($(this).data());
@@ -45,7 +47,6 @@ $(document).ready(function() {
   }
 
   function createMenu(categories) {
-    console.log(categories)
     $("#categoryMenu").empty();
     $.each(categories, function(index, category) {
       $("#categoryMenu").append("<li class='catMenuItem' data-catId=" + category.id + "> \
@@ -81,11 +82,17 @@ $(document).ready(function() {
 
   function catMenuItemHandler(obj) {
     if ($(obj).hasClass("selectedCat")) {
-      console.log("should remove class");
       $(obj).removeClass("selectedCat");
+      var index = categoriesQuery["categories"].indexOf($(obj).data().catid);
+      if (index == 0) {
+        categoriesQuery["categories"].splice(index, index+1)
+      }
+      categoriesQuery["categories"].splice(index, index)
     } else {
       $(obj).addClass("selectedCat");
+      categoriesQuery["categories"].push($(obj).data().catid);
     }
+    console.log(categoriesQuery["categories"])
   }
 
 })

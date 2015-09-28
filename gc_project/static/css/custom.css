@@ -18,6 +18,10 @@ body{
   background-color: rgb(231, 231, 231);
 }
 
+.catMenuItem:active{
+  background-color: rgb(200, 231, 231);
+}
+
 .selectedCat{
-  background-color: red;
+  background-color: rgb(231, 231, 231);
 }
