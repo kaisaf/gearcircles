@@ -13,25 +13,26 @@ $(document).ready(function() {
     window.location.href="/products/" + $(this).data().gearid
   })
 
-  $("#choiceMenu").on("click", "#btnCategory", function() {
-    if ($("#priceMenu").is(":visible")) {
-      $("#priceMenu").slideToggle("easy", function() {
-        $("#categoryMenu").slideToggle("easy");
-      });
-    } else {
-      $("#categoryMenu").slideToggle("easy");
+  $("#choiceMenu").on("click", ".btnChoiceMenuItem", function() {
+    var isEmpty = true
+    var $activePanel = $("#"+$(this).data().panelid)
+    $.each($(".pnlChoiceMenu"), function(index, panel) {
+      if ($(panel).is(":visible")) {
+        isEmpty = false
+        if ($activePanel.data() == $(panel).data()) {
+          $(panel).slideToggle("slow")
+        } else {
+          $(panel).slideToggle("slow", function() {
+            $activePanel.slideToggle("easy");
+          });
+        }
+      }
+    })
+    if (isEmpty) {
+      $activePanel.slideToggle("easy");
     }
   })
 
-  $("#choiceMenu").on("click", "#btnPrice", function() {
-    if ($("#categoryMenu").is(":visible")) {
-      $("#categoryMenu").slideToggle("easy", function() {
-        $("#priceMenu").slideToggle("easy");
-      });
-    } else {
-      $("#priceMenu").slideToggle("easy");
-    }
-  })
 
   $("#categoryMenu").on("click", ".catMenuItem", function() {
     catMenuItemHandler(this);
