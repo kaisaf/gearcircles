@@ -4,6 +4,9 @@ $(document).ready(function() {
 
   var categoriesQuery = {"categories":[]}
 
+  /*
+  EVENT HANDLERS
+  */
   $("#map").on("click", ".infoWindow", function() {
     console.log("got a click");
     console.log($(this).data());
@@ -34,13 +37,31 @@ $(document).ready(function() {
     catMenuItemHandler(this);
   })
 
-  getApiData("/api/v1/locations", setMarkers);
-  getApiData("/api/v1/categories", createMenu);
+  $("#btnSearch").on("click", function() {
+    window.gcClearAllMarkers();
+    if ($("#priceMenu").is(":visible")) {
+      $("#priceMenu").slideToggle();
+    } else if ($("#categoryMenu").is(":visible")) {
+      $("#categoryMenu").slideToggle();
+    }
+    getApiData("/api/v1/locations", categoriesQuery, setMarkers);
+  })
 
-  function getApiData(endpoint, callback) {
+
+  /*
+  GET DATA ON PAGE LOAD
+  */
+  getApiData("/api/v1/locations", categoriesQuery, setMarkers);
+  getApiData("/api/v1/categories", null, createMenu);
+
+  /*
+  RUNS AJAX CALL TO ENDPOINT PARAMETER AND CALLBACK PARAMETER ON SUCCESS
+  */
+  function getApiData(endpoint, data, callback) {
     $.ajax({
       method: "GET",
       url: endpoint,
+      data: data,
     }).done(function(data) {
       callback(data);
     })
@@ -81,6 +102,7 @@ $(document).ready(function() {
   }
 
   function catMenuItemHandler(obj) {
+    //window.gcClearAllMarkers()
     if ($(obj).hasClass("selectedCat")) {
       $(obj).removeClass("selectedCat");
       var index = categoriesQuery["categories"].indexOf($(obj).data().catid);

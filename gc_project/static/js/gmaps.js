@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+  var markers = [];
+
   window.gcGetPosition = function() {
     // Create a map object and specify the DOM element for display.
     defaultPos = {
@@ -48,8 +51,16 @@ $(document).ready(function() {
         infowindow.open(map, marker);
       });
     }
-
+    markers.push(marker);
   }
+
+  window.gcClearAllMarkers = function() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+  }
+
+
 
 
 })
