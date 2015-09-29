@@ -20,7 +20,7 @@ skis = Category.objects.create(
 
 skis_model = CategoryProperty.objects.create(
     name = "model",
-    description = "Gotama, Bonafide, etc...",
+    description = "Gotama, Bonafide, etc",
     mandatory = False,
     input_type = 0, # string
     category = skis,
@@ -66,6 +66,44 @@ skis_level = CategoryProperty.objects.create(
     category = skis,
     )
 
+#### SKI BOOTS ####
+skisBoots = Category.objects.create(
+    name="Ski Boots",
+    description="Ski boots",
+    )
+
+skisBoots_model = CategoryProperty.objects.create(
+    name = "model",
+    description = "SX120, T1, Krypton Pro ID, etc",
+    mandatory = True,
+    input_type = 0, # string
+    category = skisBoots,
+    )
+
+skisBoots_size = CategoryProperty.objects.create(
+    name = "size",
+    description = "24.5, 30.0 etc",
+    mandatory = True,
+    input_type = 2,
+    category = skisBoots,
+    )
+
+skisBoots_style = CategoryProperty.objecs.create(
+    name = "style",
+    description = "Alpine, Telemark, Touring, etc",
+    mandatory = True,
+    input_type = 0,
+    category = skisBoots,
+)
+
+skisBoots_level = CategoryProperty.objects.create(
+    name = "level",
+    description = "Beginner, Intermediate, Advanced, Expert",
+    mandatory = False,
+    input_type = 0,
+    category = skisBoots,
+    )
+
 #### SNOWBOARDS ####
 snowboards = Category.objects.create(
     name="Snowboards",
@@ -74,7 +112,7 @@ snowboards = Category.objects.create(
 
 snowboards_model = CategoryProperty.objects.create(
     name = "model",
-    description = "Gateway, Custom Fly V, Smart Pickle, etc...",
+    description = "Gateway, Custom Fly V, Smart Pickle, etc",
     mandatory = False,
     input_type = 0, # string
     category = snowboards,
@@ -114,7 +152,7 @@ snowboards_level = CategoryProperty.objects.create(
 
 snowboards_terrain = CategoryProperty.objects.create(
     name = "terrain",
-    description = "Park, Freeride, All-Mountain, Powder, etc...",
+    description = "Park, Freeride, All-Mountain, Powder, etc",
     mandatory = False,
     input_type = 0,
     category = snowboards,
@@ -129,7 +167,7 @@ snowboardsBoots = Category.objects.create(
 
 snowboardsBoots_model = CategoryProperty.objects.create(
     name = "model",
-    description = "Ion LTD, Moto, Encore, etc...",
+    description = "Ion LTD, Moto, Encore, etc",
     mandatory = False,
     input_type = 0, # string
     category = snowboardsBoots,
@@ -137,15 +175,15 @@ snowboardsBoots_model = CategoryProperty.objects.create(
 
 snowboardsBoots_size = CategoryProperty.objects.create(
     name = "size",
-    description = "7, 9.5, 12, etc...",
+    description = "7, 9.5, 12, etc",
     mandatory = True,
     input_type = 2,
     category = snowboardsBoots,
     )
 
 snowboardsBoots_flex = CategoryProperty.objects.create(
-    name = "width",
-    description = "Soft, Medium, Stiff, etc...",
+    name = "flex",
+    description = "Soft, Medium, Stiff, etc",
     mandatory = False,
     input_type = 0,
     category = snowboardsBoots,
@@ -154,13 +192,13 @@ snowboardsBoots_flex = CategoryProperty.objects.create(
 
 #### ROLLERBLADING ####
 rollerblading = Category.objects.create(
-    name="rollerblading",
+    name="Rollerblading",
     description="Rollerblading/Inline Skating",
     )
 
 rollerblading_model = CategoryProperty.objects.create(
     name = "model",
-    description = "Farmer 5, Carbon 3, TV3, etc...",
+    description = "Farmer 5, Carbon 3, TV3, etc",
     mandatory = False,
     input_type = 0, # string
     category = rollerblading,
@@ -168,7 +206,7 @@ rollerblading_model = CategoryProperty.objects.create(
 
 rollerblading_size = CategoryProperty.objects.create(
     name = "size",
-    description = "7, 9.5, 12, etc...",
+    description = "7, 9.5, 12, etc",
     mandatory = True,
     input_type = 2,
     category = rollerblading,
@@ -176,7 +214,7 @@ rollerblading_size = CategoryProperty.objects.create(
 
 rollerblading_style = CategoryProperty.objects.create(
     name = "style",
-    description = "Vert, Street, Powerblade, Fitness, etc...",
+    description = "Vert, Street, Powerblade, Fitness, etc",
     mandatory = False,
     input_type = 0,
     category = rollerblading,
@@ -185,7 +223,7 @@ rollerblading_style = CategoryProperty.objects.create(
 
 #### CYCLING ####
 cycling = Category.objects.create(
-    name="cycling",
+    name="Cycling",
     description="Cycling/Mountain Biking",
     )
 
@@ -207,36 +245,139 @@ cycling_size = CategoryProperty.objects.create(
 
 cycling_style = CategoryProperty.objects.create(
     name = "style",
-    description = "Dutch, Road, Fixed, Mountain Bike, Cruizer, etc...",
+    description = "Dutch, Road, Fixed, Mountain Bike, Cruizer, etc",
     mandatory = False,
     input_type = 0,
     category = cycling,
     )
 
 
+#### ICE AXES ####
+iceAxes = Category.objects.create(
+    name="Ice Axes",
+    description="Ice climbing/mountaineering axes",
+    )
+
+iceAxes_model = CategoryProperty.objects.create(
+    name = "model",
+    description = "Raven, Viper, Quark, etc",
+    mandatory = False,
+    input_type = 0, # string
+    category = iceAxes,
+    )
+
+iceAxes_style = CategoryProperty.objects.create(
+    name = "style",
+    description = "Mountaineering, Ice Climbing",
+    mandatory = False,
+    input_type = 0,
+    category = iceAxes,
+    )
+
+
+#### CRAMPONS ####
+crampons = Category.objects.create(
+    name="Crampons",
+    description="Ice climbing/mountaineering crampons",
+    )
+
+crampons_model = CategoryProperty.objects.create(
+    name = "model",
+    description = "Cyborg Pro, G14, Vasak, etc",
+    mandatory = False,
+    input_type = 0, # string
+    category = crampons,
+    )
+
+crampons_style = CategoryProperty.objects.create(
+    name = "style",
+    description = "Mountaineering, Ice Climbing, Race",
+    mandatory = False,
+    input_type = 0,
+    category = crampons,
+    )
+
+crampons_style = CategoryProperty.objects.create(
+    name = "style",
+    description = "Mountaineering, Ice Climbing, Race, Snow Walking",
+    mandatory = False,
+    input_type = 0,
+    category = crampons,
+    )
+
+crampons_binding = CategoryProperty.objects.create(
+    name = "binding",
+    description = "Step-In, Strap-On, Hybrid",
+    mandatory = False,
+    input_type = 0,
+    category = crampons,
+    )
+
+
+#### ICE CLIMBING BOOTS ####
+iceBoots = Category.objects.create(
+    name="Ice Climbing Boots",
+    description="Ice climbing/mountaineering boots, no hiking boots",
+    )
+
+iceBoots_model = CategoryProperty.objects.create(
+    name = "model",
+    description = "Cyborg Pro, G14, Vasak, etc",
+    mandatory = False,
+    input_type = 0, # string
+    category = iceBoots,
+    )
+
+iceBoots_size = CategoryProperty.objects.create(
+    name = "size",
+    description = "7, 9.5, 12, etc",
+    mandatory = True,
+    input_type = 2,
+    category = iceBoots,
+    )
+
+
+skis_names = ['skis', 'telemark skis', 'touring skis']
+skis_brands = ['K2', 'Salomon', 'Black Diamond', 'Dynastar', 'Dynafit', 'Black Crows', 'Fischer', 'Atomic']
+
+skiboots_names = ['touring boots', 'ski boots', 'telemark boots']
+skiboots_brands = ['K2', 'Salomon', 'Black Diamond', 'Dynafit', 'Scarpa', 'Atomic', 'Nordica']
+
+snowboards_names = ['snowboard', 'splitboard']
+snowboards_brands = ['GNU', 'Burton', 'Lib Tech', 'Ride', 'Arbor']
+
+snowboardBoots_names = ['snowboard boots']
+snowboardBoots_brands = ['Burton', 'Salomon', 'K2', 'ThirtyTwo']
+
+iceAxes_names = ['mountaineering ice axe', 'ice axes']
+iceAxes_brands = ['Petzl', 'Black Diamond', 'Simond', 'CAMP']
+
+crampons_names = ['ice climbing crampons', 'light crampons']
+crampons_brands = ['Grivel', 'Petzl', 'Black Diamond', 'Simond', 'CAMP']
+
+iceBoots_names = ['ice climbing boots']
+iceBoots_brands = ['Scarpa', 'LaSportiva', 'Asolo', 'Millet']
+
+cycling_names = ['mountain bike', 'hybrid bicycle', 'fixie']
+cycling_brands = ['Trek', 'Giant', 'Cannondale', 'Bianchi']
+
+rollerblading_names = ['inline skates', 'rollerblades']
+rollerblading_brands = ['K2', 'Roces', 'Rollerblade']
 
 
 
-categories = ['Avalanche safety', 'Ice climbing/mountaineering', 'Ice axes', 'Crampons',
-'Ice climbing boots', 'Cross country skiing', 'Other skiing gear', 'Ski boots', 'Other snowboarding gear', 'Snowshoeing', 'Camping/hiking', 'Diving',
+categories = ['Avalanche safety', 'Other ice climbing/mountaineering gear',
+'Cross country skiing', 'Other skiing gear', 'Other snowboarding gear', 'Snowshoeing', 'Camping/hiking', 'Diving',
 'Golf', 'Kayaking/Canoeing/Rafting', 'Paddleboarding', 'Rock climbing/Bouldering',
 'Skateboarding', 'Surfing/Windsurfing/Kitesurfing', 'Wakeboarding/waterskiing',
 'Sports technology', 'Other winter sports', 'Other summer sports']
 
 
-gears = ['skis', 'telemark skis', 'snowboard', 'snowboard boots', 'ski boots',
-'ski poles', 'trekking poles', 'avalance beacon', 'ABS backbag', 'touring skis',
-'touring boots', 'mountaineering ice axe', 'ice axes', 'ice climbing boots',
-'ice climbing crampons', 'light crampons', 'tent', 'cooking ware', 'surfboard',
-'paddleboard', 'crashpad', 'snowshoes', 'wakeboard', 'cross country skis',
-'kayak', 'skiing helmet', 'climbing helmet', 'bicycle helmet', 'bicycle', 'longboard',
-'skateboard', 'rollerblades', 'ice skates']
+gears = ['ski poles', 'trekking poles', 'avalance beacon', 'ABS backbag',
+'tent', 'cooking ware', 'surfboard', 'paddleboard', 'crashpad', 'snowshoes', 'wakeboard',
+'cross country skis', 'kayak', 'skiing helmet', 'climbing helmet', 'bicycle helmet',
+'bicycle', 'longboard', 'skateboard', 'rollerblades', 'ice skates']
 
-
-brands = ['K2', 'Salomon', 'Black Diamond', 'The North Face', 'Beal', 'Gnu', 'Burton',
-'Petzl', 'Dynastar', 'LaSportiva', 'Dynafit', 'Grivel', 'Black Crows', 'Scarpa',
-'Red', 'Mammuth', 'Sector 9', 'Loaded', 'Giro', 'CAMP', 'Fischer', 'Atomic',
-'Quicksilver', 'Rip Curl', 'MSR']
 
 
 """
@@ -256,13 +397,14 @@ def create_location():
     location = Location.objects.create(address=address, point=point)
     return location
 
-def create user():
-    name = fake.name()
-    email = fake.email()
-    score = randint(1, 10)
-    phone = fake.phone_number()
-    user = User.objects.create(name=name, email=email, score=score, phone=phone)
-    return user
+def create user(number):
+    for i in range(0, number):
+        name = fake.name()
+        email = fake.email()
+        score = randint(1, 10)
+        phone = fake.phone_number()
+        user = User.objects.create(name=name, email=email, score=score, phone=phone)
+        return user
 
 def create_gear():
     name = gears[randint(0, len(gears) - 1)]
