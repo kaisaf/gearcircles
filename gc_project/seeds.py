@@ -20,7 +20,7 @@ skis = Category.objects.create(
 
 skis_model = CategoryProperty.objects.create(
     name = "model",
-    description = "Temptation 88 Open, Bonafide, etc...",
+    description = "Gotama, Bonafide, etc...",
     mandatory = False,
     input_type = 0, # string
     category = skis,
@@ -36,7 +36,7 @@ skis_length = CategoryProperty.objects.create(
 
 skis_width = CategoryProperty.objects.create(
     name = "width",
-    description = "135.0, 108.5, etc",
+    description = "125.0, 108.5, etc",
     mandatory = False,
     input_type = 2,
     category = skis,
@@ -49,6 +49,14 @@ skis_profile = CategoryProperty.objects.create(
     input_type = 0,
     category = skis,
     )
+
+skis_style = CategoryProperty.objecs.create(
+    name = "style",
+    description = "Alpine, Telemark, Touring, etc",
+    mandatory = True,
+    input_type = 0,
+    category = skis,
+)
 
 skis_level = CategoryProperty.objects.create(
     name = "level",
