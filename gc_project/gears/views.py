@@ -73,6 +73,9 @@ class LocationViewSet(viewsets.ModelViewSet):
     filter_fields = ("address",)
 
     def get_queryset(self):
+        print("QUERY STRING = {}".format(self.request.query_params))
+        print("CATEGORIES WITH GET LIST = {}".format(self.request.query_params.getlist('categories[]')))
+        print("CATEGORIES WITH GET = {}".format(self.request.GET.get('categories[]')))
         query_params = Q()
         latitude = (self.request.query_params.get('lat'))
         longitude = (self.request.query_params.get('lng'))

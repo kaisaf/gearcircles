@@ -40,7 +40,7 @@ class CategoryProperty(models.Model):
     description = models.TextField()
     mandatory = models.BooleanField()
     input_type = models.IntegerField(choices=INPUT_CHOICES)
-    categories = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
