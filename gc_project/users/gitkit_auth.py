@@ -6,6 +6,13 @@ from os import path
 from identitytoolkit import gitkitclient
 
 
+def create_gitkit_instance():
+    server_config_json = path.join(
+        path.dirname(path.realpath(__file__)),
+        'gitkit-server-config.json')
+    return gitkitclient.GitkitClient.FromConfigFile(server_config_json)
+
+
 def signin_or_signup_based_on_gitkit(request):
     """
         Gitkit creates a google cookie that this function validates,
@@ -14,10 +21,7 @@ def signin_or_signup_based_on_gitkit(request):
     """
     gtoken_cookie = request.COOKIES.get("gtoken")
     if gtoken_cookie:
-        server_config_json = path.join(
-            path.dirname(path.realpath(__file__)),
-            'gitkit-server-config.json')
-        gitkit_instance = gitkitclient.GitkitClient.FromConfigFile(server_config_json)
+        gitkit_instance = create_gitkit_instance()
         gitkit_user = gitkit_instance.VerifyGitkitToken(gtoken_cookie)
         if gitkit_user:
             print("Welcome " + gitkit_user.email + "! Your user info is: " + str(vars(gitkit_user)))
