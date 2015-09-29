@@ -1,0 +1,7 @@
+{
+  "clientId": "YOUR_CLIENT_ID_GOES_HERE",
+  "serviceAccountEmail": "YOUR_SERVICE_ACCOUNT_EMAIL_GOES_HERE",
+  "serviceAccountPrivateKeyFile": "/HOME/YOUR/PROJECT/FOLDER/YOUR_GOOGLE_CLIENT_SECRET.p12",
+  "widgetUrl": "http://127.0.0.1/loginwidget",
+  "cookieName": "gtoken"
+}
