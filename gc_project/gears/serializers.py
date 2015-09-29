@@ -6,7 +6,7 @@ from users.serializers import UserSerializer
 class CategoryPropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryProperty
-        fields = ('name', 'description', 'mandatory', 'input_type', 'categories')
+        fields = ('id', 'name', 'description', 'mandatory', 'input_type')
 
 
 class CategorySerializer(serializers.ModelSerializer):
