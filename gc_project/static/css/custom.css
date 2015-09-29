@@ -1,0 +1,27 @@
+body{
+  min-height: 0px;
+}
+
+.fullscreen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.pnlChoiceMenu{
+    display: none;
+}
+
+.catMenuItem:hover{
+  background-color: rgb(231, 231, 231);
+}
+
+.catMenuItem:active{
+  background-color: rgb(200, 231, 231);
+}
+
+.selectedCat{
+  background-color: rgb(231, 231, 231);
+}

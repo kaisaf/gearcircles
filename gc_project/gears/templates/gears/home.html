@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block navbar_right %}
+  <li class="active"><a href="/logout">Logout<span class="sr-only">(current)</span></a></li>
+{% endblock %}
+
+
+{% block menu %}
+
+  <ul id="choiceMenu" class="nav navbar-nav col-xs-12">
+    <li id="btnCategory" class="btnChoiceMenuItem" data-panelId="categoryMenu"><a href="#">Category</a></li>
+    <li id="btnPrice" class="btnChoiceMenuItem" data-panelId="priceMenu"><a href="#">Price</a></li>
+    <li id="btnDate" class="btnChoiceMenuItem" data-panelId="dateMenu"><a href="#">Date</a></li>
+
+    <div class="input-group col-xs-12 col-md-6">
+      <input id="txtSearch" type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button id="btnSearch" class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+
+
+
+  </ul>
+
+  <ul id="categoryMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
+  </ul>
+
+  <ul id="priceMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
+    <li>
+      <input id="minPriceSlider" type="range" onchange="minPrice.value=value" >
+      <input id="minPrice" type="number" onchange="minPriceSlider.value=value">
+    </li>
+    <li>
+      <input id="maxPriceSlider" type="range" onchange="maxPrice.value=value">
+      <input id="maxPrice" type="number" onchange="maxPriceSlider.value=value">
+    </li>
+  </ul>
+
+  <ul id="dateMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
+    <li><input id="startDate" type="date"></li>
+    <li><input id="endDate" type="date"></li>
+  </ul>
+
+{% endblock %}
+
+
+{% block main_content %}
+  <div id="map" class="fullscreen"></div>
+{% endblock %}
+
+
+{% block script_end %}
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script src="{% static "js/gmaps.js"%}"></script>
+  <script src="{% static "gears/js/main.js"%}"></script>
+
+{% endblock %}
