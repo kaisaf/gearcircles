@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
-  window.gcGetPosition();
+  window.gcCreateMap(function() {
+    getApiData("/api/v1/locations", queryFilter, setMarkers);
+  });
 
   var queryFilter = {"categories":[]}
 
@@ -60,7 +62,7 @@ $(document).ready(function() {
   /*
   GET DATA ON PAGE LOAD
   */
-  getApiData("/api/v1/locations", queryFilter, setMarkers);
+  // getApiData("/api/v1/locations", queryFilter, setMarkers);
   getApiData("/api/v1/categories", null, createMenu);
 
   /*
@@ -92,7 +94,7 @@ $(document).ready(function() {
           "longitude": location.point.coordinates[0]
         }
       }
-      window.gcAddMarker(position, window.gcMap, createMapInfoContent(location));
+      window.gcAddMarker(position, createMapInfoContent(location));
     })
   }
 

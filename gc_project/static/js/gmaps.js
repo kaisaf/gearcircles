@@ -60,7 +60,7 @@ function gcAddMarker(position, content) {
     });
 
     marker.addListener('click', function() {
-      infowindow.open(map, marker);
+      infowindow.open(gcMap, marker);
     });
   }
   markers.push(marker);
