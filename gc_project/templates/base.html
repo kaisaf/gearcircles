@@ -66,6 +66,7 @@
             </li> -->
           </ul>
           <ul class="nav navbar-nav navbar-right col-xs-12 col-md-2">
+              <li class="active"><a id="btnLogin" ></a></li>
             {% block navbar_right %}
             {% endblock %}
             <!-- <li><a href="http://getbootstrap.com/examples/navbar/">Default</a></li>
@@ -103,6 +104,17 @@
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="//www.gstatic.com/authtoolkit/js/gitkit.js"></script>
+    <link type=text/css rel=stylesheet href="//www.gstatic.com/authtoolkit/css/gitkit.css" />
+    <script type=text/javascript>
+        window.google.identitytoolkit.signInButton(
+            '#btnLogin', // accepts any CSS selector
+            {
+                widgetUrl: "/loginwidget",
+                signOutUrl: "/logout",
+            }
+        );
+    </script>
 
     {% block script_end %}
     {% endblock %}
