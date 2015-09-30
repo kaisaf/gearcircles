@@ -37,7 +37,7 @@ function showMap(position, callback) {
   gcMap = new google.maps.Map(document.getElementById('map'), {
       center: convertCoords(position),
       scrollwheel: false,
-      zoom: 6
+      zoom: 12
   });
   google.maps.event.addListenerOnce(gcMap, 'tilesloaded', function() {
     gcOnMapReady(callback);
