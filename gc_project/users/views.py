@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import View
+from django.contrib.auth import logout
+
 from gears.models import Location
 
 from .gitkit_auth import signin_or_signup_based_on_gitkit
@@ -11,6 +13,15 @@ from django.contrib.gis.measure import Distance
 
 class IndexView(View):
     def get(self, request):
+        if request.user.is_authenticated():
+            # user already logged in, redirect to Home
+            return redirect("home")
+        
+        if signin_or_signup_based_on_gitkit(request):
+            # check if user is logged in on gitkit, signup/sigin on django and redurect to Home
+            return redirect("home")
+        
+        return render(request, "index.html")
 #        co = [39.828175, -98.5795]
 #        distance_from_point = {'mi':'10000'}
 #        point = fromstr("POINT({} {})".format(co[0], co[1]))
@@ -19,18 +30,12 @@ class IndexView(View):
 #        context = {}
 #        for location in locations:
 #            context[location.address] = location.point
-        return render(request, "index.html")#, context)
-
-
-class LoginView(View):
-    def get(self, request):
-        print("GET on login")
-        return render(request, "users/login.html")
 
 
 class LogoutView(View):
     def get(self, request):
-        return HttpResponse("Hei! LogoutView")
+        logout(request)
+        return redirect("index")
 
 
 class LoginWidgetView(View):
@@ -42,17 +47,6 @@ class LoginWidgetView(View):
 class MyAccountView(View):
     def get(self, request):
         return HttpResponse("MyAccount!!!!!")
-
-
-# class HomeView(View):
-#     def get(self, request):
-#         print("GET on /home")
-#         if not request.user.is_authenticated():
-#             #Should check google cookie and signup/signin user on django
-#             if not signin_or_signup_based_on_gitkit(request):
-#                 #not signed in on gitkit, redirect to login page
-#                 return redirect(login)
-#         return HttpResponse("Welcoome to the Login View!")
 
 
 class UserView(View):
