@@ -3,6 +3,7 @@
 
 {% block navbar_right %}
   <li class="active"><a href="/logout">Logout<span class="sr-only">(current)</span></a></li>
+
 {% endblock %}
 
 
@@ -13,14 +14,18 @@
     <li id="btnPrice" class="btnChoiceMenuItem" data-panelId="priceMenu"><a href="#">Price</a></li>
     <li id="btnDate" class="btnChoiceMenuItem" data-panelId="dateMenu"><a href="#">Date</a></li>
 
-    <div class="input-group col-xs-12 col-md-6">
+
+    <div class="input-group col-xs-12 col-md-4">
       <input id="txtSearch" type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
         <button id="btnSearch" class="btn btn-default" type="button">Go!</button>
       </span>
     </div>
 
-
+    <div class="wrap col-xs-12 col-md-4">
+      <input type="checkbox" class="slider-v3" id="s5" />
+      <label for="s5"></label>
+    </div>
 
   </ul>
 
@@ -55,6 +60,6 @@
   <script src="https://maps.googleapis.com/maps/api/js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <script src="{% static "js/gmaps.js"%}"></script>
-  <script src="{% static "gears/js/main.js"%}"></script>
+  <script src="{% static "gears/js/home.js"%}"></script>
 
 {% endblock %}

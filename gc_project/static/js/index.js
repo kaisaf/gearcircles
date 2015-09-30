@@ -1,13 +1,15 @@
 $(document).ready(function() {
 
-  window.gcGetPosition();
+  window.gcCreateMap(getLocations);
 
-  $.ajax({
-    method: "GET",
-    url: "/api/v1/locations",
-  }).done(function(data) {
-    setMarkers(data);
-  })
+  function getLocations() {
+    $.ajax({
+      method: "GET",
+      url: "/api/v1/locations/",
+    }).done(function(data) {
+      setMarkers(data);
+    })
+  }
 
   function setMarkers(locations) {
     $.each(locations, function(index, location) {
@@ -17,7 +19,7 @@ $(document).ready(function() {
           "longitude": location.point.coordinates[0]
         }
       }
-      window.gcAddMarker(position, window.gcMap);
+      window.gcAddMarker(position);
     })
   }
 
