@@ -15,6 +15,8 @@ from .serializers import (CategorySerializer, CategoryPropertySerializer,
     LocationSerializer, GearAvailabilitySerializer,
     GearImageSerializer)
 
+from datetime import datetime
+
 
 class HomeView(View):
     def get(self, request):
@@ -80,6 +82,10 @@ class LocationViewSet(viewsets.ModelViewSet):
         latitude = (self.request.query_params.get('lat'))
         longitude = (self.request.query_params.get('lng'))
         distance = (self.request.query_params.get('miles'))
+        min_price = (self.request.query_params.get('minPrice'))
+        max_price = (self.request.query_params.get('maxPrice'))
+        available_date = (self.request.query_params.get('startDate'))
+        end_date = (self.request.query_params.get('endDate'))
         gear = (self.request.query_params.get('gear'))
         user = (self.request.query_params.get('user'))
         
@@ -87,14 +93,22 @@ class LocationViewSet(viewsets.ModelViewSet):
             center = fromstr("POINT({} {})".format(latitude, longitude))
             distance_from_point = {'mi': distance}
             query_params.add(Q(point__distance_lte=(center, Distance(**distance_from_point))), query_params.connector)
-            
-        if categories:
-            for i in categories:
-                categories_params.add(Q(gear__categories__id=i), categories_params.OR)
+        if min_price:
+            query_params.add(Q(gear__price__gte=min_price), query_params.connector)
+        if max_price:
+            query_params.add(Q(gear__price__lte=max_price), query_params.connector)
+        if available_date:
+            d = datetime.strptime(available_date, "%Y-%m-%d")
+            print(d)
+            query_params.add(Q(gear__gearavailability__id = 3))
+            print("passed")
         if gear:
             query_params.add(Q(gear__id=gear), query_params.connector)
         if user:
             query_params.add(Q(gear__user__id=user), query_params.connector)
+        for i in categories:
+            categories_params.add(Q(gear__categories__id=i), categories_params.OR)
+            
         print(query_params)
         print(categories_params)
         queryset = self.queryset.filter(query_params).filter(categories_params)#.distance(center).order_by('distance')
