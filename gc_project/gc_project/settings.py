@@ -113,7 +113,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/static/gears/img/'
 
 AUTH_USER_MODEL = 'users.User'
-LOGIN_URL = '/login'
+LOGIN_URL = '/'
 
 TEMPLATES[0]['DIRS'].append(BASE_DIR + "/templates")
 
