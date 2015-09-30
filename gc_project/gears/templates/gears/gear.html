@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block menu %}
+{% endblock %}
+
+
+{% block main_content %}
+  <div class="row">
+    <div class="col-md-6">
+      <img width=128px height=128px src="{{photo}}">
+    </div>
+
+    <div class="col-md-6">
+      <h2>{{ name }}</h2>
+      <h3>{{ description }}</h3>
+      {% for category in categories %}
+      <p>{{ category }}</p>
+      {% endfor %}
+      <p>Price: ${{ price }}</p>
+      <p>Brand: {{ brand }}</p>
+      <p>Contact method: {{ preferred_contact }}</p>
+      <p>Payment methods: {{ payment }}</p>
+      <p>Timeframe: {{ expiration_date }}</p>
+      <p>Owner: {{ user }}</p>
+      <p>Location: {{ location }}</p>
+    </div>
+  </div>
+  <!-- <div id="map" class="fullscreen"></div> -->
+{% endblock %}
+
+
+{% block script_end %}
+  <!-- <script src="https://maps.googleapis.com/maps/api/js"></script> -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <!-- <script src="{% static "js/gmaps.js"%}"></script>
+  <script src="{% static "gears/js/home.js"%}"></script> -->
+
+{% endblock %}

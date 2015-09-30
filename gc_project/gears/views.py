@@ -20,6 +20,41 @@ class HomeView(View):
     def get(self, request):
         return render(request, 'gears/home.html')
 
+class GearView(View):
+    def get(self, request, gear_id):
+        gear = Gear.objects.get(id=gear_id)
+        photo = GearImage.objects.get(gear=gear)
+        #gear_properties = GearProperty.objects.get(gear=gear)
+        categories = gear.categories.values()
+        print(categories)
+        category_list = []
+        for category in categories:
+            category_list.append((category['name'] + ", " + category['description']))
+        context = {
+            "name": gear.name,
+            "description": gear.description,
+            "categories": category_list,
+            "brand": gear.brand,
+            "price": gear.price,
+            "preferred_contact": gear.preferred_contact,
+            "payment": gear.payment,
+            "expiration_date": gear.expiration_date,
+            "photo": photo.photo.url,
+            "user": gear.user,
+            "location": gear.location.address,
+
+        }
+        return render(request, 'gears/gear.html', context)
+
+    def post(self, request):
+        pass
+#         recipient_email =
+#         days_rented =
+#         dollars = days_rented * <dollars per day>
+#         cancel_return_address = <this is the current address>
+#         paypal_redirect_address = paypal_payment(recipient_email, dollars, cancel_return_address)
+#         return redirect(paypal_redirect_address)
+
 
 class CategoriesView(View):
     def get(self, request):
