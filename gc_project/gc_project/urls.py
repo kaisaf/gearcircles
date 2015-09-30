@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from rest_framework import routers
 
-from users.views import (IndexView, LoginView,
+from users.views import (IndexView,
                          LogoutView, MyAccountView,
                          LoginWidgetView, UserView)
 from gears.views import (HomeView, CategoriesView, CategoryByNameView,
@@ -41,10 +41,9 @@ router.register(r'locations', LocationViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/', LoginView.as_view(), name='login'),
     url(r'^loginwidget/', LoginWidgetView.as_view(), name='loginwidget'),
     url(r'^logout/', LogoutView.as_view(), name='logout'),
-    url(r'^home/', HomeView.as_view(), name='home'),
+    url(r'^home/', login_required(HomeView.as_view()), name='home'),
     url(r'^myaccount/', MyAccountView.as_view(), name='myaccount'),
     url(r'^users/(?P<user_id>\w+)/$', UserView.as_view(), name='user'),
     url(r'^users/(?P<user_id>\w+)/(?P<product_id>\w+)', ProductView.as_view(), name='product'),
