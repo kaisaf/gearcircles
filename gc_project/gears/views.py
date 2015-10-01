@@ -42,7 +42,6 @@ class GearView(View):
         return Gear.objects.get(id=gear_id)
 
     def get(self, request, gear_id):
-        print(dir(request.user))
         renters_email = request.user.email
         renters_phone = request.user.phone
         gear = self.get_gear_object(gear_id)
@@ -67,7 +66,8 @@ class GearView(View):
             "user": gear.user,
             "location": gear.location.address,
             "gear_properties": gear_properties,
-            #"form": RentalForm()
+            "renters_email": renters_email,
+            "renters_phone":renters_phone,
         }
 
         return render(request, 'gears/gear.html', context)
@@ -140,11 +140,11 @@ class LocationViewSet(viewsets.ModelViewSet):
     serializer_class = LocationSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ("address",)
-    
+
     def get_queryset(self):
         query_params = Q()
         categories_params = Q()
-        
+
         categories = self.request.query_params.getlist('categories[]')
         latitude = (self.request.query_params.get('lat'))
         longitude = (self.request.query_params.get('lng'))
@@ -155,7 +155,7 @@ class LocationViewSet(viewsets.ModelViewSet):
         end_date = (self.request.query_params.get('endDate'))
         gear = (self.request.query_params.get('gear'))
         user = (self.request.query_params.get('user'))
-        
+
         if latitude and longitude and distance:
             center = fromstr("POINT({} {})".format(latitude, longitude))
             distance_from_point = {'mi': distance}
@@ -175,7 +175,7 @@ class LocationViewSet(viewsets.ModelViewSet):
             query_params.add(Q(gear__user__id=user), query_params.connector)
         for i in categories:
             categories_params.add(Q(gear__categories__id=i), categories_params.OR)
-            
+
         print(query_params)
         print(categories_params)
         queryset = self.queryset.filter(query_params).filter(categories_params)#.distance(center).order_by('distance')

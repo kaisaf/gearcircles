@@ -62,8 +62,8 @@
                     {% csrf_token %}
                     {{ form }}
                     <!-- <input type="submit" value="Submit" /> -->
-                    <li>My Email<input id="myEmail" name="myEmail" type="email" required></li>
-                    <li>My Phone<input id="myPhone" name="myPhone" type="text" required></li>
+                    <li>My Email<input id="myEmail" name="myEmail" type="email" value="{{renters_email}}" required></li>
+                    <li>My Phone<input id="myPhone" name="myPhone" type="text" value="{{renters_phone}}" placeholder="XXX-XXX-XXXX" required></li>
                     <li>Start Date <input id="startDate" name="startDate" type="date" required></li>
                     <li>End Date<input id="endDate" name="endDate" type="date" required></li>
                     <li>Payment Method</li>
@@ -72,7 +72,7 @@
                       <option value={{payment}}>{{payment}}</option>
                     {% endfor %}
                     </select>
-                    <li>PRICE:</li>
+                    <li id="totalPrice">PRICE: {{ price }}</li>
 
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
