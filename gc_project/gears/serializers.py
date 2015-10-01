@@ -26,7 +26,7 @@ class GearPropertySerializer(serializers.ModelSerializer):
 class GearAvailabilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = GearAvailability
-        fields = ('not_available_date', 'gear')
+        fields = ('id', 'not_available_date', 'gear')
 
 
 class GearImageSerializer(serializers.ModelSerializer):
@@ -54,4 +54,4 @@ class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         geo_field = 'point'
-        fields = ('address', 'point', 'gear_set')
+        fields = ('id', 'address', 'point', 'gear_set')
