@@ -15,8 +15,6 @@ from .serializers import (CategorySerializer, CategoryPropertySerializer,
     LocationSerializer, GearAvailabilitySerializer,
     GearImageSerializer)
 
-from datetime import datetime
-
 
 class HomeView(View):
     def get(self, request):
@@ -73,7 +71,7 @@ class LocationViewSet(viewsets.ModelViewSet):
     serializer_class = LocationSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ("address",)
-
+    
     def get_queryset(self):
         query_params = Q()
         categories_params = Q()
@@ -100,7 +98,7 @@ class LocationViewSet(viewsets.ModelViewSet):
         if available_date:
             d = datetime.strptime(available_date, "%Y-%m-%d")
             print(d)
-            query_params.add(Q(gear__gearavailability__id = 3))
+            query_params.add(Q(gear__user__id = 10))
             print("passed")
         if gear:
             query_params.add(Q(gear__id=gear), query_params.connector)
