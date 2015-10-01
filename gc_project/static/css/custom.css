@@ -3,15 +3,25 @@ body{
 }
 
 .fullscreen{
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#gear_details{
+  position: absolute;
+  top: 120px;
+  width: 100%;
+}
+
+#form-rental{
+  list-style: none;
 }
 
 .pnlChoiceMenu{
-    display: none;
+  display: none;
 }
 
 .catMenuItem:hover{
