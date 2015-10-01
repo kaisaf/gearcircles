@@ -4,8 +4,12 @@ from django.views.generic import View
 from django.contrib.auth import logout
 
 from gears.models import Location
+from .models import User
+from .serializers import UserSerializer
 
 from .gitkit_auth import signin_or_signup_based_on_gitkit
+
+from rest_framework import viewsets
 
 from django.contrib.gis.geos import Point, fromstr
 from django.contrib.gis.measure import Distance
@@ -52,3 +56,8 @@ class MyAccountView(View):
 class UserView(View):
     def get(self, request, user_id):
         return HttpResponse("Userview " + user_id)
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset =  User.objects.all()
+    serializer_class = UserSerializer

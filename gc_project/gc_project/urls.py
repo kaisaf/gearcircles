@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from rest_framework import routers
 
-from users.views import (IndexView,
+from users.views import (IndexView, UserViewSet,
                          LogoutView, MyAccountView,
                          LoginWidgetView, UserView)
 from gears.views import (HomeView, CategoriesView, CategoryByNameView,
@@ -29,14 +29,17 @@ from gears.views import (CategoryViewSet, CategoryPropertyViewSet,
                         GearAvailabilityViewSet, GearImageViewSet,
                         LocationViewSet)
 
+from rentals.views import TransactionViewSet
+
 router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
 router.register(r'categories', CategoryViewSet)
-#router.register(r'categoryproperties', CategoryPropertyViewSet)
 router.register(r'gears', GearViewSet)
 router.register(r'gearproperties', GearPropertyViewSet)
 router.register(r'gearavailabilities', GearAvailabilityViewSet)
 router.register(r'gearimages', GearImageViewSet)
 router.register(r'locations', LocationViewSet)
+router.register(r'transactions', TransactionViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
