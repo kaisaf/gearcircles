@@ -21,28 +21,43 @@ class HomeView(View):
         return render(request, 'gears/home.html')
 
 class GearView(View):
+    def payment_method(self, method):
+        if method == 0:
+            return "Cash"
+        elif method == 1:
+            return "PayPal"
+        else:
+            return "Cash or PayPal"
+
+    def contact_method(self, method):
+        if method == 0:
+            return "Phone"
+        else:
+            return "Email"
+
     def get(self, request, gear_id):
         gear = Gear.objects.get(id=gear_id)
         photo = GearImage.objects.get(gear=gear)
-        #gear_properties = GearProperty.objects.get(gear=gear)
         categories = gear.categories.values()
-        print(categories)
         category_list = []
         for category in categories:
             category_list.append((category['name'] + ", " + category['description']))
+        gear_properties = GearProperty.objects.filter(gear=gear)
+        payment = self.payment_method(gear.payment)
+        contact = self.contact_method(gear.preferred_contact)
         context = {
             "name": gear.name,
             "description": gear.description,
             "categories": category_list,
             "brand": gear.brand,
             "price": gear.price,
-            "preferred_contact": gear.preferred_contact,
-            "payment": gear.payment,
+            "preferred_contact": contact,
+            "payment": payment,
             "expiration_date": gear.expiration_date,
             "photo": photo.photo.url,
             "user": gear.user,
             "location": gear.location.address,
-
+            "gear_properties": gear_properties
         }
         return render(request, 'gears/gear.html', context)
 

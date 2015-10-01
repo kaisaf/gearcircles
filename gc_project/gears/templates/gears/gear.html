@@ -6,24 +6,32 @@
 
 
 {% block main_content %}
-  <div class="row">
+  <div id="gear_details" class="fullscreen">
     <div class="col-md-6">
-      <img width=128px height=128px src="{{photo}}">
+      <img width=480px height=640px src="{{photo}}" class="img-responsive" alt="Responsive image">
     </div>
 
     <div class="col-md-6">
       <h2>{{ name }}</h2>
       <h3>{{ description }}</h3>
+      <p>
       {% for category in categories %}
-      <p>{{ category }}</p>
+      <span>{{ category }}</span>
       {% endfor %}
-      <p>Price: ${{ price }}</p>
+      </p>
+
+      {% for gp in gear_properties %}
+      <p>*{{ gp.category_property}} {{gp.value }}<p>
+      {% endfor %}
+      </p>
+      <p>Price/day: ${{ price }}</p>
       <p>Brand: {{ brand }}</p>
       <p>Contact method: {{ preferred_contact }}</p>
       <p>Payment methods: {{ payment }}</p>
-      <p>Timeframe: {{ expiration_date }}</p>
+      <p>Listing expires: {{ expiration_date }}</p>
       <p>Owner: {{ user }}</p>
       <p>Location: {{ location }}</p>
+      <button>RENT ME</button>
     </div>
   </div>
   <!-- <div id="map" class="fullscreen"></div> -->
