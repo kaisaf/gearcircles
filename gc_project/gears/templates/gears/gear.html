@@ -59,33 +59,34 @@
               <div class="col-md-10">
 
                 <form id="form-rental" action="" method="post">
-                    <!-- {% csrf_token %}
-                    {{ form }} -->
+                    {% csrf_token %}
+                    {{ form }}
                     <!-- <input type="submit" value="Submit" /> -->
-                    <li>Start Date <input id="startDate" type="date" required></li>
-                    <li>End Date<input id="endDate" type="date" required></li>
+                    <li>My Email<input id="myEmail" name="myEmail" type="email" required></li>
+                    <li>My Phone<input id="myPhone" name="myPhone" type="text" required></li>
+                    <li>Start Date <input id="startDate" name="startDate" type="date" required></li>
+                    <li>End Date<input id="endDate" name="endDate" type="date" required></li>
                     <li>Payment Method</li>
-                    <select required>
+                    <select name="paymentMethod" required>
                     {% for payment in payments %}
                       <option value={{payment}}>{{payment}}</option>
                     {% endfor %}
                     </select>
                     <li>PRICE:</li>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-primary" id="btn-conformRental">Confirm</button>
+                    </div>
                 </form>
 
               </div>
 
             </div>
 
-
-          <!-- <p>My Phone: <span><input type="text" placeholder="388-000-0001"></input></span></p>
-          <p>My Email: <span><input type="text" placeholder="myname@hello.com"></input></span></p> -->
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button id="submit_rental" class="btn btn-primary" id="btn-conformRental">Confirm</button>
-        </div>
+
       </div>
     </div>
   </div>

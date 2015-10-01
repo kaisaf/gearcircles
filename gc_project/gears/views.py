@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import View
 from django.db.models import Q
@@ -21,6 +21,8 @@ class HomeView(View):
         return render(request, 'gears/home.html')
 
 from .forms import RentalForm
+from datetime import datetime
+from .payment import paypal_payment
 
 class GearView(View):
     def payment_method(self, method):
@@ -29,7 +31,7 @@ class GearView(View):
         elif method == 1:
             return ["PayPal"]
         else:
-            return ["Cash", "PayPal"]
+            return ["PayPal", "Cash"]
 
     def contact_method(self, method):
         if method == 0:
@@ -37,8 +39,11 @@ class GearView(View):
         else:
             return "Email"
 
+    def get_gear_object(self, gear_id):
+        return Gear.objects.get(id=gear_id)
+
     def get(self, request, gear_id):
-        gear = Gear.objects.get(id=gear_id)
+        gear = self.get_gear_object(gear_id)
         photo = GearImage.objects.get(gear=gear)
         categories = gear.categories.values()
         category_list = []
@@ -60,19 +65,28 @@ class GearView(View):
             "user": gear.user,
             "location": gear.location.address,
             "gear_properties": gear_properties,
-            "form": RentalForm()
+            #"form": RentalForm()
         }
 
         return render(request, 'gears/gear.html', context)
 
-    def post(self, request):
-        pass
-#         recipient_email =
-#         days_rented =
-#         dollars = days_rented * <dollars per day>
-#         cancel_return_address = <this is the current address>
-#         paypal_redirect_address = paypal_payment(recipient_email, dollars, cancel_return_address)
-#         return redirect(paypal_redirect_address)
+    def post(self, request, gear_id):
+        gear = self.get_gear_object(gear_id)
+        renters_email = request.POST["myEmail"]
+        recipient_email = gear.user.email
+        start_date = request.POST["startDate"]
+        end_date = request.POST["endDate"]
+        start_date = datetime.strptime(start_date, "%Y-%m-%d")
+        end_date = datetime.strptime(end_date, "%Y-%m-%d")
+        days_rented = (end_date - start_date).days + 1
+        dollars = days_rented * gear.price
+        payment_method = request.POST["paymentMethod"]
+        print(dir(request.session))
+        cancel_return_address = "http://localhost:8000" + request.get_full_path()
+        if payment_method == "PayPal":
+            paypal_redirect_address = paypal_payment(recipient_email, dollars, cancel_return_address)
+            return redirect(paypal_redirect_address)
+        return HttpResponse("Gear POST")
 
 
 class CategoriesView(View):

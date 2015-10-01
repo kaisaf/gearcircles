@@ -45,6 +45,7 @@ def paypal_payment(recipient_email, dollars, cancel_return_address):
 
     # Assing return address back to transaction view in case transaction is cancelled:
     params["cancelUrl"] = cancel_return_address
+    params["returnUrl"] = cancel_return_address
 
     # Send a Pay request to PayPal
     url = "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay"
@@ -53,7 +54,7 @@ def paypal_payment(recipient_email, dollars, cancel_return_address):
     response = requests.post(url, data=json.dumps(params), headers=headers)
 
     # Check the response:
-    #print(response.content.decode())
+    print(response.content.decode())
     response_string = response.content.decode("utf-8")
     response_dict = json.loads(response_string)
     payKey = response_dict.get("payKey")
