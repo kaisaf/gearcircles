@@ -180,10 +180,7 @@ class LocationViewSet(viewsets.ModelViewSet):
         for i in categories:
             categories_params.add(Q(gear__categories__id=i), categories_params.OR)
             
-        print(query_params)
-        print(categories_params)
         queryset = self.queryset.filter(query_params).filter(categories_params).exclude(exclude_dates_params)#.distance(center).order_by('distance')
-        print(queryset)
         return queryset
 
 
