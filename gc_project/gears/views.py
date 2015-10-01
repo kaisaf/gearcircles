@@ -25,11 +25,11 @@ from .forms import RentalForm
 class GearView(View):
     def payment_method(self, method):
         if method == 0:
-            return "Cash"
+            return ["Cash"]
         elif method == 1:
-            return "PayPal"
+            return ["PayPal"]
         else:
-            return "Cash or PayPal"
+            return ["Cash", "PayPal"]
 
     def contact_method(self, method):
         if method == 0:
@@ -45,7 +45,7 @@ class GearView(View):
         for category in categories:
             category_list.append((category['name'] + ", " + category['description']))
         gear_properties = GearProperty.objects.filter(gear=gear)
-        payment = self.payment_method(gear.payment)
+        payments = self.payment_method(gear.payment)
         contact = self.contact_method(gear.preferred_contact)
         context = {
             "name": gear.name,
@@ -54,7 +54,7 @@ class GearView(View):
             "brand": gear.brand,
             "price": gear.price,
             "preferred_contact": contact,
-            "payment": payment,
+            "payments": payments,
             "expiration_date": gear.expiration_date,
             "photo": photo.photo.url,
             "user": gear.user,

@@ -27,7 +27,11 @@
       <p>Price/day: ${{ price }}</p>
       <p>Brand: {{ brand }}</p>
       <p>Contact method: {{ preferred_contact }}</p>
-      <p>Payment methods: {{ payment }}</p>
+      <p>Payment methods:
+      {% for payment in payments %}
+        <span>{{ payment }}</span>
+      {% endfor %}
+      </p>
       <p>Listing expires: {{ expiration_date }}</p>
       <p>Owner: {{ user }}</p>
       <p>Location: {{ location }}</p>
@@ -52,12 +56,21 @@
         <div class="modal-body">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-10">
 
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form }}
+                <form id="form-rental" action="" method="post">
+                    <!-- {% csrf_token %}
+                    {{ form }} -->
                     <!-- <input type="submit" value="Submit" /> -->
+                    <li>Start Date <input id="startDate" type="date" required></li>
+                    <li>End Date<input id="endDate" type="date" required></li>
+                    <li>Payment Method</li>
+                    <select required>
+                    {% for payment in payments %}
+                      <option value={{payment}}>{{payment}}</option>
+                    {% endfor %}
+                    </select>
+                    <li>PRICE:</li>
                 </form>
 
               </div>

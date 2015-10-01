@@ -16,6 +16,9 @@ body{
   width: 100%;
 }
 
+#form-rental{
+  list-style: none;
+}
 
 .pnlChoiceMenu{
   display: none;
