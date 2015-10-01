@@ -144,6 +144,7 @@ class LocationViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         query_params = Q()
         categories_params = Q()
+        exclude_dates_params = Q()
 
         categories = self.request.query_params.getlist('categories[]')
         latitude = (self.request.query_params.get('lat'))
@@ -151,7 +152,7 @@ class LocationViewSet(viewsets.ModelViewSet):
         distance = (self.request.query_params.get('miles'))
         min_price = (self.request.query_params.get('minPrice'))
         max_price = (self.request.query_params.get('maxPrice'))
-        available_date = (self.request.query_params.get('startDate'))
+        start_date = (self.request.query_params.get('startDate'))
         end_date = (self.request.query_params.get('endDate'))
         gear = (self.request.query_params.get('gear'))
         user = (self.request.query_params.get('user'))
@@ -164,21 +165,22 @@ class LocationViewSet(viewsets.ModelViewSet):
             query_params.add(Q(gear__price__gte=min_price), query_params.connector)
         if max_price:
             query_params.add(Q(gear__price__lte=max_price), query_params.connector)
-        if available_date:
-            d = datetime.strptime(available_date, "%Y-%m-%d")
-            print(d)
-            query_params.add(Q(gear__user__id = 10))
-            print("passed")
         if gear:
             query_params.add(Q(gear__id=gear), query_params.connector)
         if user:
             query_params.add(Q(gear__user__id=user), query_params.connector)
+
+        if start_date:
+            start = datetime.strptime(start_date, "%Y-%m-%d")
+            exclude_dates_params.add(Q(gear__gearavailability__not_available_date__gte=start), query_params.connector)
+        if end_date:
+            end = datetime.strptime(end_date, "%Y-%m-%d")
+            exclude_dates_params.add(Q(gear__gearavailability__not_available_date__lte=end), query_params.connector)
+
         for i in categories:
             categories_params.add(Q(gear__categories__id=i), categories_params.OR)
 
-        print(query_params)
-        print(categories_params)
-        queryset = self.queryset.filter(query_params).filter(categories_params)#.distance(center).order_by('distance')
+        queryset = self.queryset.filter(query_params).filter(categories_params).exclude(exclude_dates_params)#.distance(center).order_by('distance')
         return queryset
 
 
