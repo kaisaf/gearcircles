@@ -20,6 +20,8 @@ class HomeView(View):
     def get(self, request):
         return render(request, 'gears/home.html')
 
+from .forms import RentalForm
+
 class GearView(View):
     def payment_method(self, method):
         if method == 0:
@@ -57,8 +59,10 @@ class GearView(View):
             "photo": photo.photo.url,
             "user": gear.user,
             "location": gear.location.address,
-            "gear_properties": gear_properties
+            "gear_properties": gear_properties,
+            "form": RentalForm()
         }
+
         return render(request, 'gears/gear.html', context)
 
     def post(self, request):

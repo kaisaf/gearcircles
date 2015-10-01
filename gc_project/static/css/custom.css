@@ -13,7 +13,9 @@ body{
 #gear_details{
   position: absolute;
   top: 120px;
+  width: 100%;
 }
+
 
 .pnlChoiceMenu{
   display: none;

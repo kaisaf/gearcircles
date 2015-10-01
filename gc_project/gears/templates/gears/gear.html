@@ -6,7 +6,7 @@
 
 
 {% block main_content %}
-  <div id="gear_details" class="fullscreen">
+  <div id="gear_details" class="row">
     <div class="col-md-6">
       <img width=480px height=640px src="{{photo}}" class="img-responsive" alt="Responsive image">
     </div>
@@ -31,17 +31,61 @@
       <p>Listing expires: {{ expiration_date }}</p>
       <p>Owner: {{ user }}</p>
       <p>Location: {{ location }}</p>
-      <button>RENT ME</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">RENT ME</button>
+    </div>
+
+
+
+  </div>
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Rental Details</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <!-- <input type="submit" value="Submit" /> -->
+                </form>
+
+              </div>
+
+            </div>
+
+
+          <!-- <p>My Phone: <span><input type="text" placeholder="388-000-0001"></input></span></p>
+          <p>My Email: <span><input type="text" placeholder="myname@hello.com"></input></span></p> -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button id="submit_rental" class="btn btn-primary" id="btn-conformRental">Confirm</button>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- <div id="map" class="fullscreen"></div> -->
+
 {% endblock %}
+
+
 
 
 {% block script_end %}
   <!-- <script src="https://maps.googleapis.com/maps/api/js"></script> -->
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <!-- <script src="{% static "js/gmaps.js"%}"></script>
-  <script src="{% static "gears/js/home.js"%}"></script> -->
+  <!-- <script src="{% static "js/gmaps.js"%}"></script>-->
+  <script src="{% static "gears/js/gear.js"%}"></script>
 
 {% endblock %}
