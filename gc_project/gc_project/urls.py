@@ -22,13 +22,12 @@ from users.views import (IndexView,
                          LogoutView, MyAccountView,
                          LoginWidgetView, UserView)
 from gears.views import (HomeView, CategoriesView, CategoryByNameView,
-                         AddGearView, LocationsView,
+                         GearView, AddGearView, LocationsView,
                          LocationByNameView)
 from gears.views import (CategoryViewSet, CategoryPropertyViewSet,
                         GearViewSet, GearPropertyViewSet,
                         GearAvailabilityViewSet, GearImageViewSet,
                         LocationViewSet)
-from rentals.views import ProductView
 
 router = routers.DefaultRouter()
 router.register(r'categories', CategoryViewSet)
@@ -46,7 +45,7 @@ urlpatterns = [
     url(r'^home/', login_required(HomeView.as_view()), name='home'),
     url(r'^myaccount/', MyAccountView.as_view(), name='myaccount'),
     url(r'^users/(?P<user_id>\w+)/$', UserView.as_view(), name='user'),
-    url(r'^users/(?P<user_id>\w+)/(?P<product_id>\w+)', ProductView.as_view(), name='product'),
+    url(r'^gears/(?P<gear_id>\w+)/$', GearView.as_view(), name='gear'),
     url(r'^addgear/', AddGearView.as_view(), name='addgear'),
     url(r'^api/v1/', include(router.urls)),
     url(r'^$', IndexView.as_view(), name='index'),
