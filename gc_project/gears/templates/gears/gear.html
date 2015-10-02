@@ -32,7 +32,7 @@
         <span>{{ payment }}</span>
       {% endfor %}
       </p>
-      <p>Listing expires: {{ expiration_date }}</p>
+      <p>Listing expires: <span id="expDate">{{ expiration_date }}<span></p>
       <p>Owner: {{ user }}</p>
       <p>Location: {{ location }}</p>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">RENT ME</button>

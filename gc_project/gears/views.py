@@ -70,7 +70,7 @@ class GearView(View):
             "renters_email": renters_email,
             "renters_phone":renters_phone,
         }
-
+        print(gear.expiration_date)
         return render(request, 'gears/gear.html', context)
 
     def post(self, request, gear_id):
