@@ -6,7 +6,7 @@
 
 
 {% block main_content %}
-  <div id="gear_details" class="row">
+  <div id="gear-details" class="row">
     <div class="col-md-6">
       <img width=480px height=640px src="{{photo}}" class="img-responsive" alt="Responsive image">
     </div>
@@ -62,7 +62,7 @@
                     {% csrf_token %}
                     {{ form }}
                     <!-- <input type="submit" value="Submit" /> -->
-                    <li>My Email<input id="myEmail" name="myEmail" type="email" value="{{renters_email}}" required></li>
+                    <li id="topLineModal">{{ renters_email }}</li>
                     <li>My Phone<input id="myPhone" name="myPhone" type="text" value="{{renters_phone}}" placeholder="XXX-XXX-XXXX" required></li>
                     <li>Start Date <input id="startDate" name="startDate" type="date" required></li>
                     <li>End Date<input id="endDate" name="endDate" type="date" required></li>
@@ -72,7 +72,7 @@
                       <option value={{payment}}>{{payment}}</option>
                     {% endfor %}
                     </select>
-                    <li id="totalPrice">PRICE: {{ price }}</li>
+                    <li id="totalPrice">TOTAL: $<span>{{ price }}</span></li>
 
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
