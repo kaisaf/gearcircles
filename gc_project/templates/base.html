@@ -46,7 +46,7 @@
           <a class="navbar-brand" href="#">GearCircles</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav col-xs-12 col-md-10">
+          <ul class="nav navbar-nav col-xs-12 col-sm-4">
             {% block navbar_left %}
             {% endblock %}
             <!-- <li class="active"><a href="#">Home</a></li>
@@ -65,8 +65,9 @@
               </ul>
             </li> -->
           </ul>
-          <ul class="nav navbar-nav navbar-right col-xs-12 col-md-2">
-              <li class="active"><a id="btnLogin" ></a></li>
+          <ul class="nav navbar-nav navbar-right col-xs-12 col-sm-6">
+            <li id="btnLogin"></li>
+              <!-- <li class="active"><a id="btnLogin" ></a></li> -->
             {% block navbar_right %}
             {% endblock %}
             <!-- <li><a href="http://getbootstrap.com/examples/navbar/">Default</a></li>
