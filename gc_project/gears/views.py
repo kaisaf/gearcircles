@@ -135,7 +135,12 @@ class LocationByNameView(View):
 
 class AddGearView(View):
     def get(self, request):
-        return HttpResponse("ADD stuff")
+        categories = Category.objects.all()
+        context = {
+            "categories": categories,
+        }
+        return render(request, 'gears/addgear.html', context)
+
 
 # Following views for API endpoints
 class CategoryViewSet(viewsets.ModelViewSet):
