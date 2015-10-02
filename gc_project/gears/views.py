@@ -11,6 +11,7 @@ from django.contrib.gis.measure import Distance
 from rest_framework import viewsets, filters
 
 from users.models import User
+from rentals.models import Transaction
 from .models import (Category, CategoryProperty, Gear, GearProperty, Location,
     GearAvailability, GearImage)
 from .serializers import (CategorySerializer, CategoryPropertySerializer,
@@ -25,11 +26,15 @@ class HomeView(View):
 
 
 class GearView(View):
-    def payment_method(self, method):
+    def convert_payment_method(self, method):
         if method == 0:
             return ["Cash"]
         elif method == 1:
             return ["PayPal"]
+        elif method == "Cash":
+            return 0
+        elif method == "PayPal":
+            return 1
         else:
             return ["PayPal", "Cash"]
 
@@ -38,6 +43,17 @@ class GearView(View):
             return "Phone"
         else:
             return "Email"
+
+    def create_transaction(self, start_date, end_date, gear, borrower_user, price_paid, payment_method):
+        Transaction.objects.create(
+            start_date = start_date,
+            end_date = end_date,
+            gear = gear,
+            owner_user = gear.user,
+            borrower_user = borrower_user,
+            price_paid = price_paid,
+            payment_method = payment_method
+        )
 
     def get_gear_object(self, gear_id):
         return Gear.objects.get(id=gear_id)
@@ -52,7 +68,7 @@ class GearView(View):
         for category in categories:
             category_list.append((category['name'] + ", " + category['description']))
         gear_properties = GearProperty.objects.filter(gear=gear)
-        payments = self.payment_method(gear.payment)
+        payments = self.convert_payment_method(gear.payment)
         contact = self.contact_method(gear.preferred_contact)
         context = {
             "name": gear.name,
@@ -89,6 +105,7 @@ class GearView(View):
         if not request.user.phone or renter.phone != phone:
             renter.phone = phone
             renter.save()
+        self.create_transaction(start_date, end_date, gear, renter, dollars, self.convert_payment_method(payment_method))
         if payment_method == "PayPal":
             paypal_redirect_address = paypal_payment(recipient_email, dollars, cancel_return_address)
             return redirect(paypal_redirect_address)
