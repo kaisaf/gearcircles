@@ -10,6 +10,7 @@ from django.contrib.gis.measure import Distance
 
 from rest_framework import viewsets, filters
 
+from users.models import User
 from .models import (Category, CategoryProperty, Gear, GearProperty, Location,
     GearAvailability, GearImage)
 from .serializers import (CategorySerializer, CategoryPropertySerializer,
@@ -42,7 +43,6 @@ class GearView(View):
         return Gear.objects.get(id=gear_id)
 
     def get(self, request, gear_id):
-        print(dir(request.user))
         renters_email = request.user.email
         renters_phone = request.user.phone
         gear = self.get_gear_object(gear_id)
@@ -67,27 +67,33 @@ class GearView(View):
             "user": gear.user,
             "location": gear.location.address,
             "gear_properties": gear_properties,
-            #"form": RentalForm()
+            "renters_email": renters_email,
+            "renters_phone":renters_phone,
         }
-
+        print(gear.expiration_date)
         return render(request, 'gears/gear.html', context)
 
     def post(self, request, gear_id):
         gear = self.get_gear_object(gear_id)
-        renters_email = request.POST["myEmail"]
         recipient_email = gear.user.email
         start_date = request.POST["startDate"]
         end_date = request.POST["endDate"]
+        phone = request.POST["myPhone"]
         start_date = datetime.strptime(start_date, "%Y-%m-%d")
         end_date = datetime.strptime(end_date, "%Y-%m-%d")
         days_rented = (end_date - start_date).days + 1
         dollars = days_rented * gear.price
         payment_method = request.POST["paymentMethod"]
         cancel_return_address = "http://localhost:8000" + request.get_full_path()
+        renter = User.objects.get(id=request.user.id)
+        if not request.user.phone or renter.phone != phone:
+            renter.phone = phone
+            renter.save()
         if payment_method == "PayPal":
             paypal_redirect_address = paypal_payment(recipient_email, dollars, cancel_return_address)
             return redirect(paypal_redirect_address)
-        return HttpResponse("Gear POST")
+        else:
+            return redirect('myaccount')
 
 
 class CategoriesView(View):
@@ -140,12 +146,12 @@ class LocationViewSet(viewsets.ModelViewSet):
     serializer_class = LocationSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ("address",)
-    
+
     def get_queryset(self):
         query_params = Q()
         categories_params = Q()
         exclude_dates_params = Q()
-        
+
         categories = self.request.query_params.getlist('categories[]')
         latitude = (self.request.query_params.get('lat'))
         longitude = (self.request.query_params.get('lng'))
@@ -156,7 +162,7 @@ class LocationViewSet(viewsets.ModelViewSet):
         end_date = (self.request.query_params.get('endDate'))
         gear = (self.request.query_params.get('gear'))
         user = (self.request.query_params.get('user'))
-        
+
         if latitude and longitude and distance:
             center = fromstr("POINT({} {})".format(latitude, longitude))
             distance_from_point = {'mi': distance}
@@ -169,17 +175,17 @@ class LocationViewSet(viewsets.ModelViewSet):
             query_params.add(Q(gear__id=gear), query_params.connector)
         if user:
             query_params.add(Q(gear__user__id=user), query_params.connector)
-            
+
         if start_date:
             start = datetime.strptime(start_date, "%Y-%m-%d")
             exclude_dates_params.add(Q(gear__gearavailability__not_available_date__gte=start), query_params.connector)
         if end_date:
             end = datetime.strptime(end_date, "%Y-%m-%d")
             exclude_dates_params.add(Q(gear__gearavailability__not_available_date__lte=end), query_params.connector)
-        
+
         for i in categories:
             categories_params.add(Q(gear__categories__id=i), categories_params.OR)
-            
+
         queryset = self.queryset.filter(query_params).filter(categories_params).exclude(exclude_dates_params)#.distance(center).order_by('distance')
         return queryset
 

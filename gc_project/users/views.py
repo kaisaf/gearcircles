@@ -20,11 +20,11 @@ class IndexView(View):
         if request.user.is_authenticated():
             # user already logged in, redirect to Home
             return redirect("home")
-        
+
         if signin_or_signup_based_on_gitkit(request):
             # check if user is logged in on gitkit, signup/sigin on django and redurect to Home
             return redirect("home")
-        
+
         return render(request, "index.html")
 #        co = [39.828175, -98.5795]
 #        distance_from_point = {'mi':'10000'}
@@ -50,7 +50,7 @@ class LoginWidgetView(View):
 
 class MyAccountView(View):
     def get(self, request):
-        return HttpResponse("MyAccount!!!!!")
+        return render(request, 'users/myaccount.html')
 
 
 class UserView(View):
