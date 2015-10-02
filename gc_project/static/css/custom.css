@@ -16,6 +16,12 @@ body{
   width: 100%;
 }
 
+#rented-out{
+  position: absolute;
+  top: 120px;
+  width: 100%;
+}
+
 #form-rental li{
   list-style: none;
   margin-bottom: 5px;

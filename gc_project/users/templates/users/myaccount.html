@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block menu %}
+{% endblock %}
+
+{% block main_content %}
+
+<table id="rented-out" class="table table-hover">
+  <tr>
+    <th>Gear</th>
+    <th>Borrower</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Payment Method</th>
+    <th>Total Price</th>
+  </tr>
+
+  <!-- {% for transaction in transactions %}
+      <td> {{ transaction. }}</td>
+
+    </tr>
+  {% endfor %} -->
+</table>
+
+{% endblock %}
+
+
+{% block script_end %}
+  <!-- <script src="https://maps.googleapis.com/maps/api/js"></script> -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <!-- <script src="{% static "js/gmaps.js"%}"></script>-->
+  <!-- <script src="{% static "gears/js/gear.js"%}"></script> -->
+
+{% endblock %}

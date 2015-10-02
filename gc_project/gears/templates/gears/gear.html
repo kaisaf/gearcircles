@@ -38,11 +38,7 @@
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">RENT ME</button>
     </div>
 
-
-
   </div>
-
-
 
 
   <!-- Modal -->
@@ -60,8 +56,6 @@
 
                 <form id="form-rental" action="" method="post">
                     {% csrf_token %}
-                    {{ form }}
-                    <!-- <input type="submit" value="Submit" /> -->
                     <li id="topLineModal">{{ renters_email }}</li>
                     <li>My Phone<input id="myPhone" name="myPhone" type="text" value="{{renters_phone}}" placeholder="XXX-XXX-XXXX" required></li>
                     <li>Start Date <input id="startDate" name="startDate" type="date" required></li>

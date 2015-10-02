@@ -10,6 +10,7 @@ from django.contrib.gis.measure import Distance
 
 from rest_framework import viewsets, filters
 
+from users.models import User
 from .models import (Category, CategoryProperty, Gear, GearProperty, Location,
     GearAvailability, GearImage)
 from .serializers import (CategorySerializer, CategoryPropertySerializer,
@@ -74,20 +75,25 @@ class GearView(View):
 
     def post(self, request, gear_id):
         gear = self.get_gear_object(gear_id)
-        renters_email = request.POST["myEmail"]
         recipient_email = gear.user.email
         start_date = request.POST["startDate"]
         end_date = request.POST["endDate"]
+        phone = request.POST["myPhone"]
         start_date = datetime.strptime(start_date, "%Y-%m-%d")
         end_date = datetime.strptime(end_date, "%Y-%m-%d")
         days_rented = (end_date - start_date).days + 1
         dollars = days_rented * gear.price
         payment_method = request.POST["paymentMethod"]
         cancel_return_address = "http://localhost:8000" + request.get_full_path()
+        renter = User.objects.get(id=request.user.id)
+        if not request.user.phone or renter.phone != phone:
+            renter.phone = phone
+            renter.save()
         if payment_method == "PayPal":
             paypal_redirect_address = paypal_payment(recipient_email, dollars, cancel_return_address)
             return redirect(paypal_redirect_address)
-        return HttpResponse("Gear POST")
+        else:
+            return redirect('myaccount')
 
 
 class CategoriesView(View):
