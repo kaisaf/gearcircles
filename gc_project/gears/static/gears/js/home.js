@@ -10,7 +10,7 @@ $(document).ready(function() {
   EVENT HANDLERS
   */
   $("#map").on("click", ".infoWindow", function() {
-    window.location.href="/products/" + $(this).data().gearid
+    window.location.href="/gear/" + $(this).data().gearid
   })
 
   $("#choiceMenu").on("click", ".btnChoiceMenuItem", function() {

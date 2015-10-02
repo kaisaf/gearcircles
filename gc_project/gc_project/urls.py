@@ -48,7 +48,7 @@ urlpatterns = [
     url(r'^home/', login_required(HomeView.as_view()), name='home'),
     url(r'^myaccount/', MyAccountView.as_view(), name='myaccount'),
     url(r'^users/(?P<user_id>\w+)/$', UserView.as_view(), name='user'),
-    url(r'^gears/(?P<gear_id>\w+)/$', GearView.as_view(), name='gear'),
+    url(r'^gear/(?P<gear_id>\w+)/$', GearView.as_view(), name='gear'),
     url(r'^addgear/', AddGearView.as_view(), name='addgear'),
     url(r'^api/v1/', include(router.urls)),
     url(r'^$', IndexView.as_view(), name='index'),
