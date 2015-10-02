@@ -11,9 +11,7 @@ $(document).ready(function() {
     document.getElementById('endDate').max = exp;
   })
 
-  var startDate = null;
-  var endDate = null;
-  var price = $('#totalPrice span').text()
+  var price = $('#pricePerDay').text()
 
   function splitDate(dateString) {
     return dateString.split('-');
@@ -22,13 +20,21 @@ $(document).ready(function() {
   $('#startDate').on('change', function() {
     startDate = $(this).val();
     partsStart = splitDate(startDate);
-    $('#endDate').val(startDate);
-    document.getElementById('endDate').min = $(this).val();
+    var endDate = $('#endDate').val();
     if (endDate) {
-      startDate = new Date(partsStart[0],partsStart[1],partsStart[2]);
-      endDate = new Date(partsEnd[0],partsEnd[1],partsEnd[2]);
-      var difference = Math.round((endDate - startDate)/(1000*60*60*24));
-      totalPrice = (difference + 1)*price;
+      sDate = new Date(partsStart[0], partsStart[1], partsStart[2]);
+      eDate = new Date(partsEnd[0], partsEnd[1], partsEnd[2]);
+      if (sDate > eDate) {
+        $('#endDate').val(startDate);
+        endDate = startDate
+        partsEnd = splitDate(endDate);
+        document.getElementById('endDate').min = $(this).val();
+      }
+    } else {
+      document.getElementById('endDate').min = $(this).val();
+    }
+    if (endDate) {
+      totalPrice = calcPrice(partsStart, partsEnd);
       $('#totalPrice span').text(totalPrice);
     }
   })
@@ -37,12 +43,18 @@ $(document).ready(function() {
     endDate = $(this).val();
     partsEnd = splitDate(endDate);
     if (startDate) {
-      startDate = new Date(partsStart[0],partsStart[1],partsStart[2]);
-      endDate = new Date(partsEnd[0],partsEnd[1],partsEnd[2]);
-      var difference = Math.round((endDate - startDate)/(1000*60*60*24));
-      totalPrice = (difference + 1)*price;
+      totalPrice = calcPrice(partsStart, partsEnd);
       $('#totalPrice span').text(totalPrice);
     }
   })
+
+  function calcPrice(sDate, eDate) {
+    console.log(sDate[0], parseInt(sDate[1])-1, sDate[2])
+    var startDate = new Date(sDate[0], parseInt(sDate[1])-1, sDate[2]);
+    var endDate = new Date(eDate[0], parseInt(eDate[1])-1, eDate[2]);
+    var numDays = (Math.round((endDate - startDate)/(1000*60*60*24))) + 1;
+    totalPrice = numDays * price;
+    return totalPrice;
+  }
 
 })

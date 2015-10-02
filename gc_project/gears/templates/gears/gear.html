@@ -24,7 +24,7 @@
       <p>*{{ gp.category_property}} {{gp.value }}<p>
       {% endfor %}
       </p>
-      <p>Price/day: ${{ price }}</p>
+      <p>Price/day: $<span id="pricePerDay">{{ price }}<span></p>
       <p>Brand: {{ brand }}</p>
       <p>Contact method: {{ preferred_contact }}</p>
       <p>Payment methods:
