@@ -2,22 +2,86 @@
 {% load staticfiles %}
 
 {% block main_content %}
-
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Dropdown
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div>
+<div class="container">
 
 
-  {% for category in categories %}
-    {{ category }}
-  {% endfor %}
+  <form>
+
+    <div class="form-group">
+      <label for="frmName">Name</label>
+      <input type="text" class="form-control" id="frmName" placeholder="Telemark Skis" required>
+    </div>
+
+    <div class="form-group">
+      <label for="frmBrand">Brand</label>
+      <input type="text" class="form-control" id="frmBrand" placeholder="Black Diamond, Burton" required>
+    </div>
+
+    <div class="form-group">
+      <label for="frmDescription">Description</label>
+      <input type="text" class="form-control" id="frmDescription" placeholder="Tell more about your product" required>
+    </div>
+
+    <div class="form-group">
+      <label for="frm-category-select">Category</label>
+      <select id="frm-category-select" class="form-control" required>
+        <option selected></option>
+          {% for category in categories %}
+            <option value={{category.id}}>{{ category.name }}</option>
+          {% endfor %}
+      </select>
+    </div>
+
+    <div id="frm-elements-container">
+      <!-- This is for category properties -->
+    </div>
+
+    <div class="form-group">
+      <label for="frmPrice">Price</label>
+      <input type="number" step="0.1" class="form-control" id="frmPrice" placeholder="Price per day in USD" required>
+    </div>
+
+    <div class="form-group">
+      <label>Payment Options</label>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked>
+          PayPal
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios2" value="0">
+          Cash
+        </label>
+      </div>
+      <div class="radio disabled">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios3" value="2">
+          PayPal or Cash
+        </label>
+      </div>
+    </div>
+
+
+
+
+  <div class="form-group">
+    <label for="exampleInputFile">File input</label>
+    <input type="file" id="exampleInputFile">
+  </div>
+
+
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+</div><!-- /container -->
+
+
+
+{% endblock %}
+
+{% block script_end %}
+  <script src="{% static "gears/js/addgear.js"%}"></script>
+
 {% endblock %}
