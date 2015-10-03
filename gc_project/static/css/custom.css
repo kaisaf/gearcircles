@@ -31,6 +31,11 @@ body{
   font-weight: bold;
 }
 
+#map{
+  height: 400px;
+  width: 400px;
+}
+
 .pnlChoiceMenu{
   display: none;
 }

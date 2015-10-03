@@ -141,6 +141,9 @@ class AddGearView(View):
         }
         return render(request, 'gears/addgear.html', context)
 
+    def post(self, request):
+        print(request.POST)
+
 
 # Following views for API endpoints
 class CategoryViewSet(viewsets.ModelViewSet):

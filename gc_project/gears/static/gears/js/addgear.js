@@ -1,8 +1,24 @@
 $(document).ready(function() {
 
+window.gcCreateMap(function() {
+  console.log("map done")
+});
+
 $("#frm-category-select").on("change", function() {
   getCategoryDetails($(this).val());
 })
+
+$("#frmAddress").on("change", function() {
+  window.gcGetLocation($(this).val(), gcSetGeoLocation);
+})
+
+var gcSetGeoLocation = function(position) {
+  window.gcClearAllMarkers();
+  window.gcAddMarker(position);
+  $("#frmLatitude").val(position.coords.latitude);
+  $("#frmLongitude").val(position.coords.longitude);
+}
+
 
 function getCategoryDetails(catId) {
   var endpoint = "/api/v1/categories/" + catId
@@ -22,7 +38,7 @@ function createFormElements(categoryProperties) {
     var htmlInput = '<div class="form-group"> \
       <label for="' + inputId + '">' + item.name + '</label> \
       <input ' + convertInputTypeAttr(item.input_type) +
-      ' class="form-control" id="' + inputId + '" placeholder="'+
+      ' class="form-control" id="' + inputId + '" name="' + inputId + '" placeholder="'+
       item.description +'" ' + convertInputRequiredAttr(item.mandatory) +'> \
     </div>'
 
@@ -34,9 +50,9 @@ function convertInputTypeAttr(input_type) {
   if (input_type==0) {
     return 'type="text"';
   } else if (input_type==1) {
-    return 'type="number" step="1"';
+    return 'type="number" step="1" min="0"';
   } else if (input_type==2) {
-    return 'type="number" step="0.1"';
+    return 'type="number" step="0.1" min="0"';
   }
 }
 
