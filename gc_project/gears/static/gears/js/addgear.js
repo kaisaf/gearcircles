@@ -18,10 +18,11 @@ function getCategoryDetails(catId) {
 function createFormElements(categoryProperties) {
   $(categoryProperties).each(function(i, item) {
     console.log(item)
+    var inputId = "frm" + item.id;
     var htmlInput = '<div class="form-group"> \
-      <label for="exampleInputEmail1">'+item.name+'</label> \
+      <label for="' + inputId + '">' + item.name + '</label> \
       <input ' + convertInputTypeAttr(item.input_type) +
-      ' class="form-control" id="exampleInputEmail1" placeholder="'+
+      ' class="form-control" id="' + inputId + '" placeholder="'+
       item.description +'" ' + convertInputRequiredAttr(item.mandatory) +'> \
     </div>'
 
