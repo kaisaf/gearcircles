@@ -72,3 +72,29 @@ function gcClearAllMarkers() {
     markers[i].setMap(null);
   }
 }
+
+function gcGetLocation(address, callback) {
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      gcMap.setCenter(results[0].geometry.location);
+
+      // new location to be stored for the gear:
+      var new_lat = results[0].geometry.location.lat();
+      var new_lgn = results[0].geometry.location.lng();
+
+      pos = {
+        "coords": {
+          "latitude": new_lat,
+          "longitude": new_lgn
+        }
+      }
+      console.log(pos)
+      callback(pos);
+
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+
+  });
+}
