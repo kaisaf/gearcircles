@@ -8,22 +8,71 @@
 
 {% block main_content %}
 
-<table id="rented-out" class="table table-hover">
-  <tr>
-    <th>Gear</th>
-    <th>Borrower</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Payment Method</th>
-    <th>Total Price</th>
-  </tr>
-
-  <!-- {% for transaction in transactions %}
-      <td> {{ transaction. }}</td>
-
+<div>
+  <h3>Rented Out</h3>
+  <table id="rentedOut" class="table table-hover">
+    <tr>
+      <th>Gear</th>
+      <th>Borrower</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Payment Method</th>
+      <th>Total Price</th>
     </tr>
-  {% endfor %} -->
-</table>
+    {% for item in my_gears_rented %}
+      <tr>
+        <td>{{ item.gear.name }}</td>
+        <td>{{ item.borrower_user }}</td>
+        <td>{{ item.start_date }}</td>
+        <td>{{ item.end_date }}</td>
+        <td>{{ item.payment_method }}</td>
+        <td>{{ item.price_paid }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<div>
+  <h3>My Rentals</h3>
+  <table id="myRentals" class="table table-hover">
+    <tr>
+      <th>Gear</th>
+      <th>Borrower</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Payment Method</th>
+      <th>Total Price</th>
+    </tr>
+    {% for item in gears_i_rented %}
+      <tr>
+        <td>{{ item.gear.name }}</td>
+        <td>{{ item.borrower_user }}</td>
+        <td>{{ item.start_date }}</td>
+        <td>{{ item.end_date }}</td>
+        <td>{{ item.payment_method }}</td>
+        <td>{{ item.price_paid }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<div>
+  <h3>My Gears</h3>
+  <table id="myGears" class="table table-hover">
+    <tr>
+      <th>Gear</th>
+      <th>Price</th>
+      <th>Expiration Date</th>
+    </tr>
+    {% for gear in my_gears %}
+      <tr>
+        <td><a href="/gear/{{gear.id}}">{{ gear.name }}</a></td>
+        <td>{{ gear.price }}</td>
+        <td>{{ gear.expiration_date }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
 
 {% endblock %}
 

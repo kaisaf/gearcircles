@@ -54,10 +54,15 @@ class MyAccountView(View):
         gears_i_rented = Transaction.objects.filter(borrower_user=request.user)
         my_gears_rented = Transaction.objects.filter(owner_user=request.user)
         my_gears = Gear.objects.filter(user=request.user)
-        print(gears_i_rented)
-        print(my_gears_rented)
-        print(my_gears)
-        return render(request, 'users/myaccount.html')
+        context = {
+            "gears_i_rented": gears_i_rented,
+            "my_gears_rented": my_gears_rented,
+            "my_gears": my_gears
+        }
+        print('gears i rented: {}'.format(gears_i_rented))
+        print('my gears rented: {}'.format(my_gears_rented))
+        print('my gears: {}'.format(my_gears))
+        return render(request, 'users/myaccount.html', context)
 
 
 class UserView(View):
