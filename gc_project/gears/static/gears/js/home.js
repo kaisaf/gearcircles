@@ -26,6 +26,10 @@ $(document).ready(function() {
     window.location.href="/gear/" + $(this).data().gearid
   })
 
+  $("#cards").on("click", ".card", function() {
+    window.location.href="/gear/" + $(this).data().gearid
+  })
+
   $("#choiceMenu").on("click", ".btnChoiceMenuItem", function() {
     var isEmpty = true
     var $activePanel = $("#"+$(this).data().panelid)
@@ -116,11 +120,12 @@ $(document).ready(function() {
   }
 
   function createCards(locations) {
+    $("#cards").empty();
     $.each(locations, function(index, location) {
-      var card = "<div class='card'> \
+      var card = "<div class='card col-md-3 col-sx-6' data-gearId=" + location.gear_set[0].id + "> \
         <img width=128px height=128px src=" + location.gear_set[0].gearimage_set[0].photo + "> \
-        <h3>" + location.gear_set[0].name + "</h3> \
-        <h4>" + location.gear_set[0].description + "</h4> \
+        <h4>" + location.gear_set[0].name + "</h4> \
+        <p>" + location.gear_set[0].description + "</p> \
         <h4> $" + location.gear_set[0].price + "</h4> \
       </div>"
       $("#cards").append(card);
@@ -135,7 +140,7 @@ $(document).ready(function() {
       <div> \
         <h3>" + location.gear_set[0].name + "</h3> \
         <h4>" + location.gear_set[0].description + "</h4> \
-        <h4>" + location.gear_set[0].price + "</h4> \
+        <h4> $" + location.gear_set[0].price + "</h4> \
       </div> \
     </div>"
     return content;
