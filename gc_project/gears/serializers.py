@@ -37,7 +37,7 @@ class GearImageSerializer(serializers.ModelSerializer):
 
 class GearSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    categories = CategorySerializer(many=True, read_only=True)
+    category = CategorySerializer(read_only=True)
     #location = LocationSerializer(read_only=True)
     gearproperty_set = GearPropertySerializer(many=True, read_only=True)
     gearavailability_set = GearAvailabilitySerializer(many=True, read_only=True)
@@ -45,7 +45,7 @@ class GearSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gear
         fields = ('id', 'name', 'description', 'brand', 'price', 'expiration_date',
-            'preferred_contact', 'payment', 'user', 'categories',
+            'preferred_contact', 'payment', 'user', 'category',
             'gearproperty_set', 'gearimage_set', 'gearavailability_set')
 
 
