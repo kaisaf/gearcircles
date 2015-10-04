@@ -123,8 +123,9 @@ class AddGearView(View):
         return render(request, 'gears/addgear.html', context)
 
     def post(self, request):
+        print(request.POST)
         category_id = request.POST["frmCategorySelect"]
-        category = Category.object.get(id=category_id)
+        category = Category.objects.get(id=category_id)
 
         address = request.POST["frmAddress"]
         latitude = request.POST["frmLatitude"]
@@ -137,4 +138,34 @@ class AddGearView(View):
         brand = request.POST["frmBrand"]
         price = request.POST["frmPrice"]
         payment = request.POST["frmPayment"]
-        
+        expiration_date = request.POST["frmDate"]
+
+        new_gear = Gear.objects.create(
+            name=name,
+            description=description,
+            brand=brand,
+            price=price,
+            preferred_contact = 0,
+            payment=payment,
+            expiration_date=expiration_date,
+            category=category,
+            user=request.user,
+            location=location
+        )
+
+        category_properties = CategoryProperty.objects.filter(category=category)
+        for category_property in category_properties:
+            insert_gear_property(new_gear, category_property, request)
+
+        return redirect('myaccount')
+
+def insert_gear_property(new_gear, category_property, request):
+    frm_input_name = "frm{}".format(category_property.id)
+    value = request.POST.get(frm_input_name)
+    if value:
+        new_property = GearProperty.objects.create(
+            value=value,
+            gear=new_gear,
+            category_property=category_property
+        )
+        print("inserted: {}".format(new_property))
