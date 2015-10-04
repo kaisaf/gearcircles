@@ -418,7 +418,7 @@ def create_location(name):
 
 
 ### CREATE GEAR ####
-def create_gear(names, brands, user):
+def create_gear(names, brands, user, category):
     name = names[randint(0, len(names)-1)]
     description = "test description for " + name
     brand = brands[randint(0, len(brands)-1)]
@@ -427,11 +427,12 @@ def create_gear(names, brands, user):
     payment = randint(0, 2)
     days_for_exp = randint(1, 90)
     expiration_date = datetime.date.today() + datetime.timedelta(days=days_for_exp)
+    category = category
     location = create_location(name)
     user = user
     new_gear = Gear.objects.create(name=name, description=description, brand=brand, price=price,
         preferred_contact=preferred_contact, payment=payment, expiration_date=expiration_date,
-        location=location, user=user)
+        category=category, location=location, user=user)
     return new_gear
 
 users = User.objects.all()
@@ -443,60 +444,65 @@ for i in range(0, 500):
         category_name = "Skis"
         category = Category.objects.get(name="Skis")
         photo = "./skis.jpg"
-        new_gear = create_gear(skis_names, skis_brands, user)
+        new_gear = create_gear(skis_names, skis_brands, user, category)
         cat_prop = CategoryProperty.objects.get(name="length", category=category)
         gear_property1 = GearProperty.objects.create(value=randint(145, 198), gear=new_gear, category_property=cat_prop)
     elif a == 2:
         category_name = "Ski Boots"
         photo = "./ski_boots.jpg"
-        new_gear = create_gear(skiboots_names, skiboots_brands, user)
+        new_gear = create_gear(skiboots_names, skiboots_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="size")
         # gear_property1 = GearProperty.objects.create(value=skiBoots_sizes[randint(0, len(skiBoots_sizes)-1)], gear=new_gear, category_property=cat_prop)
     elif a == 3:
         category_name = "Snowboards"
+        category = Category.objects.get(name=category_name)
         photo = "./snowboard.jpg"
-        new_gear = create_gear(snowboards_names, snowboards_brands, user)
+        new_gear = create_gear(snowboards_names, snowboards_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="length")
         # gear_property1 = GearProperty.objects.create(value=randint(140, 170), gear=new_gear, category_property=cat_prop)
     elif a == 4:
         category_name = "Snowboard Boots"
+        category = Category.objects.get(name=category_name)
         photo = "./snowboard_boots.jpg"
-        new_gear = create_gear(snowboardBoots_names, snowboardBoots_brands, user)
+        new_gear = create_gear(snowboardBoots_names, snowboardBoots_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="size")
         # gear_property1 = GearProperty.objects.create(value=boot_sizes[randint(0, len(boot_sizes)-1)], gear=new_gear, category_property=cat_prop)
     elif a == 5:
         category_name = "Ice Axes"
+        category = Category.objects.get(name=category_name)
         photo = "./ice_axes.jpg"
-        new_gear = create_gear(iceAxes_names, iceAxes_brands, user)
+        new_gear = create_gear(iceAxes_names, iceAxes_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="model")
         # gear_property1 = GearProperty.objects.create(value="Cobra", gear=new_gear, category_property=cat_prop)
     elif a == 6:
         category_name = "Crampons"
+        category = Category.objects.get(name=category_name)
         photo = "./crampons.jpg"
-        new_gear = create_gear(crampons_names, crampons_brands, user)
+        new_gear = create_gear(crampons_names, crampons_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="binding")
         # gear_property1 = GearProperty.objects.create(value="Step-In", gear=new_gear, category_property=cat_prop)
     elif a == 7:
         category_name = "Ice Climbing Boots"
+        category = Category.objects.get(name=category_name)
         photo = "./ice_boots.jpg"
-        new_gear = create_gear(iceBoots_names, iceBoots_brands, user)
+        new_gear = create_gear(iceBoots_names, iceBoots_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="size")
         # gear_property1 = GearProperty.objects.create(value=boot_sizes[randint(0, len(boot_sizes)-1)], gear=new_gear, category_property=cat_prop)
     elif a == 8:
         category_name = "Cycling"
+        category = Category.objects.get(name=category_name)
         photo = "./bicycle.jpg"
-        new_gear = create_gear(cycling_names, cycling_brands, user)
+        new_gear = create_gear(cycling_names, cycling_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="frame size")
         # gear_property1 = GearProperty.objects.create(value="Medium", gear=new_gear, category_property=cat_prop)
     elif a == 9:
         category_name = "Rollerblading"
+        category = Category.objects.get(name=category_name)
         photo = "./rollerblades.jpg"
-        new_gear = create_gear(rollerblading_names, rollerblading_brands, user)
+        new_gear = create_gear(rollerblading_names, rollerblading_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="size")
         # gear_property1 = GearProperty.objects.create(value=boot_sizes[randint(0, len(boot_sizes)-1)], gear=new_gear, category_property=cat_prop)
 
-    new_gear_category = Category.objects.get(name=category_name)
-    new_gear.categories = (new_gear_category,)
 
     new_image = GearImage.objects.create(photo=photo, gear=new_gear)
 
