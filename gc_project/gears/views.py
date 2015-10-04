@@ -124,6 +124,7 @@ class AddGearView(View):
 
     def post(self, request):
         print(request.POST)
+        print(request.FILES)
         category_id = request.POST["frmCategorySelect"]
         category = Category.objects.get(id=category_id)
 
@@ -156,6 +157,11 @@ class AddGearView(View):
         category_properties = CategoryProperty.objects.filter(category=category)
         for category_property in category_properties:
             insert_gear_property(new_gear, category_property, request)
+
+        new_gear_image = GearImage.objects.create(
+            gear=new_gear,
+            photo = request.FILES['frmImage']
+        )
 
         return redirect('myaccount')
 
