@@ -83,7 +83,7 @@ class LocationViewSet(viewsets.ModelViewSet):
             exclude_dates_params.add(Q(gear__gearavailability__not_available_date__lte=end), query_params.connector)
 
         for i in categories:
-            categories_params.add(Q(gear__categories__id=i), categories_params.OR)
+            categories_params.add(Q(gear__category__id=i), categories_params.OR)
 
         queryset = self.queryset.filter(query_params).filter(categories_params).exclude(exclude_dates_params)#.distance(center).order_by('distance')
         return queryset

@@ -37,7 +37,7 @@ class GearImageSerializer(serializers.ModelSerializer):
 
 class GearSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    category = CategorySerializer(read_only=True)
+#    category = CategorySerializer(read_only=True)
     #location = LocationSerializer(read_only=True)
     gearproperty_set = GearPropertySerializer(many=True, read_only=True)
     gearavailability_set = GearAvailabilitySerializer(many=True, read_only=True)
