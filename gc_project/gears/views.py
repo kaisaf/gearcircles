@@ -137,3 +137,4 @@ class AddGearView(View):
         brand = request.POST["frmBrand"]
         price = request.POST["frmPrice"]
         payment = request.POST["frmPayment"]
+        
