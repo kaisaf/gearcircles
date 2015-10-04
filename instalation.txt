@@ -21,7 +21,7 @@ Install and configure PostgreSQL
 $ sudo apt-get install -y postgresql postgresql-contrib postgresql-server-dev-9.3
 
 $ sudo -u postgres createuser -P gear_db_user
-$ sudo -u postgres createdb -O gear_db_user geo
+$ sudo -u postgres createdb -O gear_db_user gearcircles
 
 
 Check PostgreSQL
