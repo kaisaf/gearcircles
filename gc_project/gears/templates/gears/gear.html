@@ -18,11 +18,8 @@
     <div class="col-md-6">
       <h2>{{ name }}</h2>
       <h3>{{ description }}</h3>
-      <p>
-      {% for category in categories %}
-      <span>{{ category }}</span>
-      {% endfor %}
-      </p>
+
+      <p>Category: {{ category }}</p>
 
       {% for gp in gear_properties %}
       <p>*{{ gp.category_property}} {{gp.value }}<p>

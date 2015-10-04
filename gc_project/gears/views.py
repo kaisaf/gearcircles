@@ -30,12 +30,6 @@ class GearView(View):
         else:
             return ["PayPal", "Cash"]
 
-    # def contact_method(self, method):
-    #     if method == 0:
-    #         return "Phone"
-    #     else:
-    #         return "Email"
-
     def create_transaction(self, start_date, end_date, gear, borrower_user, price_paid, payment_method):
         Transaction.objects.create(
             start_date = start_date,
@@ -55,20 +49,16 @@ class GearView(View):
         renters_phone = request.user.phone
         gear = self.get_gear_object(gear_id)
         photo = GearImage.objects.get(gear=gear)
-        categories = gear.categories.values()
+        category = gear.category.name + ": " + gear.category.description
         category_list = []
-        for category in categories:
-            category_list.append((category['name'] + ", " + category['description']))
         gear_properties = GearProperty.objects.filter(gear=gear)
         payments = self.convert_payment_method(gear.payment)
-        #contact = self.contact_method(gear.preferred_contact)
         context = {
             "name": gear.name,
             "description": gear.description,
-            "categories": category_list,
+            "category": category,
             "brand": gear.brand,
             "price": gear.price,
-            #"preferred_contact": contact,
             "payments": payments,
             "expiration_date": gear.expiration_date,
             "photo": photo.photo.url,
@@ -78,7 +68,6 @@ class GearView(View):
             "renters_email": renters_email,
             "renters_phone":renters_phone,
         }
-        print(gear.expiration_date)
         return render(request, 'gears/gear.html', context)
 
     def post(self, request, gear_id):
@@ -148,5 +137,3 @@ class AddGearView(View):
         brand = request.POST["frmBrand"]
         price = request.POST["frmPrice"]
         payment = request.POST["frmPayment"]
-
-        
