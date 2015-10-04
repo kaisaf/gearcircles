@@ -304,14 +304,6 @@ crampons_model = CategoryProperty.objects.create(
 
 crampons_style = CategoryProperty.objects.create(
     name = "style",
-    description = "Mountaineering, Ice Climbing, Race",
-    mandatory = False,
-    input_type = 0,
-    category = crampons,
-    )
-
-crampons_style = CategoryProperty.objects.create(
-    name = "style",
     description = "Mountaineering, Ice Climbing, Race, Snow Walking",
     mandatory = False,
     input_type = 0,

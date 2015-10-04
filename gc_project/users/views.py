@@ -3,8 +3,9 @@ from django.http import HttpResponse
 from django.views.generic import View
 from django.contrib.auth import logout
 
-from gears.models import Location
+from gears.models import Location, Gear
 from .models import User
+from rentals.models import Transaction
 from .serializers import UserSerializer
 
 from .gitkit_auth import signin_or_signup_based_on_gitkit
@@ -50,6 +51,12 @@ class LoginWidgetView(View):
 
 class MyAccountView(View):
     def get(self, request):
+        gears_i_rented = Transaction.objects.filter(borrower_user=request.user)
+        my_gears_rented = Transaction.objects.filter(owner_user=request.user)
+        my_gears = Gear.objects.filter(user=request.user)
+        print(gears_i_rented)
+        print(my_gears_rented)
+        print(my_gears)
         return render(request, 'users/myaccount.html')
 
 

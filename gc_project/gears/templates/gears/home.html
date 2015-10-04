@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block navbar_left %}
+  <li><a href="/addgear">Add Gear</a></li>
+{% endblock %}
 
 {% block menu %}
 
@@ -17,10 +20,10 @@
       </span>
     </div>
 
-    <div class="wrap col-xs-12 col-md-4">
+    <!-- <div class="wrap col-xs-12 col-md-4">
       <input type="checkbox" class="slider-v3" id="s5" />
       <label for="s5"></label>
-    </div>
+    </div> -->
 
   </ul>
 

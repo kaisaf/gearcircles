@@ -10,17 +10,6 @@ body{
   min-height: 100%;
 }
 
-#gear-details{
-  position: absolute;
-  top: 120px;
-  width: 100%;
-}
-
-#rented-out{
-  position: absolute;
-  top: 120px;
-  width: 100%;
-}
 
 #form-rental li{
   list-style: none;
@@ -40,6 +29,11 @@ body{
   text-align: center;
   font-size: 20px;
   font-weight: bold;
+}
+
+#map{
+  height: 400px;
+  width: 400px;
 }
 
 .pnlChoiceMenu{
