@@ -125,6 +125,11 @@ class AddGearView(View):
     def post(self, request):
         print(request.POST)
         print(request.FILES)
+        user = User.objects.get(email=request.user.email)
+        if user.phone != request.POST["frmPhone"]:
+            user.phone = request.POST["frmPhone"]
+            user.save()
+
         category_id = request.POST["frmCategorySelect"]
         category = Category.objects.get(id=category_id)
 
@@ -150,7 +155,7 @@ class AddGearView(View):
             payment=payment,
             expiration_date=expiration_date,
             category=category,
-            user=request.user,
+            user=user,
             location=location
         )
 
