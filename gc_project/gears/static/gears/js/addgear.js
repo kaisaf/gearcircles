@@ -4,7 +4,7 @@ window.gcCreateMap(function() {
   console.log("map done")
 });
 
-$("#frm-category-select").on("change", function() {
+$("#frmCategorySelect").on("change", function() {
   getCategoryDetails($(this).val());
 })
 

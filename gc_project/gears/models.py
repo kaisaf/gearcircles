@@ -65,7 +65,7 @@ class Gear(models.Model):
     preferred_contact = models.IntegerField(choices=CONTACT_CHOICES)
     payment = models.IntegerField(choices=PAYMENT_CHOICES)
     expiration_date = models.DateField()
-    categories = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category)
     user = models.ForeignKey(User)
     location = models.ForeignKey(Location)
     created_at = models.DateTimeField(auto_now_add=True)

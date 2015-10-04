@@ -38,11 +38,11 @@ class GearView(View):
         else:
             return ["PayPal", "Cash"]
 
-    def contact_method(self, method):
-        if method == 0:
-            return "Phone"
-        else:
-            return "Email"
+    # def contact_method(self, method):
+    #     if method == 0:
+    #         return "Phone"
+    #     else:
+    #         return "Email"
 
     def create_transaction(self, start_date, end_date, gear, borrower_user, price_paid, payment_method):
         Transaction.objects.create(
@@ -69,14 +69,14 @@ class GearView(View):
             category_list.append((category['name'] + ", " + category['description']))
         gear_properties = GearProperty.objects.filter(gear=gear)
         payments = self.convert_payment_method(gear.payment)
-        contact = self.contact_method(gear.preferred_contact)
+        #contact = self.contact_method(gear.preferred_contact)
         context = {
             "name": gear.name,
             "description": gear.description,
             "categories": category_list,
             "brand": gear.brand,
             "price": gear.price,
-            "preferred_contact": contact,
+            #"preferred_contact": contact,
             "payments": payments,
             "expiration_date": gear.expiration_date,
             "photo": photo.photo.url,
@@ -142,7 +142,26 @@ class AddGearView(View):
         return render(request, 'gears/addgear.html', context)
 
     def post(self, request):
-        print(request.POST)
+        category_id = request.POST["frmCategorySelect"]
+        category = Category.object.get(id=category_id)
+
+        address = request.POST["frmAddress"]
+        latitude = request.POST["frmLatitude"]
+        longitude = request.POST["frmLongitude"]
+        point = fromstr("POINT({} {})".format(longitude, latitude))
+        location = Location.objects.create(address=address, point=point)
+
+        name = request.POST["frmName"]
+        description = request.POST["frmDescription"]
+        brand = request.POST["frmBrand"]
+        price = request.POST["frmPrice"]
+        payment = request.POST["frmPayment"]
+
+
+
+
+
+
 
 
 # Following views for API endpoints
