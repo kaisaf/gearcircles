@@ -252,7 +252,7 @@ cycling_size = CategoryProperty.objects.create(
     name = "frame size",
     description = "Small, Medium, Large",
     mandatory = False,
-    input_type = 2,
+    input_type = 0,
     category = cycling,
     )
 
@@ -449,6 +449,7 @@ for i in range(0, 500):
         gear_property1 = GearProperty.objects.create(value=randint(145, 198), gear=new_gear, category_property=cat_prop)
     elif a == 2:
         category_name = "Ski Boots"
+        category = Category.objects.get(name=category_name)
         photo = "./ski_boots.jpg"
         new_gear = create_gear(skiboots_names, skiboots_brands, user, category)
         # cat_prop = CategoryProperty.objects.get(name="size")
