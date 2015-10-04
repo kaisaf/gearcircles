@@ -1,14 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import View
-from django.db.models import Q
 from datetime import datetime
 from .payment import paypal_payment
 
 from django.contrib.gis.geos import Point, fromstr
-from django.contrib.gis.measure import Distance
-
-from rest_framework import viewsets, filters
 
 from users.models import User
 from rentals.models import Transaction
