@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  $("#cards").hide();
+
   window.gcCreateMap(function() {
     getApiData("/api/v1/locations", queryFilter, setMarkers);
   });
@@ -9,6 +11,17 @@ $(document).ready(function() {
   /*
   EVENT HANDLERS
   */
+
+  $("#switchView").on("change", function() {
+    if (this.checked) {
+      $("#cards").show();
+      $("#map").hide();
+    } else {
+      $("#map").show();
+      $("#cards").hide();
+    }
+  })
+
   $("#map").on("click", ".infoWindow", function() {
     window.location.href="/gear/" + $(this).data().gearid
   })
@@ -55,7 +68,11 @@ $(document).ready(function() {
     queryFilter["minPrice"] = minPrice;
     queryFilter["maxPrice"] = maxPrice;
     queryFilter["txtSearch"] = txtSearch;
-    getApiData("/api/v1/locations", queryFilter, setMarkers);
+    //getApiData("/api/v1/locations", queryFilter, setMarkers);
+    getApiData("/api/v1/locations", queryFilter, function(locations) {
+      setMarkers(locations);
+      createCards(locations);
+    });
   })
 
 
@@ -95,6 +112,18 @@ $(document).ready(function() {
         }
       }
       window.gcAddMarker(position, createMapInfoContent(location));
+    })
+  }
+
+  function createCards(locations) {
+    $.each(locations, function(index, location) {
+      var card = "<div class='card'> \
+        <img width=128px height=128px src=" + location.gear_set[0].gearimage_set[0].photo + "> \
+        <h3>" + location.gear_set[0].name + "</h3> \
+        <h4>" + location.gear_set[0].description + "</h4> \
+        <h4> $" + location.gear_set[0].price + "</h4> \
+      </div>"
+      $("#cards").append(card);
     })
   }
 
