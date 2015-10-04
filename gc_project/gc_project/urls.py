@@ -24,10 +24,10 @@ from users.views import (IndexView, UserViewSet,
 from gears.views import (HomeView, CategoriesView, CategoryByNameView,
                          GearView, AddGearView, LocationsView,
                          LocationByNameView)
-from gears.views import (CategoryViewSet, CategoryPropertyViewSet,
-                        GearViewSet, GearPropertyViewSet,
-                        GearAvailabilityViewSet, GearImageViewSet,
-                        LocationViewSet)
+from gears.viewsets import (CategoryViewSet, CategoryPropertyViewSet,
+                             GearViewSet, GearPropertyViewSet,
+                            GearAvailabilityViewSet, GearImageViewSet,
+                            LocationViewSet)
 
 from rentals.views import TransactionViewSet
 
