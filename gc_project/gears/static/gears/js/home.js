@@ -3,7 +3,10 @@ $(document).ready(function() {
   $("#cards").hide();
 
   window.gcCreateMap(function() {
-    getApiData("/api/v1/locations", queryFilter, setMarkers);
+    getApiData("/api/v1/locations", queryFilter, function(locations) {
+      setMarkers(locations);
+      createCards(locations);
+    });
   });
 
   var queryFilter = {"categories":[]}
