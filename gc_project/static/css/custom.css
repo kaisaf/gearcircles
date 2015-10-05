@@ -1,6 +1,7 @@
 body{
-  min-height: 0px;
+  padding-top: 80px;
 }
+
 
 .fullscreen{
   position: absolute;
