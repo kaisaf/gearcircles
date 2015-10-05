@@ -1,0 +1,5 @@
+{
+    "account_sid":"YOUR_ACCOUNT_SID",
+    "auth_token":"YOUR_ACCOUNT_TOKEN",
+    "number": "YOUR_TWILIO_NUMBER"
+}
