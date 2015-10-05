@@ -32,4 +32,3 @@ def validate_number(phone):
     except TwilioRestException as e:
         return e.msg
     return None
-
