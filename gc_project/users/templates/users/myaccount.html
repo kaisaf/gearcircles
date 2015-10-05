@@ -7,76 +7,77 @@
 
 
 {% block main_content %}
-
-<div>
-  <h3>Rented Out</h3>
-  <div class="table-responsive">
-    <table id="rentedOut" class="table table-hover">
-      <tr>
-        <th>Gear</th>
-        <th>Borrower</th>
-        <th class="hidden-xs">Start Date</th>
-        <th class="hidden-xs">End Date</th>
-        <th class="hidden-xs">Payment Method</th>
-        <th>Total Price</th>
-      </tr>
-      {% for item in my_gears_rented %}
+<div class="container">
+  <div>
+    <h3>Rented Out</h3>
+    <div class="table-responsive">
+      <table id="rentedOut" class="table table-hover">
         <tr>
-          <td>{{ item.gear.name }}</td>
-          <td>{{ item.borrower_user }}</td>
-          <td class="hidden-xs">{{ item.start_date }}</td>
-          <td class="hidden-xs">{{ item.end_date }}</td>
-          <td class="hidden-xs">{{ item.payment_method }}</td>
-          <td>{{ item.price_paid }}</td>
+          <th>Gear</th>
+          <th>Borrower</th>
+          <th class="hidden-xs">Start Date</th>
+          <th class="hidden-xs">End Date</th>
+          <th class="hidden-xs">Payment Method</th>
+          <th>Total Price</th>
         </tr>
-      {% endfor %}
-    </table>
+        {% for item in my_gears_rented %}
+          <tr>
+            <td>{{ item.gear.name }}</td>
+            <td>{{ item.borrower_user }}</td>
+            <td class="hidden-xs">{{ item.start_date }}</td>
+            <td class="hidden-xs">{{ item.end_date }}</td>
+            <td class="hidden-xs">{{ item.payment_method }}</td>
+            <td>{{ item.price_paid }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
   </div>
-</div>
 
-<div>
-  <h3>My Rentals</h3>
-  <div class="table-responsive">
-    <table id="myRentals" class="table table-hover">
-      <tr>
-        <th>Gear</th>
-        <th>Owner</th>
-        <th class="hidden-xs">Start Date</th>
-        <th class="hidden-xs">End Date</th>
-        <th class="hidden-xs">Payment Method</th>
-        <th>Total Price</th>
-      </tr>
-      {% for item in gears_i_rented %}
+  <div>
+    <h3>My Rentals</h3>
+    <div class="table-responsive">
+      <table id="myRentals" class="table table-hover">
         <tr>
-          <td>{{ item.gear.name }}</td>
-          <td>{{ item.owner_user }}</td>
-          <td class="hidden-xs">{{ item.start_date }}</td>
-          <td class="hidden-xs">{{ item.end_date }}</td>
-          <td class="hidden-xs">{{ item.payment_method }}</td>
-          <td>{{ item.price_paid }}</td>
+          <th>Gear</th>
+          <th>Owner</th>
+          <th class="hidden-xs">Start Date</th>
+          <th class="hidden-xs">End Date</th>
+          <th class="hidden-xs">Payment Method</th>
+          <th>Total Price</th>
         </tr>
-      {% endfor %}
-    </table>
+        {% for item in gears_i_rented %}
+          <tr>
+            <td>{{ item.gear.name }}</td>
+            <td>{{ item.owner_user }}</td>
+            <td class="hidden-xs">{{ item.start_date }}</td>
+            <td class="hidden-xs">{{ item.end_date }}</td>
+            <td class="hidden-xs">{{ item.payment_method }}</td>
+            <td>{{ item.price_paid }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
   </div>
-</div>
 
-<div>
-  <h3>My Gears</h3>
-  <div class="table-responsive">
-    <table id="myGears" class="table table-hover">
-      <tr>
-        <th>Gear</th>
-        <th>Price</th>
-        <th>Expiration Date</th>
-      </tr>
-      {% for gear in my_gears %}
+  <div>
+    <h3>My Gears</h3>
+    <div class="table-responsive">
+      <table id="myGears" class="table table-hover">
         <tr>
-          <td><a href="/gear/{{gear.id}}">{{ gear.name }}</a></td>
-          <td>{{ gear.price }}</td>
-          <td>{{ gear.expiration_date }}</td>
+          <th>Gear</th>
+          <th>Price</th>
+          <th>Expiration Date</th>
         </tr>
-      {% endfor %}
-    </table>
+        {% for gear in my_gears %}
+          <tr>
+            <td><a href="/gear/{{gear.id}}">{{ gear.name }}</a></td>
+            <td>{{ gear.price }}</td>
+            <td>{{ gear.expiration_date }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
   </div>
 </div>
 
