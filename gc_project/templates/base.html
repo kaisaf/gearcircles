@@ -41,20 +41,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/home">GearCircles</a>
+          <a class="navbar-brand visible-xs" href="/home">GearCircles</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav col-xs-12 col-sm-4">
+          <ul class="nav navbar-nav col-xs-12">
+            <li class="hidden-xs"><a class="navbar-brand" href="/home">GearCircles</a></li>
             {% block navbar_left %}
             {% endblock %}
+            <li id="btnLogin" class="pull-right"></li>
           </ul>
 
-          <ul class="nav navbar-nav navbar-right col-xs-12 col-sm-6">
-
+          <!-- <ul class="nav navbar-nav navbar-right col-xs-12 col-sm-6">
+            <li id="btnLogin"></li>
             {% block navbar_right %}
-              <li id="btnLogin"></li>
             {% endblock %}
-          </ul>
+          </ul> -->
 
           {% block menu %}
           {% endblock %}
