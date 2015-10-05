@@ -1,7 +1,12 @@
 $(document).ready(function() {
 
+  $("#cards").hide();
+
   window.gcCreateMap(function() {
-    getApiData("/api/v1/locations", queryFilter, setMarkers);
+    getApiData("/api/v1/locations", queryFilter, function(locations) {
+      setMarkers(locations);
+      createCards(locations);
+    });
   });
 
   var queryFilter = {"categories":[]}
@@ -9,7 +14,22 @@ $(document).ready(function() {
   /*
   EVENT HANDLERS
   */
+
+  $("#switchView").on("change", function() {
+    if (this.checked) {
+      $("#cards").show();
+      $("#map").hide();
+    } else {
+      $("#map").show();
+      $("#cards").hide();
+    }
+  })
+
   $("#map").on("click", ".infoWindow", function() {
+    window.location.href="/gear/" + $(this).data().gearid
+  })
+
+  $("#cards").on("click", ".card", function() {
     window.location.href="/gear/" + $(this).data().gearid
   })
 
@@ -55,7 +75,11 @@ $(document).ready(function() {
     queryFilter["minPrice"] = minPrice;
     queryFilter["maxPrice"] = maxPrice;
     queryFilter["txtSearch"] = txtSearch;
-    getApiData("/api/v1/locations", queryFilter, setMarkers);
+    //getApiData("/api/v1/locations", queryFilter, setMarkers);
+    getApiData("/api/v1/locations", queryFilter, function(locations) {
+      setMarkers(locations);
+      createCards(locations);
+    });
   })
 
 
@@ -98,6 +122,19 @@ $(document).ready(function() {
     })
   }
 
+  function createCards(locations) {
+    $("#cards").empty();
+    $.each(locations, function(index, location) {
+      var card = "<div class='card col-md-3 col-sx-6' data-gearId=" + location.gear_set[0].id + "> \
+        <img width=128px height=128px src=" + location.gear_set[0].gearimage_set[0].photo + "> \
+        <h4>" + location.gear_set[0].name + "</h4> \
+        <p>" + location.gear_set[0].description + "</p> \
+        <h4> $" + location.gear_set[0].price + "</h4> \
+      </div>"
+      $("#cards").append(card);
+    })
+  }
+
   function createMapInfoContent(location) {
     var content = "<div class='infoWindow' data-gearId=" + location.gear_set[0].id + "> \
       <div> \
@@ -106,7 +143,7 @@ $(document).ready(function() {
       <div> \
         <h3>" + location.gear_set[0].name + "</h3> \
         <h4>" + location.gear_set[0].description + "</h4> \
-        <h4>" + location.gear_set[0].price + "</h4> \
+        <h4> $" + location.gear_set[0].price + "</h4> \
       </div> \
     </div>"
     return content;

@@ -10,6 +10,19 @@ body{
   min-height: 100%;
 }
 
+.card{
+  border-width: 1px;
+  border-color: grey;
+  border-style: solid;
+  min-height: 250px;
+  max-height: 250px;
+  padding: 10px;
+}
+
+.card:hover{
+  background-color: #f8f8f8;
+}
+
 
 #form-rental li{
   list-style: none;
@@ -33,7 +46,6 @@ body{
 
 #map{
   height: 400px;
-  width: 400px;
 }
 
 .pnlChoiceMenu{

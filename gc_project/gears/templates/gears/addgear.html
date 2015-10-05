@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block navbar_left %}
+  <li><a href="/myaccount">My Account</a></li>
+{% endblock %}
+
 {% block main_content %}
 <div class="container">
 
 
   <form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
+
+    <div class="form-group">
+      <label for="frmPhone">Phone</label>
+      <input type="phone" class="form-control" id="frmPhone" name="frmPhone" value="{{request.user.phone}}" placeholder="XXX-XXX-XXXX" required>
+    </div>
+
     <div class="form-group">
       <label for="frmName">Name</label>
       <input type="text" class="form-control" id="frmName" name="frmName" placeholder="Telemark Skis" required>
@@ -65,13 +75,15 @@
 
     <div class="form-group">
       <label for="frmAddress">Address</label>
-      <input type="text" class="form-control" id="frmAddress" name="frmAddress" placeholder="295 Madison Avenue" required>
+      <input type="address" class="form-control" id="frmAddress" name="frmAddress" placeholder="295 Madison Avenue" required>
     </div>
 
     <input type="hidden" class="form-control" id="frmLatitude" name="frmLatitude" required>
     <input type="hidden" class="form-control" id="frmLongitude" name="frmLongitude" required>
 
-    <div id="map"></div>
+    <div class="container">
+      <div id="map" class="col-xs-12 col-md-6"></div>
+    </div>
 
     <div class="form-group">
       <label for="frmDate">Expiration Date</label>
@@ -80,7 +92,7 @@
 
     <div class="form-group">
       <label for="frmImage">File input</label>
-      <input type="file" id="frmImage" name="frmImage">
+      <input type="file" id="frmImage" name="frmImage" required>
     </div>
 
 
