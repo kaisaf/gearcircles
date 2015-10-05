@@ -51,6 +51,7 @@ body{
 
 .pnlChoiceMenu{
   display: none;
+  padding-bottom: 10px;
 }
 
 .catMenuItem:hover{

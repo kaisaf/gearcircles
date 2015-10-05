@@ -30,24 +30,32 @@
 
   </ul>
 
-  <ul id="categoryMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
-  </ul>
+  <div class="container">
+    <ul id="categoryMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
+    </ul>
 
-  <ul id="priceMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
-    <li>
-      <input id="minPriceSlider" type="range" onchange="minPrice.value=value" >
-      <input id="minPrice" type="number" onchange="minPriceSlider.value=value">
-    </li>
-    <li>
-      <input id="maxPriceSlider" type="range" onchange="maxPrice.value=value">
-      <input id="maxPrice" type="number" onchange="maxPriceSlider.value=value">
-    </li>
-  </ul>
+    <ul id="priceMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
+      <li>
+        <input id="minPriceSlider" type="range" onchange="minPrice.value=value" >
+        <input id="minPrice" type="number" onchange="minPriceSlider.value=value">
+      </li>
+      <li>
+        <input id="maxPriceSlider" type="range" onchange="maxPrice.value=value">
+        <input id="maxPrice" type="number" onchange="maxPriceSlider.value=value">
+      </li>
+    </ul>
 
-  <ul id="dateMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
-    <li><input id="startDate" type="date"></li>
-    <li><input id="endDate" type="date"></li>
-  </ul>
+    <ul id="dateMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
+      <div class="col-md-2">
+        <label for="startDate">Start Date</label>
+        <li><input id="startDate" type="date"></li>
+      </div>
+      <div class="col-md-2">
+        <label for="endDate">End Date</label>
+        <li><input id="endDate" type="date"></li>
+      </div>
+    </ul>
+  </div>
 
 {% endblock %}
 
