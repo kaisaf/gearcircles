@@ -12,6 +12,22 @@ $("#frmAddress").on("change", function() {
   window.gcGetLocation($(this).val(), gcSetGeoLocation);
 })
 
+$("#btnSubmitAddGear").on("click", function() {
+  var formValid = true;
+  $('input').each(function() {
+    var formGroup = $(this).parents(".form-group");
+    var glyphicon = formGroup.find(".glyphicon");
+    if (this.checkValidity()) {
+      formGroup.addClass("has-success").removeClass("has-error");
+      glyphicon.addClass("glyphicon-ok").removeClass("glyphicon-remove");
+    } else {
+      formGroup.addClass("has-error").removeClass("has-success");
+      glyphicon.addClass("glyphicon-remove").removeClass("glyphicon-ok");
+      formValid = false;
+    }
+  })
+})
+
 var today = new Date();
 var expirationDate = new Date(today.setDate(today.getDate() + 90));
 var year = expirationDate.getFullYear();
@@ -44,13 +60,13 @@ function createFormElements(categoryProperties) {
   $(categoryProperties).each(function(i, item) {
     console.log(item)
     var inputId = "frm" + item.id;
-    var htmlInput = '<div class="form-group has-error has-feedback"> \
+    var htmlInput = '<div class="form-group has-feedback"> \
     <label for="' + inputId + '" class="control-label col-md-2">' + item.name +':</label> \
      <div class="col-md-6"> \
       <input ' + convertInputTypeAttr(item.input_type) +
       ' class="form-control" id="' + inputId + '" name="' + inputId + '" placeholder="'+
       item.description +'" ' + convertInputRequiredAttr(item.mandatory) +'> \
-    <span class="glyphicon glyphicon-remove form-control-feedback"></span> \
+    <span class="glyphicon form-control-feedback"></span> \
     </div>'
 
 

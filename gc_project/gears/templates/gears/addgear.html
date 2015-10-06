@@ -13,43 +13,43 @@
     {% csrf_token %}
 
 
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmPhone" class="control-label col-md-2">Phone:</label>
       <div class="col-md-6">
         <input type="phone" class="form-control" id="frmPhone" name="frmPhone" value="{{request.user.phone}}" placeholder="+12223334455" required>
         <!-- Glyphicon is placed after textbox -->
-        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
 
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmName" class="control-label col-md-2">Gear name/title:</label>
       <div class="col-md-6">
         <input type="text" class="form-control" id="frmName" name="frmName" placeholder="Telemark Skis" required>
         <!-- Glyphicon is placed after textbox -->
-        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
 
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmBrand" class="control-label col-md-2">Brand:</label>
       <div class="col-md-6">
         <input type="text" class="form-control" id="frmBrand" name="frmBrand" placeholder="Black Diamond, Burton" required>
         <!-- Glyphicon is placed after textbox -->
-        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
 
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmDescription" class="control-label col-md-2">Description:</label>
       <div class="col-md-6">
         <input type="text" class="form-control" id="frmDescription" name="frmDescription" placeholder="Tell more about your product" required>
         <!-- Glyphicon is placed after textbox -->
-        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
 
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmCategorySelect" class="control-label col-md-2">Category:</label>
       <div class="col-md-6">
         <select id="frmCategorySelect" name="frmCategorySelect" class="form-control" required>
@@ -66,7 +66,7 @@
     </div>
 
     <!-- Input group -->
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmPrice" class="control-label col-md-2">Price:</label>
       <div class="col-md-6">
          <div class="input-group">
@@ -76,12 +76,12 @@
           <input type="number" step="0.1" min="0" class="form-control" id="frmPrice" name="frmPrice" placeholder="Price per day in USD" required>
          </div>
         <!-- Glyphicon is placed after input group-->
-        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
 
 
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmPayment" class="control-label col-md-2">Payment Options:</label>
         <div class="col-md-6">
         <div class="radio">
@@ -105,12 +105,12 @@
       </div>
     </div>
 
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmAddress" class="control-label col-md-2">Address:</label>
       <div class="col-md-6">
         <input type="address" class="form-control" id="frmAddress" name="frmAddress" placeholder="295 Madison Avenue" required>
         <!-- Glyphicon is placed after textbox -->
-        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
 
@@ -122,15 +122,15 @@
       <div id="map" class="frmMap col-xs-12 col-md-6"></div>
     </div>
 
-    <div class="form-group has-error has-feedback">
-      <label for="frmDate" class="control-label col-md-2">Expiration Date</label>
+    <div class="form-group has-feedback">
+      <label for="frmDate" class="control-label col-md-2">Expiration Date:</label>
       <div class="col-md-6">
         <input id="frmDate" name="frmDate" type="date" required>
       </div>
     </div>
 
 
-    <div class="form-group has-error has-feedback">
+    <div class="form-group has-feedback">
       <label for="frmImage" class="control-label col-md-2">Image:</label>
       <div class="col-md-6">
         <input type="file" id="frmImage" name="frmImage" required>
@@ -139,7 +139,7 @@
 
     <div class="form-group">
       <label for="frmButton" class="control-label col-md-2"></label>
-      <div class="col-md-6">
+      <div class="col-md-10">
         <button type="submit" id="btnSubmitAddGear" class="btn btn-primary col-md-6">Submit</button>
       </div>
     </div>
