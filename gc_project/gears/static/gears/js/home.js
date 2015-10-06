@@ -137,13 +137,13 @@ $(document).ready(function() {
 
   function createMapInfoContent(location) {
     var content = "<div class='infoWindow' data-gearId=" + location.gear_set[0].id + "> \
+      <h3>" + location.gear_set[0].name + "</h3> \
       <div> \
         <img width=128px height=128px src=" + location.gear_set[0].gearimage_set[0].photo + "> \
       </div> \
       <div> \
-        <h3>" + location.gear_set[0].name + "</h3> \
-        <h4>" + location.gear_set[0].description + "</h4> \
-        <h4> $" + location.gear_set[0].price + "</h4> \
+        <p>" + location.gear_set[0].description + "</p> \
+        <h4 id='priceTag'> $" + location.gear_set[0].price + "</h4> \
       </div> \
     </div>"
     return content;
