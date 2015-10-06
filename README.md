@@ -21,7 +21,8 @@ Deployment
 ===========
 
 `createdb gearcircles -h localhost -U docker -p 25432`
-`docker run -it --link postgis:POSTGIS --name gearcircles gearcircles`
+
+`docker run -dit --link postgis:POSTGIS --name gearcircles gearcircles`
 
 Developers:
 * Kaisa Filppula
