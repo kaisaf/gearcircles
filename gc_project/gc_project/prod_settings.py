@@ -86,8 +86,8 @@ DATABASES = {
         'NAME': 'gearcircles',
         'USER': 'docker',
         'PASSWORD': 'docker',
-        'HOST': os.environ["POSTGIS_PORT_25432_TCP_ADDR"],
-        'PORT': '25432',
+        'HOST': os.environ["POSTGIS_PORT_5432_TCP_ADDR"],
+        'PORT': '5432',
     }
 }
 
