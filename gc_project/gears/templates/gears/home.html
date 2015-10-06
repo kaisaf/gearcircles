@@ -35,13 +35,19 @@
     </ul>
 
     <ul id="priceMenu" class="nav navbar-nav pnlChoiceMenu col-xs-12">
-      <li>
-        <input id="minPriceSlider" type="range" onchange="minPrice.value=value" >
-        <input id="minPrice" type="number" onchange="minPriceSlider.value=value">
+      <li class='col-xs-12 col-md-3'>
+        <div class="input-group">
+          <label for=minPrice class="col-xs-5 col-xs-push-4">Min</label>
+          <input id="minPriceSlider" value=0 min=0 type="range" onchange="minPrice.value=value" >
+          <input id="minPrice" value=0 min=0 type="number" onchange="minPriceSlider.value=value" class="col-xs-5 col-xs-push-4">
+        </div>
       </li>
-      <li>
-        <input id="maxPriceSlider" type="range" onchange="maxPrice.value=value">
-        <input id="maxPrice" type="number" onchange="maxPriceSlider.value=value">
+      <li class='col-xs-12 col-md-3'>
+        <div class="input-group">
+          <label for=maxPrice class="col-xs-5 col-xs-push-4">Max</label>
+          <input id="maxPriceSlider" value=50 min=0 type="range" onchange="maxPrice.value=value">
+          <input id="maxPrice" value=50 min=0 type="number" onchange="maxPriceSlider.value=value" class="col-xs-5 col-xs-push-4">
+        </div>
       </li>
     </ul>
 
@@ -69,7 +75,6 @@
 {% block main_content %}
   <div id="map" class="fullscreen"></div>
   <div id="cards" class="container">
-    <!-- <div class="row"></div> -->
   </div>
 {% endblock %}
 

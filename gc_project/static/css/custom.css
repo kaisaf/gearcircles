@@ -11,6 +11,10 @@ body{
   min-height: 100%;
 }
 
+#cards{
+  margin-top: 80px;
+}
+
 .card{
   border-width: 1px;
   border-color: grey;
@@ -22,6 +26,22 @@ body{
 
 .card:hover{
   background-color: #f8f8f8;
+}
+
+
+#coverText {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 40px;
+  color: white;
+  font-size: x-large;
 }
 
 #form-rental li{
@@ -56,11 +76,13 @@ body{
 
 #dateMenu li{
   padding-right: 10px;
-  padding-bottom: 10px; 
+  padding-bottom: 10px;
 }
 
 .catMenuItem:hover{
   background-color: rgb(231, 231, 231);
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
 
 .catMenuItem:active{
@@ -69,6 +91,13 @@ body{
 
 .selectedCat{
   background-color: rgb(231, 231, 231);
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+
+.catMenuItem{
+  margin-right:5px;
+  margin-bottom: 2px;
 }
 
 
@@ -85,6 +114,7 @@ body{
   cursor: pointer;
   border-radius: 1.5em;
   background: #d9d9d9;
+  margin-top: 5px;
 }
 
 /*********** Switch:*/
