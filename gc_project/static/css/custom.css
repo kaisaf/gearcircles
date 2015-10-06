@@ -16,18 +16,21 @@ body{
 }
 
 .card{
-  border-width: 1px;
+  border-width: 2px;
   border-color: grey;
   border-style: solid;
-  min-height: 250px;
-  max-height: 250px;
+  min-height: 280px;
+  max-height: 280px;
+  min-width: 240px;
+  max-width: 240px;
   padding: 10px;
+  margin: 2px;
+  border-radius: 20px;
 }
 
 .card:hover{
   background-color: #f8f8f8;
 }
-
 
 #coverText {
   float: none;
@@ -35,7 +38,6 @@ body{
   margin-right: auto;
   margin-top: 20%;
   background-color: rgba(0, 0, 0, 0.5);
-
   border-radius: 20px;
   border-style: solid;
   border-width: 1px;
@@ -99,6 +101,7 @@ body{
   margin-right:5px;
   margin-bottom: 2px;
 }
+
 
 
 .slider-v3 {
