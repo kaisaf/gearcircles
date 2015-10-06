@@ -71,6 +71,10 @@ body{
   margin-bottom: 10px;
 }
 
+#btnSubmitAddGear{
+  margin-bottom: 40px;
+}
+
 .pnlChoiceMenu{
   display: none;
   padding-bottom: 10px;

@@ -65,151 +65,88 @@
       <!--This is for category properties  -->
     </div>
 
-
-
-  <!-- Input group -->
-  <div class="form-group has-error has-feedback">
-    <label for="frmPrice" class="control-label col-md-2">Price:</label>
-    <div class="col-md-6">
-       <div class="input-group">
-        <div class="input-group-addon">
-          <span class="glyphicon glyphicon-usd"></span>
-        </div>
-        <input type="number" step="0.1" min="0" class="form-control" id="frmPrice" name="frmPrice" placeholder="Price per day in USD" required>
-       </div>
-      <!-- Glyphicon is placed after input group-->
-      <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-    </div>
-  </div>
-
-
-
-
-  <div class="form-group has-error has-feedback">
-    <label for="frmPayment" class="control-label col-md-2">Payment Options:</label>
+    <!-- Input group -->
+    <div class="form-group has-error has-feedback">
+      <label for="frmPrice" class="control-label col-md-2">Price:</label>
       <div class="col-md-6">
-      <div class="radio">
-        <label>
-          <input type="radio" name="frmPayment" id="optionsRadios1" name="optionsRadios1" value="1" checked>
-          PayPal
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" name="frmPayment" id="optionsRadios2" name="optionsRadios2" value="0">
-          Cash
-        </label>
-      </div>
-      <div class="radio disabled">
-        <label>
-          <input type="radio" name="frmPayment" id="optionsRadios3" name="optionsRadios3" value="2">
-          PayPal or Cash
-        </label>
+         <div class="input-group">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-usd"></span>
+          </div>
+          <input type="number" step="0.1" min="0" class="form-control" id="frmPrice" name="frmPrice" placeholder="Price per day in USD" required>
+         </div>
+        <!-- Glyphicon is placed after input group-->
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>
     </div>
-  </div>
 
 
-</form>
-
-
-
-
-
-    <!-- <div class="form-group">
-      <label for="frmPhone">Phone</label>
-      <input type="phone" class="form-control" id="frmPhone" name="frmPhone" value="{{request.user.phone}}" placeholder="+12223334455" required>
-    </div> -->
-
-    <!-- <div class="form-group">
-      <label for="frmName">Name</label>
-      <input type="text" class="form-control" id="frmName" name="frmName" placeholder="Telemark Skis" required>
-    </div> -->
-
-    <!-- <div class="form-group">
-      <label for="frmBrand">Brand</label>
-      <input type="text" class="form-control" id="frmBrand" name="frmBrand" placeholder="Black Diamond, Burton" required>
-    </div> -->
-<!--
-    <div class="form-group">
-      <label for="frmDescription">Description</label>
-      <input type="text" class="form-control" id="frmDescription" name="frmDescription" placeholder="Tell more about your product" required>
-    </div> -->
-
-    <!-- <div class="form-group">
-      <label for="frmCategorySelect">Category</label>
-      <select id="frmCategorySelect" name="frmCategorySelect" class="form-control" required>
-        <option selected></option>
-          {% for category in categories %}
-            <option value={{category.id}}>{{ category.name }}</option>
-          {% endfor %}
-      </select>
-    </div> -->
-
-    <!-- <div id="frm-elements-container">
-      This is for category properties
-    </div> -->
-
-    <!-- <div class="form-group">
-      <label for="frmPrice">Price</label>
-      <div class="input-group">
-        <div class="input-group-addon">
-          <span class="glyphicon glyphicon-usd"></span>
+    <div class="form-group has-error has-feedback">
+      <label for="frmPayment" class="control-label col-md-2">Payment Options:</label>
+        <div class="col-md-6">
+        <div class="radio">
+          <label>
+            <input type="radio" name="frmPayment" id="optionsRadios1" name="optionsRadios1" value="1" checked>
+            PayPal
+          </label>
         </div>
-        <input type="number" step="0.1" min="0" class="form-control" id="frmPrice" name="frmPrice" placeholder="Price per day in USD" required>
+        <div class="radio">
+          <label>
+            <input type="radio" name="frmPayment" id="optionsRadios2" name="optionsRadios2" value="0">
+            Cash
+          </label>
+        </div>
+        <div class="radio disabled">
+          <label>
+            <input type="radio" name="frmPayment" id="optionsRadios3" name="optionsRadios3" value="2">
+            PayPal or Cash
+          </label>
+        </div>
       </div>
-    </div> -->
-<!--
-    <div class="form-group">
-      <label>Payment Options</label>
-      <div class="radio">
-        <label>
-          <input type="radio" name="frmPayment" id="optionsRadios1" name="optionsRadios1" value="1" checked>
-          PayPal
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" name="frmPayment" id="optionsRadios2" name="optionsRadios2" value="0">
-          Cash
-        </label>
-      </div>
-      <div class="radio disabled">
-        <label>
-          <input type="radio" name="frmPayment" id="optionsRadios3" name="optionsRadios3" value="2">
-          PayPal or Cash
-        </label>
-      </div>
-    </div> -->
+    </div>
 
-    <div class="form-group">
-      <label for="frmAddress">Address</label>
-      <input type="address" class="form-control" id="frmAddress" name="frmAddress" placeholder="295 Madison Avenue" required>
+    <div class="form-group has-error has-feedback">
+      <label for="frmAddress" class="control-label col-md-2">Address:</label>
+      <div class="col-md-6">
+        <input type="address" class="form-control" id="frmAddress" name="frmAddress" placeholder="295 Madison Avenue" required>
+        <!-- Glyphicon is placed after textbox -->
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
     </div>
 
     <input type="hidden" class="form-control" id="frmLatitude" name="frmLatitude" required>
     <input type="hidden" class="form-control" id="frmLongitude" name="frmLongitude" required>
 
-    <div class="container">
+    <div class="form-group">
+      <label for="frmAddress" class="control-label col-md-2"></label>
       <div id="map" class="frmMap col-xs-12 col-md-6"></div>
     </div>
 
-    <div class="form-group">
-      <label for="frmDate">Expiration Date</label>
-      <input id="frmDate" name="frmDate" type="date" required>
-    </div>
-
-    <div class="form-group">
-      <label for="frmImage">File input</label>
-      <input type="file" id="frmImage" name="frmImage" required>
+    <div class="form-group has-error has-feedback">
+      <label for="frmDate" class="control-label col-md-2">Expiration Date</label>
+      <div class="col-md-6">
+        <input id="frmDate" name="frmDate" type="date" required>
+      </div>
     </div>
 
 
-    <button type="submit" class="btn btn-default">Submit</button>
+    <div class="form-group has-error has-feedback">
+      <label for="frmImage" class="control-label col-md-2">Image:</label>
+      <div class="col-md-6">
+        <input type="file" id="frmImage" name="frmImage" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="frmButton" class="control-label col-md-2"></label>
+      <div class="col-md-6">
+        <button type="submit" id="btnSubmitAddGear" class="btn btn-primary col-md-6">Submit</button>
+      </div>
+    </div>
+
   </form>
 
-</div><!-- /container -->
-
+</div> <!-- /container -->
 
 
 {% endblock %}

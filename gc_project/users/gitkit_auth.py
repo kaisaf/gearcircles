@@ -35,5 +35,3 @@ def signin_or_signup_based_on_gitkit(request):
             return False
     else:
         return False
-        
-        

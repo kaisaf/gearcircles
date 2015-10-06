@@ -39,21 +39,6 @@ function getCategoryDetails(catId) {
   })
 }
 
-// function createFormElements(categoryProperties) {
-//   $(categoryProperties).each(function(i, item) {
-//     console.log(item)
-//     var inputId = "frm" + item.id;
-//     var htmlInput = '<div class="form-group"> \
-//       <label for="' + inputId + '">' + item.name + '</label> \
-//       <input ' + convertInputTypeAttr(item.input_type) +
-//       ' class="form-control" id="' + inputId + '" name="' + inputId + '" placeholder="'+
-//       item.description +'" ' + convertInputRequiredAttr(item.mandatory) +'> \
-//     </div>'
-//
-//     $("#frm-elements-container").append(htmlInput);
-//   })
-// }
-
 
 function createFormElements(categoryProperties) {
   $(categoryProperties).each(function(i, item) {
