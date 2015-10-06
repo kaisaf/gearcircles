@@ -39,20 +39,25 @@ function getCategoryDetails(catId) {
   })
 }
 
+
 function createFormElements(categoryProperties) {
   $(categoryProperties).each(function(i, item) {
     console.log(item)
     var inputId = "frm" + item.id;
-    var htmlInput = '<div class="form-group"> \
-      <label for="' + inputId + '">' + item.name + '</label> \
+    var htmlInput = '<div class="form-group has-error has-feedback"> \
+    <label for="' + inputId + '" class="control-label col-md-2">' + item.name +':</label> \
+     <div class="col-md-6"> \
       <input ' + convertInputTypeAttr(item.input_type) +
       ' class="form-control" id="' + inputId + '" name="' + inputId + '" placeholder="'+
       item.description +'" ' + convertInputRequiredAttr(item.mandatory) +'> \
+    <span class="glyphicon glyphicon-remove form-control-feedback"></span> \
     </div>'
+
 
     $("#frm-elements-container").append(htmlInput);
   })
 }
+
 
 function convertInputTypeAttr(input_type) {
   if (input_type==0) {

@@ -6,7 +6,7 @@ from gears.models import Gear, GearAvailability
 
 import datetime
 
-import rentals.twilio_helper
+from rentals import twilio_helper
 
 
 PAYMENT_CHOICES = (
@@ -25,11 +25,11 @@ class Transaction(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def clean(self):
-        if self.start_date > self.end_date:
-            raise ValidationError("End date can not be before start date")
-        if not self.gear.check_availability(self.start_date, self.end_date):
-            raise ValidationError("Gear not available for given timeframe")
+    # def clean(self):
+    #     if self.start_date > self.end_date:
+    #         raise ValidationError("End date can not be before start date")
+    #     if not self.gear.check_availability(self.start_date, self.end_date):
+    #         raise ValidationError("Gear not available for given timeframe")
 
     def save(self, *args, **kwargs):
         self.full_clean()

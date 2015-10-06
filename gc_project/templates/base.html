@@ -8,7 +8,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <!-- <link rel="icon" href="http://getbootstrap.com/favicon.ico"> -->
 
     <title>GearCircles</title>
 
@@ -16,12 +16,11 @@
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">
+    <!--MUST COMMENT THIS OUT WITH OUR CUSTOM CSS-->
+    <!-- <link href="http://getbootstrap.com/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet"> -->
 
     <link href="{% static "css/custom.css"%}" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -43,46 +42,25 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/home">GearCircles</a>
+          <a class="navbar-brand visible-xs" href="/home">GearCircles</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav col-xs-12 col-sm-4">
+          <ul class="nav navbar-nav col-xs-12">
+            <li class="hidden-xs"><a class="navbar-brand" href="/home">GearCircles</a></li>
             {% block navbar_left %}
             {% endblock %}
-            <!-- <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li> -->
+            <li id="btnLogin" class="pull-right"></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right col-xs-12 col-sm-6">
+
+          <!-- <ul class="nav navbar-nav navbar-right col-xs-12 col-sm-6">
             <li id="btnLogin"></li>
-              <!-- <li class="active"><a id="btnLogin" ></a></li> -->
             {% block navbar_right %}
             {% endblock %}
-            <!-- <li><a href="http://getbootstrap.com/examples/navbar/">Default</a></li>
-            <li><a href="http://getbootstrap.com/examples/navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
-          </ul>
+          </ul> -->
 
           {% block menu %}
           {% endblock %}
 
-          <!-- <ul id="choiceMenu" class="nav navbar-nav nav-right col-xs-12">
-            <li id="btnCategory"><a href="#">Category</a></li>
-            <li id="btnPrice"><a href="#">Price</a></li>
-            <li><a href="#contact">Brand</a></li>
-          </ul> -->
 
 
         </div><!--/.nav-collapse -->

@@ -52,19 +52,17 @@ function gcAddMarker(position, content) {
       title: "I'm here!"
   });
 
-  if (content) {
-    var contentString = content;
+  (function (marker, content) {
+                google.maps.event.addListener(marker, "click", function (e) {
+                    infoWindow.setContent(content);
+                    infoWindow.open(gcMap, marker);
+                });
+            })(marker, content);
 
-    var infowindow = new google.maps.InfoWindow({
-     content: contentString
-    });
-
-    marker.addListener('click', function() {
-      infowindow.open(gcMap, marker);
-    });
-  }
   markers.push(marker);
 }
+
+var infoWindow = new google.maps.InfoWindow();
 
 function gcClearAllMarkers() {
   console.log("clear markers")
