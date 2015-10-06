@@ -84,10 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'gearcircles',
-        'USER': 'gear_db_user',
-        'PASSWORD': 'oursuperuser',
-        'HOST': os.environ["POSTGIS_PORT_5432_TCP_ADDR"],
-        'PORT': '5432',
+        'USER': 'docker',
+        'PASSWORD': 'docker',
+        'HOST': os.environ["POSTGIS_PORT_25432_TCP_ADDR"],
+        'PORT': '25432',
     }
 }
 
