@@ -17,6 +17,12 @@ can search gear near them based on categories, price ranges, dates or search wor
 Gear owners can list their equipment using category specific forms and accept
 PayPal or cash payments.
 
+Deployment
+===========
+
+`createdb gearcircles -h localhost -U docker -p 25432`
+`docker run -it --link postgis:POSTGIS --name gearcircles gearcircles`
+
 Developers:
 * Kaisa Filppula
 * Victor Menezes
