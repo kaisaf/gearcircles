@@ -9,30 +9,134 @@
 <div class="container">
 
 
-  <form enctype="multipart/form-data" method="POST">
+  <form class="form-horizontal" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
 
-    <div class="form-group">
+
+    <div class="form-group has-error has-feedback">
+      <label for="frmPhone" class="control-label col-md-2">Phone:</label>
+      <div class="col-md-6">
+        <input type="phone" class="form-control" id="frmPhone" name="frmPhone" value="{{request.user.phone}}" placeholder="+12223334455" required>
+        <!-- Glyphicon is placed after textbox -->
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+
+    <div class="form-group has-error has-feedback">
+      <label for="frmName" class="control-label col-md-2">Gear name/title:</label>
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="frmName" name="frmName" placeholder="Telemark Skis" required>
+        <!-- Glyphicon is placed after textbox -->
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+
+    <div class="form-group has-error has-feedback">
+      <label for="frmBrand" class="control-label col-md-2">Brand:</label>
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="frmBrand" name="frmBrand" placeholder="Black Diamond, Burton" required>
+        <!-- Glyphicon is placed after textbox -->
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+
+    <div class="form-group has-error has-feedback">
+      <label for="frmDescription" class="control-label col-md-2">Description:</label>
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="frmDescription" name="frmDescription" placeholder="Tell more about your product" required>
+        <!-- Glyphicon is placed after textbox -->
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+
+    <div class="form-group has-error has-feedback">
+      <label for="frmCategorySelect" class="control-label col-md-2">Category:</label>
+      <div class="col-md-6">
+        <select id="frmCategorySelect" name="frmCategorySelect" class="form-control" required>
+          <option selected></option>
+            {% for category in categories %}
+              <option value={{category.id}}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div id="frm-elements-container">
+      <!--This is for category properties  -->
+    </div>
+
+
+
+  <!-- Input group -->
+  <div class="form-group has-error has-feedback">
+    <label for="frmPrice" class="control-label col-md-2">Price:</label>
+    <div class="col-md-6">
+       <div class="input-group">
+        <div class="input-group-addon">
+          <span class="glyphicon glyphicon-usd"></span>
+        </div>
+        <input type="number" step="0.1" min="0" class="form-control" id="frmPrice" name="frmPrice" placeholder="Price per day in USD" required>
+       </div>
+      <!-- Glyphicon is placed after input group-->
+      <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+  </div>
+
+
+
+
+  <div class="form-group has-error has-feedback">
+    <label for="frmPayment" class="control-label col-md-2">Payment Options:</label>
+      <div class="col-md-6">
+      <div class="radio">
+        <label>
+          <input type="radio" name="frmPayment" id="optionsRadios1" name="optionsRadios1" value="1" checked>
+          PayPal
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="frmPayment" id="optionsRadios2" name="optionsRadios2" value="0">
+          Cash
+        </label>
+      </div>
+      <div class="radio disabled">
+        <label>
+          <input type="radio" name="frmPayment" id="optionsRadios3" name="optionsRadios3" value="2">
+          PayPal or Cash
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+</form>
+
+
+
+
+
+    <!-- <div class="form-group">
       <label for="frmPhone">Phone</label>
       <input type="phone" class="form-control" id="frmPhone" name="frmPhone" value="{{request.user.phone}}" placeholder="+12223334455" required>
-    </div>
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="frmName">Name</label>
       <input type="text" class="form-control" id="frmName" name="frmName" placeholder="Telemark Skis" required>
-    </div>
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="frmBrand">Brand</label>
       <input type="text" class="form-control" id="frmBrand" name="frmBrand" placeholder="Black Diamond, Burton" required>
-    </div>
-
+    </div> -->
+<!--
     <div class="form-group">
       <label for="frmDescription">Description</label>
       <input type="text" class="form-control" id="frmDescription" name="frmDescription" placeholder="Tell more about your product" required>
-    </div>
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="frmCategorySelect">Category</label>
       <select id="frmCategorySelect" name="frmCategorySelect" class="form-control" required>
         <option selected></option>
@@ -40,13 +144,13 @@
             <option value={{category.id}}>{{ category.name }}</option>
           {% endfor %}
       </select>
-    </div>
+    </div> -->
 
-    <div id="frm-elements-container">
-      <!-- This is for category properties -->
-    </div>
+    <!-- <div id="frm-elements-container">
+      This is for category properties
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="frmPrice">Price</label>
       <div class="input-group">
         <div class="input-group-addon">
@@ -54,8 +158,8 @@
         </div>
         <input type="number" step="0.1" min="0" class="form-control" id="frmPrice" name="frmPrice" placeholder="Price per day in USD" required>
       </div>
-    </div>
-
+    </div> -->
+<!--
     <div class="form-group">
       <label>Payment Options</label>
       <div class="radio">
@@ -76,7 +180,7 @@
           PayPal or Cash
         </label>
       </div>
-    </div>
+    </div> -->
 
     <div class="form-group">
       <label for="frmAddress">Address</label>
