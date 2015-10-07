@@ -1,11 +1,15 @@
 $(document).ready(function() {
 
   $("#cards").hide();
+  $("#loading").hide();
+
   document.getElementById('endDate').min = convertDate(new Date())
   document.getElementById('startDate').min = convertDate(new Date())
 
   window.gcCreateMap(function() {
+    $("#loading").show();
     getApiData("/api/v1/locations", queryFilter, function(locations) {
+      $("#loading").hide("easing");
       setMarkers(locations);
       createCards(locations);
     });
