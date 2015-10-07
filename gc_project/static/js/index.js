@@ -19,7 +19,8 @@ $(document).ready(function() {
           "longitude": location.point.coordinates[0]
         }
       }
-      window.gcAddMarker(position);
+      content = null;
+      window.gcAddMarker(position, content, index);
     })
   }
 
