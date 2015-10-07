@@ -11,10 +11,6 @@ $(document).ready(function() {
   })
 
   var price = $('#pricePerDay').text()
-  // var partsStart = null;
-  // var partsEnd = null;
-  // var endDate = null;
-  // var startDate = null;
 
   function convertDate(d) {
     var year = d.getFullYear();
@@ -27,7 +23,6 @@ $(document).ready(function() {
       date = "0"+date;
     }
     var dateString = year + "-" + month + "-" + date;
-    console.log(dateString)
     return dateString;
   }
 
@@ -60,16 +55,17 @@ $(document).ready(function() {
     endDate = $(this).val();
     partsEnd = splitDate(endDate);
     startDate = $('#startDate').val();
-    partsStart = splitDate(startDate)
-    var sDate = new Date(partsStart[0], partsStart[1], partsStart[2]);
-    var eDate = new Date(partsEnd[0], partsEnd[1], partsEnd[2]);
-    totalPrice = calcPrice(partsStart, partsEnd);
-    $('#totalPrice span').text(totalPrice);
+    if (startDate) {
+      partsStart = splitDate(startDate)
+      var sDate = new Date(partsStart[0], partsStart[1], partsStart[2]);
+      var eDate = new Date(partsEnd[0], partsEnd[1], partsEnd[2]);
+      totalPrice = calcPrice(partsStart, partsEnd);
+      $('#totalPrice span').text(totalPrice);
+    }
     document.getElementById('endDate').min = $('#startDate').val();
   })
 
   function calcPrice(sDate, eDate) {
-    console.log(sDate, eDate)
     var startDate = new Date(sDate[0], parseInt(sDate[1])-1, sDate[2]);
     var endDate = new Date(eDate[0], parseInt(eDate[1])-1, eDate[2]);
     var numDays = (Math.round((endDate - startDate)/(1000*60*60*24))) + 1;
