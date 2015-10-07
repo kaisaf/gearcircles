@@ -17,7 +17,6 @@
       <label for="frmPhone" class="control-label col-md-2">Phone:</label>
       <div class="col-md-6">
         <input type="phone" class="form-control" id="frmPhone" name="frmPhone" value="{{request.user.phone}}" placeholder="+12223334455" required>
-        <!-- Glyphicon is placed after textbox -->
         <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
@@ -26,7 +25,6 @@
       <label for="frmName" class="control-label col-md-2">Gear name/title:</label>
       <div class="col-md-6">
         <input type="text" class="form-control" id="frmName" name="frmName" placeholder="Telemark Skis" required>
-        <!-- Glyphicon is placed after textbox -->
         <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
@@ -35,7 +33,6 @@
       <label for="frmBrand" class="control-label col-md-2">Brand:</label>
       <div class="col-md-6">
         <input type="text" class="form-control" id="frmBrand" name="frmBrand" placeholder="Black Diamond, Burton" required>
-        <!-- Glyphicon is placed after textbox -->
         <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
@@ -44,7 +41,6 @@
       <label for="frmDescription" class="control-label col-md-2">Description:</label>
       <div class="col-md-6">
         <input type="text" class="form-control" id="frmDescription" name="frmDescription" placeholder="Tell more about your product" required>
-        <!-- Glyphicon is placed after textbox -->
         <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
@@ -75,7 +71,6 @@
           </div>
           <input type="number" step="0.1" min="0" class="form-control" id="frmPrice" name="frmPrice" placeholder="Price per day in USD" required>
          </div>
-        <!-- Glyphicon is placed after input group-->
         <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
@@ -109,7 +104,6 @@
       <label for="frmAddress" class="control-label col-md-2">Address:</label>
       <div class="col-md-6">
         <input type="address" class="form-control" id="frmAddress" name="frmAddress" placeholder="295 Madison Avenue" required>
-        <!-- Glyphicon is placed after textbox -->
         <span class="glyphicon form-control-feedback"></span>
       </div>
     </div>
@@ -138,9 +132,9 @@
     </div>
 
     <div class="form-group">
-      <label for="frmButton" class="control-label col-md-2"></label>
       <div class="col-md-10">
-        <button type="submit" id="btnSubmitAddGear" class="btn btn-primary col-md-6">Submit</button>
+        <label for="frmButton" class="control-label col-md-3"></label>
+        <button type="submit" id="btnSubmitAddGear" class="btn btn-primary col-md-6 push">Submit</button>
       </div>
     </div>
 
