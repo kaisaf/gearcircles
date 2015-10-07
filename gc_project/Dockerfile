@@ -9,11 +9,13 @@ COPY . /srv
 
 WORKDIR /srv
 
+ENV DEV_ENV PRODUCTION
+
 RUN git clone https://github.com/vmenezes/identity-toolkit-python-client.git
-RUN pip3 install identity-toolkit-python-client
+RUN pip3 install ./identity-toolkit-python-client
 RUN pip3 install -r requirements.txt
 
 EXPOSE 8000
 
-CMD gunicorn wsgi:application
+CMD gunicorn -b 0.0.0.0:8000 wsgi:application
 
