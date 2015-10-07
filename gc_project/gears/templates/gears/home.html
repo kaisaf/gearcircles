@@ -75,10 +75,11 @@
 {% block main_content %}
   <div id="map" class="fullscreen"></div>
   <div id="cards" class="container"></div>
-  <div id="loading" class="fullscreen">
-    <img class="visible-md" src="{% static "img/ajax-loader.gif"%}" height="128px" width="128px" alt="loading...">
-    <img class="visible-xs" src="{% static "img/ajax-loader.gif"%}" height="64px" width="64px" alt="loading...">
+  <div id="loading" class="hidden">
+      <img class="visible-md" src="{% static "img/ajax-loader.gif"%}" height="128px" width="128px" alt="loading...">
+      <img class="visible-xs" src="{% static "img/ajax-loader.gif"%}" height="64px" width="64px" alt="loading...">
   </div>
+
 {% endblock %}
 
 

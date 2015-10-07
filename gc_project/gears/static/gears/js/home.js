@@ -1,15 +1,16 @@
 $(document).ready(function() {
 
   $("#cards").hide();
-  $("#loading").hide();
+  //$("#loading").removeClass("fullscreen");
 
   document.getElementById('endDate').min = convertDate(new Date())
   document.getElementById('startDate').min = convertDate(new Date())
 
   window.gcCreateMap(function() {
-    $("#loading").show();
+    $("#loading").addClass("fullscreen");
+    $("#loading").removeClass("hidden");
     getApiData("/api/v1/locations", queryFilter, function(locations) {
-      $("#loading").hide("easing");
+      $("#loading").removeClass("fullscreen");
       setMarkers(locations);
       createCards(locations);
     });
