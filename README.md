@@ -20,9 +20,33 @@ PayPal or cash payments.
 Deployment
 ===========
 
+Dependent on kartoza/postgis
+
+`docker pull kartoza/postgis`
+
+`sudo docker run --name "postgis" -p 25432:5432 -d -t kartoza/postgis`
+
+Username and password are docker and docker by default.
+
 `createdb gearcircles -h localhost -U docker -p 25432`
 
-`docker run -dit --link postgis:POSTGIS --name gearcircles gearcircles`
+`psql -h localhost -U docker -p 25432 -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" gearcircles`
+
+Inside gc_project directory containing `Dockerfile`
+
+`docker build -t gearcircles .`
+
+To migrate the database
+
+`docker run -dit --link postgis:POSTGIS --name migrate gearcircles python3 manage.py migrate`
+
+To run the seeds
+
+`docker run -dit --link postgis:POSTGIS --name seeds gearcircles python3 seeds.py`
+
+To start the server
+
+`docker run -dit --link postgis:POSTGIS --name gearcircles -p 80:8000 gearcircles`
 
 Developers:
 * Kaisa Filppula
