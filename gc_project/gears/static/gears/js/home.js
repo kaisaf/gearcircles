@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
   $("#cards").hide();
+  document.getElementById('endDate').min = convertDate(new Date())
+  document.getElementById('startDate').min = convertDate(new Date())
 
   window.gcCreateMap(function() {
     getApiData("/api/v1/locations", queryFilter, function(locations) {
@@ -81,6 +83,88 @@ $(document).ready(function() {
       createCards(locations);
     });
   })
+
+  $('#startDate').on('change', function() {
+    startDate = $(this).val();
+    partsStart = splitDate(startDate);
+    var endDate = $('#endDate').val();
+    if (endDate) {
+      sDate = new Date(partsStart[0], partsStart[1], partsStart[2]);
+      eDate = new Date(partsEnd[0], partsEnd[1], partsEnd[2]);
+      if (sDate > eDate) {
+        $('#endDate').val(startDate);
+        endDate = startDate;
+        partsEnd = splitDate(endDate);
+        document.getElementById('endDate').min = $(this).val();
+      }
+    }
+    document.getElementById('endDate').min = $(this).val();
+  })
+
+  $('#endDate').on('change', function() {
+    endDate = $(this).val();
+    partsEnd = splitDate(endDate);
+    var startDate = $('#startDate').val();
+    if (startDate) {
+      sDate = new Date(partsStart[0], partsStart[1], partsStart[2]);
+      eDate = new Date(partsEnd[0], partsEnd[1], partsEnd[2]);
+      if (sDate > eDate) {
+        $('#endDate').val(startDate);
+        endDate = startDate;
+        partsEnd = splitDate(endDate);
+        document.getElementById('endDate').min = $('#startDate').val();
+      }
+    }
+    document.getElementById('endDate').min = $('#startDate').val();
+  })
+
+  var partsStart = null;
+  var partsEnd = null;
+
+  function convertDate(d) {
+    var year = d.getFullYear();
+    var month = d.getMonth() + 1;
+    var date = d.getDate();
+    if (month<10) {
+      month = "0"+month;
+    }
+    if (date<10) {
+      date = "0"+date;
+    }
+    var dateString = year + "-" + month + "-" + date;
+    return dateString;
+  }
+
+  function splitDate(dateString) {
+    return dateString.split('-');
+  }
+
+
+
+  $("#minPriceSlider").on("click", function() {
+    if ($("#maxPrice").val() < $(this).val()) {
+      $("#maxPrice").val($(this).val());
+    }
+  })
+
+  $("#minPriceSlider").on("change", function() {
+    if ($("#maxPrice").val() < $(this).val()) {
+      $("#maxPrice").val($(this).val());
+    }
+  })
+
+  $("#maxPriceSlider").on("click", function() {
+    if ($(this).val() < $("#minPrice").val()) {
+      $("#minPrice").val($(this).val());
+    }
+  })
+
+  $("#maxPriceSlider").on("change", function() {
+    if ($(this).val() < $("#minPrice").val()) {
+      $("#minPrice").val($(this).val());
+    }
+  })
+
 
 
   /*

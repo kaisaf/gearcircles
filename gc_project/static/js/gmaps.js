@@ -45,11 +45,13 @@ function showMap(position, callback) {
 }
 
 
-function gcAddMarker(position, content) {
+function gcAddMarker(position, content, index) {
+  window.setTimeout(function() {
   var marker = new google.maps.Marker({
       position: convertCoords(position),
       map: gcMap,
-      title: "I'm here!"
+      title: "I'm here!",
+      animation: google.maps.Animation.DROP
   });
 
   (function (marker, content) {
@@ -59,7 +61,8 @@ function gcAddMarker(position, content) {
                 });
             })(marker, content);
 
-  markers.push(marker);
+    markers.push(marker);
+  }, (200*index));
 }
 
 var infoWindow = new google.maps.InfoWindow();
