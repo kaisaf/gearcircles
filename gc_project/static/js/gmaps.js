@@ -62,7 +62,7 @@ function gcAddMarker(position, content, index) {
             })(marker, content);
 
     markers.push(marker);
-  }, (200*index));
+  }, (100*index));
 }
 
 var infoWindow = new google.maps.InfoWindow();
