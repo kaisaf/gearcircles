@@ -50,10 +50,17 @@ body{
   height: 60%;
 }
 
-#loading{
-  padding: 40%;
-  background-color: rgba(0, 0, 0, 0.3);
+.hideLoading{
+  position: absolute;
+  top: -200px;
 }
+
+.showLoading{
+  position: absolute;
+  top: 40%;
+  left: 40%;
+}
+
 
 #form-rental li{
   list-style: none;
