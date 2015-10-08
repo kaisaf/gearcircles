@@ -11,12 +11,13 @@
 
 
 {% block main_content %}
-  <div id="gear-details" class="row">
+  <div id="gear-details" class="col-xs-12">
     <div class="col-md-6">
       <img width=480px height=640px src="{{photo}}" class="img-responsive" alt="Responsive image">
     </div>
 
-    <div class="col-md-6">
+  <div id=gearContainer class="col-md-4">
+    <!-- <div class="col-md-6"> -->
       <h2>{{ name }}</h2>
       <h3>{{ description }}</h3>
 
@@ -36,10 +37,27 @@
       <p>Listing expires: <span id="expDate">{{ expiration_date }}<span></p>
       <p>Owner: {{ user }}</p>
       <p>Location: {{ location }}</p>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">RENT ME</button>
+      <button id="btnRentMe" type="button" class="btn btn-primary col-md-10 col-xs-10" data-toggle="modal" data-target="#myModal">RENT ME</button>
+
+
+      <!--TWITTER SHARE BUTTON -->
+      <div class="socialMedia">
+      <a href="https://twitter.com/share" class="twitter-share-button col-md-6 col-xs-6" data-url="http://www.gearcircles.com/gear/{{ id }}" data-text="{{ category }} for ${{ price }}" data-size="small" data-hashtags="GearCircles">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+     <!--/TWITTER -->
+
+     <!-- FACEBOOK SHARE BUTTON -->
+      <div class="fb-share-button col-md-4 col-xs-5" data-href="http://www.gearcircles.com" data-layout="button_count">
+      </div>
     </div>
 
-  </div>
+
+     <!-- FACEBOOK -->
+
+    </div>
+
+  <!-- </div> -->
+</div>
 
 
   <!-- Modal -->
@@ -96,5 +114,15 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <!-- <script src="{% static "js/gmaps.js"%}"></script>-->
   <script src="{% static "gears/js/gear.js"%}"></script>
+  <!-- FACEBOOK SDK -->
+       <div id="fb-root"></div>
+       <script>(function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=917212868359703";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));</script>
+ <!-- FACEBOOK SDK -->
 
 {% endblock %}

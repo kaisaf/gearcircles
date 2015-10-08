@@ -1,11 +1,15 @@
 $(document).ready(function() {
 
   $("#cards").hide();
+
   document.getElementById('endDate').min = convertDate(new Date())
   document.getElementById('startDate').min = convertDate(new Date())
 
   window.gcCreateMap(function() {
+
     getApiData("/api/v1/locations", queryFilter, function(locations) {
+      $("#loadingImg").hide();
+      // $(".loading").addClass("hideLoading");
       setMarkers(locations);
       createCards(locations);
     });
@@ -78,7 +82,11 @@ $(document).ready(function() {
     queryFilter["maxPrice"] = maxPrice;
     queryFilter["txtSearch"] = txtSearch;
     //getApiData("/api/v1/locations", queryFilter, setMarkers);
+    $("#loadingImg").show();
+    // $("#loadingLarge").attr("class", "hidden-md loading showLoading");
     getApiData("/api/v1/locations", queryFilter, function(locations) {
+      $("#loadingImg").hide();
+      // $("#loadingLarge").attr("class", "hidden");
       setMarkers(locations);
       createCards(locations);
     });

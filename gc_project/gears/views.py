@@ -49,11 +49,12 @@ class GearView(View):
         renters_phone = request.user.phone
         gear = self.get_gear_object(gear_id)
         photo = GearImage.objects.get(gear=gear)
-        category = gear.category.name + ": " + gear.category.description
+        category = gear.category.name
         category_list = []
         gear_properties = GearProperty.objects.filter(gear=gear)
         payments = self.convert_payment_method(gear.payment)
         context = {
+            "id": gear.id,
             "name": gear.name,
             "description": gear.description,
             "category": category,
@@ -123,8 +124,6 @@ class AddGearView(View):
         return render(request, 'gears/addgear.html', context)
 
     def post(self, request):
-        print(request.POST)
-        print(request.FILES)
         user = User.objects.get(email=request.user.email)
         if user.phone != request.POST["frmPhone"]:
             user.phone = request.POST["frmPhone"]
