@@ -8,7 +8,7 @@ $(document).ready(function() {
   window.gcCreateMap(function() {
 
     getApiData("/api/v1/locations", queryFilter, function(locations) {
-      $(".loading").attr("class", "hidden");
+      $("#loadingImg").hide();
       // $(".loading").addClass("hideLoading");
       setMarkers(locations);
       createCards(locations);
@@ -82,10 +82,10 @@ $(document).ready(function() {
     queryFilter["maxPrice"] = maxPrice;
     queryFilter["txtSearch"] = txtSearch;
     //getApiData("/api/v1/locations", queryFilter, setMarkers);
-    $("#loadingSmall").attr("class", "hidden-xs loading showLoading");
-    $("#loadingLarge").attr("class", "hidden-md loading showLoading");
+    $("#loadingImg").show();
+    // $("#loadingLarge").attr("class", "hidden-md loading showLoading");
     getApiData("/api/v1/locations", queryFilter, function(locations) {
-      $(".loading").attr("class", "hidden");
+      $("#loadingImg").hide();
       // $("#loadingLarge").attr("class", "hidden");
       setMarkers(locations);
       createCards(locations);

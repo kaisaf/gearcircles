@@ -4,6 +4,7 @@ body{
 
 #navbarTopLine{
   padding-right: 0px;
+  padding-left: 15px;
 }
 
 .gitkit-button, .gitkit-button:hover{
@@ -66,12 +67,8 @@ body{
   height: 60%;
 }
 
-.hideLoading{
-  position: absolute;
-  top: -200px;
-}
 
-.showLoading{
+#loadingImg{
   position: absolute;
   top: 40%;
   left: 40%;
