@@ -2,6 +2,22 @@ body{
   padding-top: 80px;
 }
 
+#navbarTopLine{
+  padding-right: 0px;
+}
+
+.gitkit-button, .gitkit-button:hover{
+  border-style: none !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  margin: 10px !important;
+}
+
+#btnLogin{
+  padding: 0px;
+}
 
 .fullscreen{
   position: absolute;

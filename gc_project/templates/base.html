@@ -34,7 +34,7 @@
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+      <!-- <div class="container"> -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -45,26 +45,20 @@
           <a class="navbar-brand visible-xs" href="/home">GearCircles</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav col-xs-12">
+          <ul id="navbarTopLine" class="nav navbar-nav col-xs-12">
             <li class="hidden-xs"><a class="navbar-brand" href="/home">GearCircles</a></li>
             {% block navbar_left %}
             {% endblock %}
-            <li id="btnLogin" class="pull-right"></li>
+            <li class="active pull-right">
+              <a id="btnLogin"></a>
+            </li>
           </ul>
-
-          <!-- <ul class="nav navbar-nav navbar-right col-xs-12 col-sm-6">
-            <li id="btnLogin"></li>
-            {% block navbar_right %}
-            {% endblock %}
-          </ul> -->
 
           {% block menu %}
           {% endblock %}
 
-
-
         </div><!--/.nav-collapse -->
-      </div>
+      <!-- </div> -->
 
     </nav>
 

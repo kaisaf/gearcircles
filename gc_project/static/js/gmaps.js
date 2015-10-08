@@ -50,7 +50,7 @@ function gcAddMarker(position, content, index) {
   var marker = new google.maps.Marker({
       position: convertCoords(position),
       map: gcMap,
-      title: "I'm here!",
+      //title: "I'm here!",
       animation: google.maps.Animation.DROP
   });
 
