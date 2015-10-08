@@ -4,7 +4,10 @@ import django
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 sys.path.append(BASE_DIR)
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gc_project.settings")
+if(os.environ.get("DEV_ENV") == "PRODUCTION"):
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gc_project.prod_settings")
+else:
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gc_project.dev_settings")
 django.setup()
 
 from gears.models import Category, CategoryProperty, Location, Gear, GearProperty, GearAvailability, GearImage
