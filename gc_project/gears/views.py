@@ -54,6 +54,7 @@ class GearView(View):
         gear_properties = GearProperty.objects.filter(gear=gear)
         payments = self.convert_payment_method(gear.payment)
         context = {
+            "id": gear.id,
             "name": gear.name,
             "description": gear.description,
             "category": category,
