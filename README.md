@@ -46,7 +46,11 @@ To run the seeds
 
 To start the server
 
-`docker run -dit --link postgis:POSTGIS --name gearcircles -p 80:8000 gearcircles`
+`docker run -dit --link postgis:POSTGIS --name gearcircles gearcircles`
+
+Run [nginx-proxy](https://github.com/jwilder/nginx-proxy)
+
+`docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy`
 
 Developers:
 * Kaisa Filppula
