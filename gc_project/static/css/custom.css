@@ -103,7 +103,8 @@ body{
   background-color: rgb(231, 231, 231);
   border-radius: 20px;
   box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
-  padding: 20px;
+  padding: 20px 20px 40px 20px;
+
 }
 
 #btnRentMe{
