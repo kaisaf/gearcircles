@@ -178,4 +178,3 @@ def insert_gear_property(new_gear, category_property, request):
             gear=new_gear,
             category_property=category_property
         )
-        print("inserted: {}".format(new_property))
