@@ -45,7 +45,6 @@ class LogoutView(View):
 
 class LoginWidgetView(View):
     def get(self, request):
-        print("GET on loginwidget")
         return render(request, "users/loginwidget.html")
 
 
@@ -59,9 +58,6 @@ class MyAccountView(View):
             "my_gears_rented": my_gears_rented,
             "my_gears": my_gears
         }
-        print('gears i rented: {}'.format(gears_i_rented))
-        print('my gears rented: {}'.format(my_gears_rented))
-        print('my gears: {}'.format(my_gears))
         return render(request, 'users/myaccount.html', context)
 
 
