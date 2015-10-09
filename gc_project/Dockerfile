@@ -10,6 +10,7 @@ COPY . /srv
 WORKDIR /srv
 
 ENV DEV_ENV PRODUCTION
+ENV VIRTUAL_HOST gearcircles.com
 
 RUN git clone https://github.com/vmenezes/identity-toolkit-python-client.git
 RUN pip3 install ./identity-toolkit-python-client
