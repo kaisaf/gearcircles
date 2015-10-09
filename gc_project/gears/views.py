@@ -82,7 +82,7 @@ class GearView(View):
         days_rented = (end_date - start_date).days + 1
         dollars = days_rented * gear.price
         payment_method = request.POST["paymentMethod"]
-        cancel_return_address = "http://localhost:8000/myaccount"
+        cancel_return_address = "http://www.gearcircles.com/myaccount"
         renter = User.objects.get(id=request.user.id)
         if not request.user.phone or renter.phone != phone:
             renter.phone = phone

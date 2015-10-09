@@ -37,19 +37,21 @@
       <p>Listing expires: <span id="expDate">{{ expiration_date }}<span></p>
       <p>Owner: {{ user }}</p>
       <p>Location: {{ location }}</p>
-      <button id="btnRentMe" type="button" class="btn btn-primary col-md-10 col-xs-10" data-toggle="modal" data-target="#myModal">RENT ME</button>
+      <button id="btnRentMe" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">RENT ME</button>
 
 
+      <div class="col-md-4 col-xs-6">
       <!--TWITTER SHARE BUTTON -->
-      <div class="socialMedia">
-      <a href="https://twitter.com/share" class="twitter-share-button col-md-6 col-xs-6" data-url="http://www.gearcircles.com/gear/{{ id }}" data-text="{{ category }} for ${{ price }}" data-size="small" data-hashtags="GearCircles">Tweet</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.gearcircles.com/gear/{{ id }}" data-text="{{ category }} for ${{ price }}" data-size="small" data-hashtags="GearCircles">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
      <!--/TWITTER -->
-
-     <!-- FACEBOOK SHARE BUTTON -->
-      <div class="fb-share-button col-md-4 col-xs-5" data-href="http://www.gearcircles.com" data-layout="button_count">
       </div>
-    </div>
+
+      <div class="col-md-4 col-xs-6">
+     <!-- FACEBOOK SHARE BUTTON -->
+        <div class="fb-share-button" data-href="http://www.gearcircles.com" data-layout="button_count">
+        </div>
+      </div>
 
 
      <!-- FACEBOOK -->
