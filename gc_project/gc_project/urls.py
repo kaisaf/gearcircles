@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from rest_framework import routers
 
-from users.views import (IndexView, UserViewSet,
+from users.views import (IndexView, TempIndexView, UserViewSet,
                          LogoutView, MyAccountView,
                          LoginWidgetView, UserView)
 from gears.views import (HomeView, CategoriesView, CategoryByNameView,
@@ -51,5 +51,6 @@ urlpatterns = [
     url(r'^gear/(?P<gear_id>\w+)/$', login_required(GearView.as_view()), name='gear'),
     url(r'^addgear/', login_required(AddGearView.as_view()), name='addgear'),
     url(r'^api/v1/', include(router.urls)),
-    url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^demo/', IndexView.as_view(), name='index'),
+    url(r'^$', TempIndexView.as_view(), name='temp_index'),
 ]

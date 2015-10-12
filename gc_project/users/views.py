@@ -37,6 +37,10 @@ class IndexView(View):
 #            context[location.address] = location.point
 
 
+class TempIndexView(View):
+    def get(self, request):
+        return render(request, "temp_index.html")
+
 class LogoutView(View):
     def get(self, request):
         logout(request)
