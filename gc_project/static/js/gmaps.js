@@ -1,8 +1,8 @@
 var markers = [];
 var gcMap = null;
 
-function gcOnMapReady(callback) {
-  callback();
+function gcOnMapReady(callback, position) {
+  callback(position);
 }
 
 function gcCreateMap(callback) {
@@ -40,7 +40,7 @@ function showMap(position, callback) {
       zoom: 12
   });
   google.maps.event.addListenerOnce(gcMap, 'tilesloaded', function() {
-    gcOnMapReady(callback);
+    gcOnMapReady(callback, position);
   });
 }
 
@@ -62,7 +62,7 @@ function gcAddMarker(position, content, index) {
             })(marker, content);
 
     markers.push(marker);
-  }, (100*index));
+  }, (200*index));
 }
 
 var infoWindow = new google.maps.InfoWindow();
