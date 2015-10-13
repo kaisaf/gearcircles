@@ -25,7 +25,7 @@ def signin_or_signup_based_on_gitkit(request):
         gitkit_user = gitkit_instance.VerifyGitkitToken(gtoken_cookie)
         if gitkit_user:
             print("Welcome " + gitkit_user.email + "! Your user info is: " + str(vars(gitkit_user)))
-            user = User.objects.filter(email=gitkit_user.email).first()
+            #user = User.objects.filter(email=gitkit_user.email).first()
             if not user:
                 user = User.objects.create_user(email=gitkit_user.email, name=gitkit_user.name)
             user.backend = 'django.contrib.auth.backends.ModelBackend'
