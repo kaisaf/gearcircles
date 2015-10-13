@@ -3,6 +3,8 @@
 GearCircles is a person-to-person gear rental marketplace for outdoor sports. It
 connects the local gear owners to those eager to try new things.
 
+http://www.gearcircles.com
+
 GearCircles is a Django project build on top of:
 * [GeoDjango] (http://geodjango.org/)
 * [PostGIS] (http://postgis.net/)
