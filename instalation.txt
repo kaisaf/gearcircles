@@ -24,6 +24,14 @@ $ sudo -u postgres createuser -P gear_db_user
 $ sudo -u postgres createdb -O gear_db_user gearcircles
 
 
+Add permissions needed to run Django Tests
+
+$ sudo -u postgres plsql
+$ ALTER USER gear_db_user CREATEDB;
+$ ALTER ROLE gear_db_user SUPERUSER;
+$ \q
+
+
 Check PostgreSQL
 
 $ psql -h localhost -U gear_db_user gearcircles
