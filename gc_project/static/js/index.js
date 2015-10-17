@@ -7,25 +7,25 @@ window.gcCreateMap(createLocations);
     for (i = 0; i < 15; i++) {
       place1 = {
         "point": {
-          "coordinates": [position.coords.longitude + Math.random()/5, position.coords.latitude + Math.random()/5]
+          "coordinates": [position.coords.longitude + Math.random()/3, position.coords.latitude + Math.random()/5]
         }
       }
       locations.push(place1);
       place2 = {
         "point": {
-          "coordinates": [position.coords.longitude - Math.random()/5, position.coords.latitude - Math.random()/5]
+          "coordinates": [position.coords.longitude - Math.random()/3, position.coords.latitude - Math.random()/5]
         }
       }
       locations.push(place2);
       place3 = {
         "point": {
-          "coordinates": [position.coords.longitude + Math.random()/5, position.coords.latitude - Math.random()/5]
+          "coordinates": [position.coords.longitude + Math.random()/3, position.coords.latitude - Math.random()/5]
         }
       }
       locations.push(place3);
       place4 = {
         "point": {
-          "coordinates": [position.coords.longitude - Math.random()/5, position.coords.latitude + Math.random()/5]
+          "coordinates": [position.coords.longitude - Math.random()/3, position.coords.latitude + Math.random()/5]
         }
       }
       locations.push(place4);
