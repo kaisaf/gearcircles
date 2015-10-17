@@ -4,7 +4,7 @@ window.gcCreateMap(createLocations);
 
   function createLocations(position) {
     var locations = []
-    for (i = 0; i < 15; i++) {
+    for (i = 0; i < 25; i++) {
       place1 = {
         "point": {
           "coordinates": [position.coords.longitude + Math.random()/3, position.coords.latitude + Math.random()/5]
