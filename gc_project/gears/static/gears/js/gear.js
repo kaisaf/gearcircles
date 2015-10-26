@@ -31,6 +31,12 @@ $(document).ready(function() {
     return date;
   }
 
+  $.('#myPhone').on('change', function() {
+    var phone = $(this).val();
+    console.log(phone)
+    $('#btnGetCode').removeClass('hidden');
+  })
+
   $('#startDate').on('change', function() {
     var startDate = $(this).val();
     var partsStart = splitDate(startDate);

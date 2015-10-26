@@ -8,6 +8,7 @@ from django.contrib.gis.geos import Point, fromstr
 
 from users.models import User
 from rentals.models import Transaction
+from rentals import twilio_helper
 from .models import (Category, CategoryProperty, Gear, GearProperty, Location,
     GearAvailability, GearImage)
 
@@ -125,10 +126,7 @@ class AddGearView(View):
 
     def post(self, request):
         user = User.objects.get(email=request.user.email)
-        if user.phone != request.POST["frmPhone"]:
-            user.phone = request.POST["frmPhone"]
-            user.save()
-
+        phone = request.POST["frmPhone"]
         category_id = request.POST["frmCategorySelect"]
         category = Category.objects.get(id=category_id)
 
