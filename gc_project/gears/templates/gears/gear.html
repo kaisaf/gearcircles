@@ -79,7 +79,8 @@
                     {% csrf_token %}
                     <li id="topLineModal">{{ renters_email }}</li>
                     <li>My Phone<input id="myPhone" name="myPhone" type="text" value="{{renters_phone}}" placeholder="+12223334455" required></li>
-                    <li id="btnGetCode" class="hidden"><button>Get Validation Code</button><li>
+                    <li id="btnGetCode" class="hidden"><button class="btn">Verify phone number</button><li>
+                    <li id="insertCode" class="hidden"><input id="myCode" name="myCode" type="text" placeholder="Input code here"></li>
                     <li>Start Date <input id="startDate" name="startDate" type="date" required></li>
                     <li>End Date<input id="endDate" name="endDate" type="date" required></li>
                     <li>Payment Method</li>

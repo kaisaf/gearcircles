@@ -31,10 +31,14 @@ $(document).ready(function() {
     return date;
   }
 
-  $.('#myPhone').on('change', function() {
+  $('#myPhone').on('change', function() {
     var phone = $(this).val();
-    console.log(phone)
+    console.log(phone);
     $('#btnGetCode').removeClass('hidden');
+  })
+
+  $('#btnGetCode').on('click', function() {
+    $('#insertCode').removeClass('hidden');
   })
 
   $('#startDate').on('change', function() {
