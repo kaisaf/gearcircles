@@ -51,7 +51,7 @@ class GearView(View):
         gear = self.get_gear_object(gear_id)
         photo = GearImage.objects.get(gear=gear)
         category = gear.category.name
-        category_list = []
+        #category_list = []
         gear_properties = GearProperty.objects.filter(gear=gear)
         payments = self.convert_payment_method(gear.payment)
         context = {
@@ -95,6 +95,15 @@ class GearView(View):
         else:
             return redirect('myaccount')
 
+class CreateCodeView(View):
+    def get(self, request):
+        #SEND sms to the new number
+        return HttpResponse("Message sent")
+
+class ValidateCodeView(View):
+    def post(self, request):
+        print(request.POST["pin"])
+        return HttpResponse("PIN correct!!!")
 
 class CategoriesView(View):
     def get(self, request):
