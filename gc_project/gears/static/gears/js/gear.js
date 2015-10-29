@@ -33,13 +33,35 @@ $(document).ready(function() {
 
   $('#myPhone').on('change', function() {
     var phone = $(this).val();
-    console.log(phone);
     $('#btnGetCode').removeClass('hidden');
   })
 
   $('#btnGetCode').on('click', function() {
-    $('#insertCode').removeClass('hidden');
+    $.ajax({
+      method: "GET",
+      url: "/get-sms-code",
+    }).done(function(result) {
+      console.log(result);
+      $('#btnGetCode').addClass('hidden');
+      $('#insertCode').removeClass('hidden');
+      $('#btnSendCode').removeClass('hidden');
+    })
   })
+
+  $('#btnSendCode').on('click', function() {
+    var pin = $('#myCode').val();
+    var data = {"pin": pin};
+    $.ajax({
+      method: "POST",
+      url: "/validate-sms-code/",
+      data: data,
+    }).done(function(result) {
+      $('#insertCode').addClass('hidden');
+      $('#btnSendCode').addClass('hidden');
+      console.log(result);
+    })
+  })
+
 
   $('#startDate').on('change', function() {
     var startDate = $(this).val();
