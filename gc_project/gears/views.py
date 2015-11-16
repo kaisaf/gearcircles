@@ -52,7 +52,6 @@ class GearView(View):
         gear = self.get_gear_object(gear_id)
         photo = GearImage.objects.get(gear=gear)
         category = gear.category.name
-        #category_list = []
         gear_properties = GearProperty.objects.filter(gear=gear)
         payments = self.convert_payment_method(gear.payment)
         context = {
@@ -101,20 +100,16 @@ class CreateCodeView(View):
         phone = request.POST["phone"]
         code = str(randint(1000, 9999))
         message = "Your PIN code is: " + code
-        print(message)
-        print("code is: " + code)
         request.session["code"] = code
-        #twilio_helper.send_sms(phone, message)
+        twilio_helper.send_sms(phone, message)
         return HttpResponse("Message sent")
 
 class ValidateCodeView(View):
     def post(self, request):
-        print(request.POST["pin"])
-        print(request.session["code"])
         if request.POST["pin"] == request.session["code"]:
-            return HttpResponse("PIN correct!!!")
+            return HttpResponse("PIN correct!")
         else:
-            raise Http404("OH NO")
+            raise Http404("Wrong PIN")
 
 class CategoriesView(View):
     def get(self, request):

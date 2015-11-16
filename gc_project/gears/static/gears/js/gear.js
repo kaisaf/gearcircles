@@ -37,8 +37,7 @@ $(document).ready(function() {
   })
 
   $('#btnGetCode').on('click', function() {
-    phone = $('#myPhone').val()
-    console.log(phone)
+    phone = $('#myPhone').val();
     $.ajax({
       method: "POST",
       url: "/get-sms-code/",
@@ -53,15 +52,18 @@ $(document).ready(function() {
 
   $('#btnSendCode').on('click', function() {
     var pin = $('#myCode').val();
-    var data = {"pin": pin};
     $.ajax({
       method: "POST",
       url: "/validate-sms-code/",
-      data: data,
+      data: {"pin": pin},
+      statusCode: {
+        404: function() {
+          alert("Wrong PIN code, please try again");
+        }
+      }
     }).done(function(result) {
       $('#insertCode').addClass('hidden');
       $('#btnSendCode').addClass('hidden');
-      console.log(result);
     })
   })
 
