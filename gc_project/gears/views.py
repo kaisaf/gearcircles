@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.views.generic import View
 from datetime import datetime
+from random import randint
 from .payment import paypal_payment
 
 from django.contrib.gis.geos import Point, fromstr
@@ -96,14 +97,24 @@ class GearView(View):
             return redirect('myaccount')
 
 class CreateCodeView(View):
-    def get(self, request):
-        #SEND sms to the new number
+    def post(self, request):
+        phone = request.POST["phone"]
+        code = str(randint(1000, 9999))
+        message = "Your PIN code is: " + code
+        print(message)
+        print("code is: " + code)
+        request.session["code"] = code
+        #twilio_helper.send_sms(phone, message)
         return HttpResponse("Message sent")
 
 class ValidateCodeView(View):
     def post(self, request):
         print(request.POST["pin"])
-        return HttpResponse("PIN correct!!!")
+        print(request.session["code"])
+        if request.POST["pin"] == request.session["code"]:
+            return HttpResponse("PIN correct!!!")
+        else:
+            raise Http404("OH NO")
 
 class CategoriesView(View):
     def get(self, request):

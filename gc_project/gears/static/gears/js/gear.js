@@ -37,9 +37,12 @@ $(document).ready(function() {
   })
 
   $('#btnGetCode').on('click', function() {
+    phone = $('#myPhone').val()
+    console.log(phone)
     $.ajax({
-      method: "GET",
-      url: "/get-sms-code",
+      method: "POST",
+      url: "/get-sms-code/",
+      data: {"phone": phone},
     }).done(function(result) {
       console.log(result);
       $('#btnGetCode').addClass('hidden');

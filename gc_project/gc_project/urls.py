@@ -53,7 +53,7 @@ urlpatterns = [
     url(r'^addgear/', login_required(AddGearView.as_view()), name='addgear'),
     url(r'^api/v1/', include(router.urls)),
     url(r'^demo/', IndexView.as_view(), name='index'),
-    url(r'^get-sms-code/', CreateCodeView.as_view(), name='create_code'),
+    url(r'^get-sms-code/', csrf_exempt(CreateCodeView.as_view()), name='create_code'),
     url(r'^validate-sms-code/', csrf_exempt(ValidateCodeView.as_view()), name='validate_code'),
     url(r'^$', TempIndexView.as_view(), name='temp_index'),
 ]
