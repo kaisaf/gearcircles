@@ -25,6 +25,44 @@ $(document).ready(function() {
     window.gcGetLocation($(this).val(), gcSetGeoLocation);
   })
 
+  $('#frmPhone').on('change', function() {
+    var phone = $(this).val();
+    console.log(phone);
+    $('#btnGetCode').removeClass('hidden');
+  })
+
+  $('#btnGetCode').on('click', function() {
+    phone = $('#frmPhone').val();
+    $.ajax({
+      method: "POST",
+      url: "/get-sms-code/",
+      data: {"phone": phone},
+    }).done(function(result) {
+      console.log(result);
+      $('#btnGetCode').addClass('hidden');
+      $('#insertCode').removeClass('hidden');
+      $('#btnSendCode').removeClass('hidden');
+    })
+  })
+
+  $('#btnSendCode').on('click', function() {
+    var pin = $('#frmCode').val();
+    $.ajax({
+      method: "POST",
+      url: "/validate-sms-code/",
+      data: {"pin": pin},
+      statusCode: {
+        404: function() {
+          alert("Wrong PIN code, please try again");
+          $('#frmCode').val("");
+        }
+      }
+    }).done(function(result) {
+      $('#insertCode').addClass('hidden');
+      $('#btnSendCode').addClass('hidden');
+    })
+  })
+
   $("#btnSubmitAddGear").on("click", function() {
     var formValid = true;
     $('input').each(function() {

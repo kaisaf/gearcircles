@@ -21,6 +21,28 @@
       </div>
     </div>
 
+    <div id="btnGetCode" class="form-group hidden">
+      <label for="btnGetCode" class="control-label col-md-2">Get PIN:</label>
+      <div class="col-md-6">
+        <button id="frmGetCode" class="btn">Get PIN code for phone verification</button>
+      </div>
+    </div>
+
+    <div id="insertCode" class="form-group hidden">
+      <label for="frmCode" class="control-label col-md-2">Insert PIN:</label>
+      <div class="col-md-6">
+        <input type="text" class="form-control" id="frmCode" name="insertCode" placeholder="Input PIN here">
+      </div>
+    </div>
+
+    <div id="btnSendCode" class="form-group hidden">
+      <label for="frmSendCode" class="control-label col-md-2">Submit PIN:</label>
+      <div class="col-md-6">
+        <button id="frmSendCode" class="btn">Submit PIN</button>
+      </div>
+    </div>
+
+
     <div class="form-group has-feedback">
       <label for="frmName" class="control-label col-md-2">Gear name/title:</label>
       <div class="col-md-6">
@@ -141,6 +163,8 @@
   </form>
 
 </div> <!-- /container -->
+
+
 
 
 {% endblock %}
