@@ -27,8 +27,8 @@ $(document).ready(function() {
 
   $('#frmPhone').on('change', function() {
     var phone = $(this).val();
-    console.log(phone);
     $('#btnGetCode').removeClass('hidden');
+    $('.hide-if-pin-needed').addClass('hidden');
   })
 
   $('#btnGetCode').on('click', function() {
@@ -38,7 +38,6 @@ $(document).ready(function() {
       url: "/get-sms-code/",
       data: {"phone": phone},
     }).done(function(result) {
-      console.log(result);
       $('#btnGetCode').addClass('hidden');
       $('#insertCode').removeClass('hidden');
       $('#btnSendCode').removeClass('hidden');
@@ -60,6 +59,7 @@ $(document).ready(function() {
     }).done(function(result) {
       $('#insertCode').addClass('hidden');
       $('#btnSendCode').addClass('hidden');
+      $('.hide-if-pin-needed').removeClass('hidden');
     })
   })
 
