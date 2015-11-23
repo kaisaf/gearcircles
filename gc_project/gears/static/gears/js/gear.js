@@ -43,7 +43,6 @@ $(document).ready(function() {
       url: "/get-sms-code/",
       data: {"phone": phone},
     }).done(function(result) {
-      console.log(result);
       $('#btnGetCode').addClass('hidden');
       $('#insertCode').removeClass('hidden');
       $('#btnSendCode').removeClass('hidden');

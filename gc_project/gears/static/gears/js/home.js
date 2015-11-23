@@ -9,7 +9,6 @@ $(document).ready(function() {
 
     getApiData("/api/v1/locations", queryFilter, function(locations) {
       $("#loadingImg").hide();
-      // $(".loading").addClass("hideLoading");
       setMarkers(locations);
       createCards(locations);
     });
@@ -81,12 +80,9 @@ $(document).ready(function() {
     queryFilter["minPrice"] = minPrice;
     queryFilter["maxPrice"] = maxPrice;
     queryFilter["txtSearch"] = txtSearch;
-    //getApiData("/api/v1/locations", queryFilter, setMarkers);
     $("#loadingImg").show();
-    // $("#loadingLarge").attr("class", "hidden-md loading showLoading");
     getApiData("/api/v1/locations", queryFilter, function(locations) {
       $("#loadingImg").hide();
-      // $("#loadingLarge").attr("class", "hidden");
       setMarkers(locations);
       createCards(locations);
     });
@@ -178,7 +174,6 @@ $(document).ready(function() {
   /*
   GET DATA ON PAGE LOAD
   */
-  // getApiData("/api/v1/locations", queryFilter, setMarkers);
   getApiData("/api/v1/categories", null, createMenu);
 
   /*
@@ -242,7 +237,6 @@ $(document).ready(function() {
   }
 
   function catMenuItemHandler(obj) {
-    //window.gcClearAllMarkers()
     if ($(obj).hasClass("selectedCat")) {
       $(obj).removeClass("selectedCat");
       var index = queryFilter["categories"].indexOf($(obj).data().catid);

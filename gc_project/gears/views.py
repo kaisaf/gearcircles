@@ -95,6 +95,7 @@ class GearView(View):
         else:
             return redirect('myaccount')
 
+
 class CreateCodeView(View):
     def post(self, request):
         phone = request.POST["phone"]
@@ -104,12 +105,14 @@ class CreateCodeView(View):
         twilio_helper.send_sms(phone, message)
         return HttpResponse("Message sent")
 
+
 class ValidateCodeView(View):
     def post(self, request):
         if request.POST["pin"] == request.session["code"]:
             return HttpResponse("PIN correct!")
         else:
             raise Http404("Wrong PIN")
+
 
 class CategoriesView(View):
     def get(self, request):

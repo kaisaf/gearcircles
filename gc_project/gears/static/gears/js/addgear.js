@@ -1,18 +1,5 @@
 $(document).ready(function() {
 
-  // google.maps.event.addListener(map, 'click', function(e) {
-  //   console.log("hi")
-  //   placeMarker(e.latLng, map);
-  // });
-  //
-  // function placeMarker(location) {
-  //   console.log("nooo")
-  //   var marker = new google.maps.Marker({
-  //       position: location,
-  //       setMap: map
-  //   });
-  // };
-
   window.gcCreateMap(function(map) {
     console.log("map ready")
   });
