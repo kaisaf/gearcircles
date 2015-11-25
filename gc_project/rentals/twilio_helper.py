@@ -21,14 +21,16 @@ def send_sms(phone, text):
         to = phone,
         from_ = twilio_settings["number"]) # Twilio number
 
-def validate_number(phone):
-    """
-    Return None if phone is valid or error message
-    params: phone String "+12223334444"
-    """
-    client = create_twilio_client()
-    try:
-        client.caller_ids.validate("phone")
-    except TwilioRestException as e:
-        return e.msg
-    return None
+# def validate_number(phone):
+#     """
+#     Return None if phone is valid or error message
+#     params: phone String "+12223334444"
+#     """
+#     client = create_twilio_client()
+#     try:
+#         response = client.caller_ids.validate(phone)
+#         code = response.get("validation_code")
+#         return code
+#     except TwilioRestException as e:
+#         return e.msg
+#     return None

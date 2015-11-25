@@ -1,18 +1,5 @@
 $(document).ready(function() {
 
-  // google.maps.event.addListener(map, 'click', function(e) {
-  //   console.log("hi")
-  //   placeMarker(e.latLng, map);
-  // });
-  //
-  // function placeMarker(location) {
-  //   console.log("nooo")
-  //   var marker = new google.maps.Marker({
-  //       position: location,
-  //       setMap: map
-  //   });
-  // };
-
   window.gcCreateMap(function(map) {
     console.log("map ready")
   });
@@ -23,6 +10,44 @@ $(document).ready(function() {
 
   $("#frmAddress").on("change", function() {
     window.gcGetLocation($(this).val(), gcSetGeoLocation);
+  })
+
+  $('#frmPhone').on('change', function() {
+    var phone = $(this).val();
+    $('#btnGetCode').removeClass('hidden');
+    $('.hide-if-pin-needed').addClass('hidden');
+  })
+
+  $('#btnGetCode').on('click', function() {
+    phone = $('#frmPhone').val();
+    $.ajax({
+      method: "POST",
+      url: "/get-sms-code/",
+      data: {"phone": phone},
+    }).done(function(result) {
+      $('#btnGetCode').addClass('hidden');
+      $('#insertCode').removeClass('hidden');
+      $('#btnSendCode').removeClass('hidden');
+    })
+  })
+
+  $('#btnSendCode').on('click', function() {
+    var pin = $('#frmCode').val();
+    $.ajax({
+      method: "POST",
+      url: "/validate-sms-code/",
+      data: {"pin": pin},
+      statusCode: {
+        404: function() {
+          alert("Wrong PIN code, please try again");
+          $('#frmCode').val("");
+        }
+      }
+    }).done(function(result) {
+      $('#insertCode').addClass('hidden');
+      $('#btnSendCode').addClass('hidden');
+      $('.hide-if-pin-needed').removeClass('hidden');
+    })
   })
 
   $("#btnSubmitAddGear").on("click", function() {

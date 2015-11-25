@@ -31,6 +31,42 @@ $(document).ready(function() {
     return date;
   }
 
+  $('#myPhone').on('change', function() {
+    var phone = $(this).val();
+    $('#btnGetCode').removeClass('hidden');
+  })
+
+  $('#btnGetCode').on('click', function() {
+    phone = $('#myPhone').val();
+    $.ajax({
+      method: "POST",
+      url: "/get-sms-code/",
+      data: {"phone": phone},
+    }).done(function(result) {
+      $('#btnGetCode').addClass('hidden');
+      $('#insertCode').removeClass('hidden');
+      $('#btnSendCode').removeClass('hidden');
+    })
+  })
+
+  $('#btnSendCode').on('click', function() {
+    var pin = $('#myCode').val();
+    $.ajax({
+      method: "POST",
+      url: "/validate-sms-code/",
+      data: {"pin": pin},
+      statusCode: {
+        404: function() {
+          alert("Wrong PIN code, please try again");
+        }
+      }
+    }).done(function(result) {
+      $('#insertCode').addClass('hidden');
+      $('#btnSendCode').addClass('hidden');
+    })
+  })
+
+
   $('#startDate').on('change', function() {
     var startDate = $(this).val();
     var partsStart = splitDate(startDate);

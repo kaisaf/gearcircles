@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import routers
 
 from users.views import (IndexView, TempIndexView, UserViewSet,
@@ -23,7 +24,7 @@ from users.views import (IndexView, TempIndexView, UserViewSet,
                          LoginWidgetView, UserView)
 from gears.views import (HomeView, CategoriesView, CategoryByNameView,
                          GearView, AddGearView, LocationsView,
-                         LocationByNameView)
+                         LocationByNameView, CreateCodeView, ValidateCodeView)
 from gears.viewsets import (CategoryViewSet, CategoryPropertyViewSet,
                              GearViewSet, GearPropertyViewSet,
                             GearAvailabilityViewSet, GearImageViewSet,
@@ -52,5 +53,7 @@ urlpatterns = [
     url(r'^addgear/', login_required(AddGearView.as_view()), name='addgear'),
     url(r'^api/v1/', include(router.urls)),
     url(r'^demo/', IndexView.as_view(), name='index'),
+    url(r'^get-sms-code/', csrf_exempt(CreateCodeView.as_view()), name='create_code'),
+    url(r'^validate-sms-code/', csrf_exempt(ValidateCodeView.as_view()), name='validate_code'),
     url(r'^$', TempIndexView.as_view(), name='temp_index'),
 ]

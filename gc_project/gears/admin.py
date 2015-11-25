@@ -26,6 +26,7 @@ class LocationInline(admin.StackedInline):
     model = Location
     extra = 1
 
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display =  ('name', 'description')
     search_fields = ['name']
@@ -47,12 +48,6 @@ class GearPropertyAdmin(admin.ModelAdmin):
     list_display =  ('value', 'gear')
 
 
-
-
 admin.site.register(Category, CategoryAdmin)
-#admin.site.register(CategoryProperty, CategoryPropertyAdmin)
 admin.site.register(Gear, GearAdmin)
-#admin.site.register(GearProperty, GearPropertyAdmin)
-#admin.site.register(GearAvailability)
 admin.site.register(Location)
-#admin.site.register(GearImage)

@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.views.generic import View
 from datetime import datetime
+from random import randint
 from .payment import paypal_payment
 
 from django.contrib.gis.geos import Point, fromstr
 
 from users.models import User
 from rentals.models import Transaction
+from rentals import twilio_helper
 from .models import (Category, CategoryProperty, Gear, GearProperty, Location,
     GearAvailability, GearImage)
 
@@ -50,7 +52,6 @@ class GearView(View):
         gear = self.get_gear_object(gear_id)
         photo = GearImage.objects.get(gear=gear)
         category = gear.category.name
-        category_list = []
         gear_properties = GearProperty.objects.filter(gear=gear)
         payments = self.convert_payment_method(gear.payment)
         context = {
@@ -95,6 +96,24 @@ class GearView(View):
             return redirect('myaccount')
 
 
+class CreateCodeView(View):
+    def post(self, request):
+        phone = request.POST["phone"]
+        code = str(randint(1000, 9999))
+        message = "Your PIN code is: " + code
+        request.session["code"] = code
+        twilio_helper.send_sms(phone, message)
+        return HttpResponse("Message sent")
+
+
+class ValidateCodeView(View):
+    def post(self, request):
+        if request.POST["pin"] == request.session["code"]:
+            return HttpResponse("PIN correct!")
+        else:
+            raise Http404("Wrong PIN")
+
+
 class CategoriesView(View):
     def get(self, request):
         return HttpResponse("Gear CategoryView")
@@ -125,10 +144,7 @@ class AddGearView(View):
 
     def post(self, request):
         user = User.objects.get(email=request.user.email)
-        if user.phone != request.POST["frmPhone"]:
-            user.phone = request.POST["frmPhone"]
-            user.save()
-
+        phone = request.POST["frmPhone"]
         category_id = request.POST["frmCategorySelect"]
         category = Category.objects.get(id=category_id)
 
